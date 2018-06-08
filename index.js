@@ -17,6 +17,13 @@ app.get('/footer.html', function(req, res) {
   res.sendFile(path.join(__dirname + '/pages/navigation/footer.html'))
 })
 
+app.get('/signin.css', function(req, res) {
+  res.sendFile(path.join(__dirname + '/pages/navigation/signin.css'))
+})
+app.get('/footer.css', function(req, res) {
+  res.sendFile(path.join(__dirname + '/pages/navigation/footer.css'))
+})
+
 app.get('/home', function(req, res) {
   res.sendFile(path.join(__dirname + '/pages/index.html'))
 })
