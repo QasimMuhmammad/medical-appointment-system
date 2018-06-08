@@ -13,5 +13,12 @@ app.get('/header.html', function(req, res) {
   res.sendFile(path.join(__dirname + '/pages/navigation/header.html'))
 })
 
+app.get('/home', function(req, res) {
+  res.sendFile(path.join(__dirname + '/pages/index.html'))
+})
+
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname + '/pages/login.html'))
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
