@@ -13,6 +13,10 @@ app.get('/header.html', function(req, res) {
   res.sendFile(path.join(__dirname + '/pages/navigation/header.html'))
 })
 
+app.get('/footer.html', function(req, res) {
+  res.sendFile(path.join(__dirname + '/pages/navigation/footer.html'))
+})
+
 app.get('/home', function(req, res) {
   res.sendFile(path.join(__dirname + '/pages/index.html'))
 })
