@@ -1,0 +1,27 @@
+{
+  "name": "medical-appointment-system",
+  "version": "1.0.0",
+  "description": "CPSC 471 Spring 2018 Final Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop": "taskkill /im node.exe /F"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimmywctruong/medical-appointment-system.git"
+  },
+  "author": "Jimmy Truong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimmywctruong/medical-appointment-system/issues"
+  },
+  "homepage": "https://github.com/jimmywctruong/medical-appointment-system#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1"
+  }
+}
