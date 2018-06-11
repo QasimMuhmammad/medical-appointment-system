@@ -8,14 +8,30 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="home.css">
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
     <link href="footer.css" rel="stylesheet">
     <title>Hello, world!</title>
   </head>
   <body>
     <div id="header"></div>
 
-    <div id="footer">footer</div>
+    <div class="container text-center">
+
+    <form class="form-signin">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="Username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+    </div>
+
+
+    <div id="footer"></div>
 
 
     <!-- Optional JavaScript -->
