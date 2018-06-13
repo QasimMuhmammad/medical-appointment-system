@@ -2,9 +2,9 @@
   "name": "medical-appointment-system",
   "version": "1.0.0",
   "description": "CPSC 471 Spring 2018 Final Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "stop": "taskkill /im node.exe /F"
   },
