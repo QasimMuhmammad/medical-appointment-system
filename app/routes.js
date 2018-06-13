@@ -6,6 +6,7 @@ const router = express.Router()
 
 
 const path = require('path')
+const router = express.Router()
 
 // export our router
 module.exports = router
