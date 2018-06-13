@@ -4,8 +4,8 @@
   "description": "CPSC 471 Spring 2018 Final Project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "stop": "taskkill /im node.exe /F"
   },
   "repository": {
