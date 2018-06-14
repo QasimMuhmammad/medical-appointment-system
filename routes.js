@@ -54,10 +54,14 @@ router.get('/dashboard.css', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/css/dashboard.css'))
 })
 
-router.get('/appointments.html', function(req,res){
+router.get('/appointments', function(req,res){
   res.sendFile(path.join(__dirname + '/pages/appointments.html'))
 });
 
 router.get('/new_appointment.html' , function(req,res){
   res.sendFile(path.join(__dirname + '/pages/new_appointment.html'))
+});
+
+router.post('appointment_submit.js' , function(req,res){
+      //res.sendFile(path.join(__dirname + ''))
 });
