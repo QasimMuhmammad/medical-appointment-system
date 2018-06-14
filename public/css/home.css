@@ -34,3 +34,7 @@
 	padding: 20px 30px;
 	font-weight: bold;
 }
+
+body {
+	background-size: 70% 100%;
+}

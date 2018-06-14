@@ -20,6 +20,10 @@ router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
+router.get('/dashboard', function(req, res) {
+  res.render('pages/dashboard');
+});
+
 router.get('/book-appointment', function(req, res) {
   res.render('pages/book-appointment');
 });
