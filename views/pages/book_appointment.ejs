@@ -1,0 +1,51 @@
+<%- contentFor('body') %>
+<div class= "jumbotron">
+
+  <p class="lead">Please fill out the following information before choosing a time:</p>
+
+  <form class="form-horizontal" action="appointment_submit.js" method="post">
+
+    <!-- First Name  !--->
+    <div class="form-group">
+      <label class="col-sm-3 control label" for="FirstName">First Name</label>
+      <div class="col-sm-9">
+        <div class="form-inline">
+            <input class="form-control name" data-val="true" id="FirstName"
+              name="FirstName" type="text" value=""/>
+          </div>
+      </div>
+    </div>
+
+    <!-- Last Name !--->
+  <div class="form-group">
+    <label class="col-sm-3 control label" for="LastName">Last Name</label>
+    <div class="col-sm-9">
+        <div class="form-inline">
+          <input class="form-control name" data-val="true" id="LastName"
+            name="FirstName" type="text" value=""/>
+        </div>
+    </div>
+  </div>
+
+    <!-- Phone Number !--->
+  <div class="form-group">
+    <label class="col-sm-3 control label" for="Phone Number">Phone Number</label>
+    <div class="col-sm-9">
+        <div class="form-inline">
+          <input class="form-control name" data-val="true" id="PhoneNumber"
+            name="FirstName" type="text" value=""/>
+        </div>
+    </div>
+  </div>
+
+    <!-- Submit Button !--->
+  <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <button type="submit" class="btn btn-primary show-loading-text" data-loading-text="Booking...">Book Appointment</button>
+        </div>
+  </div>
+
+  </form>
+
+
+</div>
