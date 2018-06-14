@@ -20,7 +20,11 @@ router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
-router.get('/book-appointment', function(req, res) {
+router.get('/appointments', function(req, res){
+  res.render('pages/appointments');
+});
+
+router.get('/book-appointments', function(req, res) {
   res.render('pages/book-appointment');
 });
 
