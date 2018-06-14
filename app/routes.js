@@ -20,8 +20,8 @@ router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
-router.get('/appointments', function(req, res) {
-  res.render('pages/appointments');
+router.get('/book-appointment', function(req, res) {
+  res.render('pages/book-appointment');
 });
 
 router.post('appointment_submit.js' , function(req,res){
