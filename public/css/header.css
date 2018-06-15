@@ -1,5 +1,4 @@
-
-.nav-item a {
+.nav-item {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -8,17 +7,17 @@
     border-bottom: 3px solid transparent;
 }
 
-.nav-item a:hover {
+.nav-link:hover {
    border-bottom: 3px solid lightblue;
    color: lightblue !important;
 }
 
-.nav-item a.active {
+.nav-link:active {
    border-bottom: 3px solid lightblue;
    color: lightblue !important;
 }
 
 body{
-  padding-top: 50px; 
+  padding-top: 58px;
 
 }
