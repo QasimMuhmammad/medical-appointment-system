@@ -4,23 +4,65 @@
 
 .calendar-layer {
   position: absolute !important;
+  width: inherit;
+}
+
+tr {
+  height: 75px !important;
+}
+
+th {
+  height: 40px !important;
+}
+
+.container {
+  position: relative;
+}
+
+.table {
+  width: inherit;
 }
 
 .add-time {
   font-size: 32pt;
   visibility: hidden;
+}
 
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+    cursor: auto;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .plus:hover .add-time {
   visibility: visible;
+}
+
+.plus:hover {
   cursor: pointer;
+  background-color: lightgreen;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
 }
 
 .calendar-bg {
-  z-index: 5;
+  z-index: 10;
 }
 
 .calendar-fg {
-  z-index: 10;
+  z-index: 5;
+}
+
+.calendar-new-event {
+  z-index: 15
 }
