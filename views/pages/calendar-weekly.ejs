@@ -1,0 +1,33 @@
+<% contentFor('css') %>
+  <link rel="stylesheet" href="/css/calendar-weekly.css">
+
+  <% contentFor('body') %>
+
+    <table class="table table-bordered">
+      <thead>
+        <th scope="col" style="width: 5%" class="text-right">
+          Time
+        </th>
+
+        <% for (day of days) { %>
+          <th scope="col" style="width: 10%" class="text-center">
+            <%= day %>
+          </th>
+        <% } %>
+
+      </thead>
+      <tbody>
+
+        <% for (var i = 0; i < 10; i++) { %>
+          <tr>
+            <td class="text-right"><%=i%>:00</td>
+            <% for (var j = 0; j < days.length; j++) { %>
+              <td></td>
+            <% } %>
+          </tr>
+        <% } %>
+
+      </tbody>
+
+    </table>
+  </div>
