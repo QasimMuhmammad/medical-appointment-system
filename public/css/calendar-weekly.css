@@ -6,6 +6,17 @@
   position: absolute !important;
 }
 
+.add-time {
+  font-size: 32pt;
+  visibility: hidden;
+
+}
+
+.plus:hover .add-time {
+  visibility: visible;
+  cursor: pointer;
+}
+
 .calendar-bg {
   z-index: 5;
 }

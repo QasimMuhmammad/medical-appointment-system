@@ -24,6 +24,11 @@ router.get('/book-appointment', function(req, res) {
   res.render('pages/book-appointment');
 });
 
+router.get('/calendar-weekly', function(req, res) {
+  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  res.render('pages/calendar-weekly',  data);
+});
+
 router.post('appointment_submit.js' , function(req,res){
       //res.sendFile(path.join(__dirname + ''))
 });

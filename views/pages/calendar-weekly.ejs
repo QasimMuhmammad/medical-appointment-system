@@ -1,7 +1,7 @@
-<% contentFor('css') %>
+<% contentFor('css'); %>
   <link rel="stylesheet" href="/css/calendar-weekly.css">
 
-  <% contentFor('body') %>
+  <% contentFor('body'); %>
 
     <table class="table table-bordered">
       <thead>
@@ -22,7 +22,9 @@
           <tr>
             <td class="text-right"><%=i%>:00</td>
             <% for (var j = 0; j < days.length; j++) { %>
-              <td></td>
+              <td class="text-center plus">
+                  <i class="far fa-plus-square add-time"></i>
+              </td>
             <% } %>
           </tr>
         <% } %>
