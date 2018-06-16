@@ -1,26 +1,65 @@
-
 <%- contentFor('hero') %>
-<section class="hero">
-  <div class="hero-content">
-    <h2>Welcome to the Site!</h2>
-    <p>The best place to be!</p>
-    <a href="/" class="btn btn-lg btn-primary">Get Started</a>
-  </div>
-</section>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to the Site!</h2>
+      <p>The best place to be!</p>
+      <a href="/" class="btn btn-lg btn-primary">Get Started</a>
+    </div>
+  </section>
 
-<%- contentFor('body') %>
-<div class="jumbotron text-center">
-<p>
-!
-!
-!
-!!!!
+  <%- contentFor('body') %>
+    <div class="jumbotron text-center">
+      <div class="card-deck text-white text-left">
+        <div class="card">
+          <div class="hours-card">
+            <div class="card-body">
+              <h5>Hours of Operation</h5>
+              <table class="table table-hover" style="font-size: 12px">
+                <tbody>
+                  <tr>
+                    <td>Monday-Friday</td>
+                    <td>8:00-17:30</td>
+                  </tr>
+                  <tr>
+                    <td>Saturday</td>
+                    <td>9:00-17:30</td>
+                  </tr>
+                  <tr>
+                    <td>Sunday</td>
+                    <td>9:00-15:00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="appoint-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Appointments</h5>
+              <hr class="bg-white">
+              <p class="card-text">Some text inside the second card</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="location-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Location</h5>
+              <hr class="bg-white">
+              <p class="card-text">Some text inside the third card</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="contact-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Contact Us</h5>
+              <hr class="bg-white">
+              <p class="card-text">Some text inside the fourth card</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-!!!
-
-
-!!
-  This is the home page. Welcome!</p>
-
-</div>
+    </div>
