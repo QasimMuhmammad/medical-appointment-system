@@ -3,11 +3,18 @@
 
   <p class="lead">Please fill out the following information before choosing a time:</p>
 
-  <form class="form-horizontal" action="appointment_submit.js" method="post">
-
+  <form class="form-horizontal" action="book_appointments" method="post">
+    <% if (Object.keys(errors).length !=0) { %>
+      <p class="errors-heading">Oops, please correct the following:</p>
+    <ul class="errors-list">
+      <% Object.values(errors).forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
     <!-- First Name  !--->
     <div class="form-group">
-      <label class="col-sm-3 control label" for="FirstName">First Name</label>
+      <label class="col-sm-3 control label" for="FirstName"> <b> First Name </b></label>
       <div class="col-sm-9">
         <div class="form-inline">
             <input class="form-control name" data-val="true" id="FirstName"
@@ -18,34 +25,83 @@
 
     <!-- Last Name !--->
   <div class="form-group">
-    <label class="col-sm-3 control label" for="LastName">Last Name</label>
+    <label class="col-sm-3 control label" for="LastName"> <b> Last Name </b></label>
     <div class="col-sm-9">
         <div class="form-inline">
           <input class="form-control name" data-val="true" id="LastName"
-            name="FirstName" type="text" value=""/>
+            name="LastName" type="text" value=""/>
         </div>
     </div>
+  </div>
+
+  <!-- Health-Care Number  !--->
+  <div class="form-group">
+  <label class="col-sm-3 control label" for="HealthCareNum"> <b>Health Care Number </b></label>
+  <div class="col-sm-9">
+      <div class="form-inline">
+        <input class="form-control name" data-val="true" id="HealthCareNum"
+          name="HealthCareNum" type="text" value=""/>
+      </div>
+  </div>
+  </div>
+
+  <!-- Email address !--->
+  <div class="form-group">
+  <label class="col-sm-3 control label" for="Email Address"> <b> Email Address </b></label>
+  <div class="col-sm-9">
+      <div class="form-inline">
+        <input class="form-control name" data-val="true" id="Email Address"
+          name="EmailAddress" type="text" value=""/>
+      </div>
+  </div>
   </div>
 
     <!-- Phone Number !--->
   <div class="form-group">
-    <label class="col-sm-3 control label" for="Phone Number">Phone Number</label>
+    <label class="col-sm-3 control label" for="Phone Number"> <b> Phone Number</b> </label>
     <div class="col-sm-9">
         <div class="form-inline">
           <input class="form-control name" data-val="true" id="PhoneNumber"
-            name="FirstName" type="text" value=""/>
+            name="PhoneNumber" type="text" value=""/>
         </div>
     </div>
   </div>
 
+  <!-- Sex !-->
+  <label class="col-sm-1 radio-inline">
+    <b>Gender</b>
+      <input type="radio" name="optradio"> Male
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="optradio"> Female
+    </label>
+  </label>
+
+  <!-- Insurance !--->
+  <div class="form-group row">
+      <div class="form-group col-sm-3" style="margin-left:15px;">
+      <label for="sel1"> <b>Insurance Company </b> (Optional)</label>
+      <select class="form-control" id="InsuranceName">
+        <option>Alberta HealthCare</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+    </div>
+  <div class="col-sm-3" style="margin-left:25px;">
+    <label for="InsuranceAccount"> <b> Account Number</b> </label>
+    <input class="form-control" id="InsuranceAccount" type="text" name = "InsuranceAccount" dataval= "true" value="">
+  </div>
+</div>
+
     <!-- Submit Button !--->
   <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
-            <button type="submit" class="btn btn-primary show-loading-text" data-loading-text="Booking...">Book Appointment</button>
+            <button type="submit" class="btn btn-primary show-loading-text"
+            data-loading-text="Booking..."> <b> Book Appointment </b> </button>
         </div>
   </div>
-
-  </form>
+</form>
 
 
 </div>
