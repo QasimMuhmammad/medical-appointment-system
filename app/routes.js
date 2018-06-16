@@ -2,14 +2,16 @@
 const express = require('express');
 const path = require('path');
 
+
 const bodyParser = require("body-parser");
+
+// Next three for form validation
 const validator = require("express-validator");
 const {check, validationResult} = require('express-validator/check')
 const { matchedData, sanitize } = require('express-validator/filter');
 
 // create our router object
 const router = express.Router();
-
 
 // export our router
 module.exports = router;
@@ -19,7 +21,6 @@ const middleware= [
   bodyParser.urlencoded({
       extended: true
   })
-
 ]
 
 router.use(middleware)
@@ -81,12 +82,24 @@ router.post('/book_appointments', [
   check('PhoneNumber')
       .isInt()
       .isLength({min:10,max:10})
-      .withMessage("Invalid Phone Number Entered")
-]
-, function(req,res) {
+      .withMessage("Invalid Phone Number Entered"),
+  check('Sex')
+
+],
+  function(req,res) {
   const errors = validationResult(req)
-  res.render('pages/book-appointment', {
-    data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber InsuranceName, InsuranceAccount}
-    errors: errors.mapped()
-  });
+
+  if(!errors.isEmpty())
+  {
+    res.render('pages/book-appointment', {
+      data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
+      errors: errors.mapped()
+    })
+  }
+
+
+  //If validation is successful, data has the real data.
+  const data = matchedData(req)
+  console.log('Sanitized: ', data)
+
 });

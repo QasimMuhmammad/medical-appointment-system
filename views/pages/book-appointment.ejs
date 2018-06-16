@@ -8,7 +8,7 @@
       <p class="errors-heading">Oops, please correct the following:</p>
     <ul class="errors-list">
       <% Object.values(errors).forEach(error => { %>
-        <li><%= error.msg %></li>
+        <li style="color:#e32;"><%= error.msg %></li>
       <% }) %>
     </ul>
     <% } %>
@@ -21,7 +21,7 @@
             <input class="form-control name" data-val="true" id="FirstName"
               name="FirstName" type="text" value=""/>
         </div>
-      <% if (errors.FirstName) { %> <div class="error"><%= errors.FirstName.msg %></div> <% } %>
+      <% if (errors.FirstName) { %> <div class="error" style="color:#e32;"><%= errors.FirstName.msg %></div> <% } %>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
           <input class="form-control name" data-val="true" id="LastName"
             name="LastName" type="text" value=""/>
         </div>
-    <% if (errors.LastName) { %> <div class="error"><%= errors.LastName.msg %></div> <% } %>
+    <% if (errors.LastName) { %> <div class="error" style="color:#e32;"><%= errors.LastName.msg %></div> <% } %>
     </div>
   </div>
 
@@ -45,31 +45,31 @@
         <input class="form-control name" data-val="true" id="HealthCareNum"
           name="HealthCareNum" type="text" value=""/>
       </div>
-  <% if (errors.HealthCareNum) { %> <div class="error"><%= errors.HealthCareNum.msg %></div> <% } %>
+  <% if (errors.HealthCareNum) { %> <div class="error" style="color:#e32;"><%= errors.HealthCareNum.msg %></div> <% } %>
   </div>
   </div>
 
   <!-- Email address !--->
   <div class="form-group">
-  <label class="col-sm-3 control label" for="Email Address"> <b> Email Address </b></label>
+  <label class="col-sm-3 control label" for="Email Address"> <b> Email Address *</b></label>
   <div class="col-sm-9">
       <div class="form-inline">
         <input class="form-control name" data-val="true" id="Email Address"
           name="EmailAddress" type="text" value=""/>
       </div>
-  <% if (errors.EmailAddress) { %> <div class="error"><%= errors.EmailAddress.msg %></div> <% } %>
+  <% if (errors.EmailAddress) { %> <div class="error" style="color:#e32;"><%= errors.EmailAddress.msg %></div> <% } %>
   </div>
   </div>
 
     <!-- Phone Number !--->
   <div class="form-group">
-    <label class="col-sm-3 control label" for="Phone Number"> <b> Phone Number</b> </label>
+    <label class="col-sm-3 control label" for="Phone Number"> <b> Phone Number *</b> </label>
     <div class="col-sm-9">
         <div class="form-inline">
           <input class="form-control name" data-val="true" id="PhoneNumber"
             name="PhoneNumber" type="text" value=""/>
         </div>
-    <% if (errors.PhoneNumber) { %> <div class="error"><%= errors.PhoneNumber.msg %></div> <% } %>
+    <% if (errors.PhoneNumber) { %> <div class="error" style="color:#e32;"><%= errors.PhoneNumber.msg %></div> <% } %>
     </div>
   </div>
 
@@ -77,29 +77,13 @@
   <div class="form-group row">
       <div class="form-group col-sm-3" style="margin-left:15px;">
       <label for="selecion1"> <b>Sex</b></label>
-      <select class="form-control" id="Sex">
+      <select class="form-control" id="Sex" name="Sex" >
         <option>Male</option>
         <option>Female</option>
       </select>
     </div>
 </div>
 
-  <!-- Insurance !--->
-  <div class="form-group row">
-      <div class="form-group col-sm-3" style="margin-left:15px;">
-      <label for="sel1"> <b>Insurance Company </b> (Optional)</label>
-      <select class="form-control" id="InsuranceName">
-        <option>Alberta HealthCare</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-      </select>
-    </div>
-  <div class="col-sm-3" style="margin-left:25px;">
-    <label for="InsuranceAccount"> <b> Account Number</b> </label>
-    <input class="form-control" id="InsuranceAccount" type="text" name = "InsuranceAccount" dataval= "true" value="">
-  </div>
-</div>
 
     <!-- Submit Button !--->
   <div class="form-group">
