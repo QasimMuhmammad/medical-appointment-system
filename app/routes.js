@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const validator = require("express-validator");
 const {check, validationResult} = require('express-validator/check')
+const { matchedData, sanitize } = require('express-validator/filter');
 
 // create our router object
 const router = express.Router();
@@ -58,17 +59,34 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
-router.post('/book_appointments', function(req,res){
+router.post('/book_appointments', [
+  check('FirstName')
+      .isLength({min: 1})
+      .withMessage('Your first name is required')
+      .trim(),
+  check('LastName')
+      .isLength({min: 1})
+      .withMessage('Your last name is required')
+      .trim(),
+  check('HealthCareNum')
+      .isLength({min: 9, max:9})
+      .isInt()
+      .withMessage('Your healthcare is required and must be 9 numbers')
+      .trim(),
+  check('EmailAddress')
+      .isEmail()
+      .withMessage('Must be an email')
+      .trim()
+      .normalizeEmail(),
+  check('PhoneNumber')
+      .isInt()
+      .isLength({min:10,max:10})
+      .withMessage("Invalid Phone Number Entered")
+]
+, function(req,res) {
+  const errors = validationResult(req)
   res.render('pages/book-appointment', {
     data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber InsuranceName, InsuranceAccount}
-    errors: {
-      FirstName: {msg: "Your First Name is required"},
-      LastName: {msg: "Your Last Name is required"},
-      HealthCarNum: {msg: "Your Health Care num is required or wrong"},
-      EmailAddress: {msg: "The email address is required"},
-      PhoneNumber: {msg: "The phone number is incorrect"},
-      InsuranceName: {msg: "The Insurance name was incorrect"},
-      InsuranceAccount: {msg: "The entered value makes no sense"}
-    }
+    errors: errors.mapped()
   });
 });

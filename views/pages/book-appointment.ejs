@@ -3,7 +3,7 @@
 
   <p class="lead">Please fill out the following information before choosing a time:</p>
 
-  <form class="form-horizontal" action="book_appointments" method="post">
+  <form class="form-horizontal" action="book_appointments" method="post" novalidate>
     <% if (Object.keys(errors).length !=0) { %>
       <p class="errors-heading">Oops, please correct the following:</p>
     <ul class="errors-list">
@@ -12,6 +12,7 @@
       <% }) %>
     </ul>
     <% } %>
+
     <!-- First Name  !--->
     <div class="form-group">
       <label class="col-sm-3 control label" for="FirstName"> <b> First Name </b></label>
@@ -19,7 +20,8 @@
         <div class="form-inline">
             <input class="form-control name" data-val="true" id="FirstName"
               name="FirstName" type="text" value=""/>
-          </div>
+        </div>
+      <% if (errors.FirstName) { %> <div class="error"><%= errors.FirstName.msg %></div> <% } %>
       </div>
     </div>
 
@@ -31,6 +33,7 @@
           <input class="form-control name" data-val="true" id="LastName"
             name="LastName" type="text" value=""/>
         </div>
+    <% if (errors.LastName) { %> <div class="error"><%= errors.LastName.msg %></div> <% } %>
     </div>
   </div>
 
@@ -42,6 +45,7 @@
         <input class="form-control name" data-val="true" id="HealthCareNum"
           name="HealthCareNum" type="text" value=""/>
       </div>
+  <% if (errors.HealthCareNum) { %> <div class="error"><%= errors.HealthCareNum.msg %></div> <% } %>
   </div>
   </div>
 
@@ -53,6 +57,7 @@
         <input class="form-control name" data-val="true" id="Email Address"
           name="EmailAddress" type="text" value=""/>
       </div>
+  <% if (errors.EmailAddress) { %> <div class="error"><%= errors.EmailAddress.msg %></div> <% } %>
   </div>
   </div>
 
@@ -64,18 +69,20 @@
           <input class="form-control name" data-val="true" id="PhoneNumber"
             name="PhoneNumber" type="text" value=""/>
         </div>
+    <% if (errors.PhoneNumber) { %> <div class="error"><%= errors.PhoneNumber.msg %></div> <% } %>
     </div>
   </div>
 
   <!-- Sex !-->
-  <label class="col-sm-1 radio-inline">
-    <b>Gender</b>
-      <input type="radio" name="optradio"> Male
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="optradio"> Female
-    </label>
-  </label>
+  <div class="form-group row">
+      <div class="form-group col-sm-3" style="margin-left:15px;">
+      <label for="selecion1"> <b>Sex</b></label>
+      <select class="form-control" id="Sex">
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </div>
+</div>
 
   <!-- Insurance !--->
   <div class="form-group row">
