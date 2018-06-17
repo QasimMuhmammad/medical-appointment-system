@@ -1,0 +1,26 @@
+{
+  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "startTime": {
+    "hour": 8,
+    "minute": 0
+  },
+  "endTime": {
+    "hour": 18,
+    "minute": 0
+  },
+  "interval": {
+    "minutes": 30
+  },
+  "events": [{
+    "name": "Hiking",
+    "day": "Monday",
+    "startTime": "9:00",
+    "endTime": "11:00"
+  },
+  {
+    "name": "Lunch",
+    "day": "Monday",
+    "startTime": "11:00",
+    "endTime": "12:00"
+  }]
+}

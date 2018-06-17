@@ -1,0 +1,16 @@
+{
+  "events": [{
+    "id": "event-1",
+    "name": "Hiking",
+    "day": "Monday",
+    "startTime": "9:00",
+    "endTime": "11:00"
+  },
+  {
+    "id": "event-2",
+    "name": "Lunch",
+    "day": "Monday",
+    "startTime": "11:00",
+    "endTime": "12:00"
+  }]
+}

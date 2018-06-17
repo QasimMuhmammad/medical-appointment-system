@@ -108,4 +108,7 @@ router.post('/book_appointments', [
   const data = matchedData(req)
   console.log('Sanitized: ', data)
 
+router.get('/calendar-weekly', function(req, res) {
+  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  res.render('pages/calendar-weekly',  data);
 });
