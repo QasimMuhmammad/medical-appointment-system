@@ -4,32 +4,40 @@ $("#todays-date").append(function() {
 
 $.ajax({
   url: "/test-data/test-events.json",
-  success: renderEvents,
+  success: renderEvents
 });
 
 
 function renderEvents(data) {
   data.events.forEach(function(evt) {
-    var eventCard = $("#event-card").children();
-    console.log($("#event-card").children());
-    console.log(eventCard);
-    eventCard.attr("id", evt.id);
-    eventCard.find("card-title").html(evt.name);
-    eventCard.find("card-body").html("STUFF");
+    var hours = evt.endTime.hour - evt.startTime.hour +
+      (evt.endTime.minute - evt.startTime.minute) / 60.0;
+    var minFrac = evt.startTime.minute / 60.0 * 100;
+    console.log(minFrac);
+    var eventAttr = {
+      eventId: "event-" + evt.id,
+      eventTitle: evt.name,
+      eventHeight: (hours * 100).toString() + "%",
+      eventTop: minFrac.toString() + "%"
+    };
 
-    var template = `<div id={{eventId}} class="card calendar-event w-100">
-      <div class="card-body">
+    var template = `<div id={{eventId}}
+      class="card calendar-event w-100"
+      style="height: {{eventHeight}}; top: {{eventTop}}">
+      <div class="card-body bg-warning">
         <div class="card-title">
-
+          {{eventTitle}}
         </div>
         <div class="card-text">
-
+          STUFF
         </div>
       </div>
     </div>`;
 
-    var html = Mustache.to_html()
+    var html = Mustache.to_html(template, eventAttr);
 
-    $("#" + evt.day + "-" + evt.startTime.split(':')[0]).append(eventCard);
+    $("#" + evt.day + "-" + evt.startTime.hour).html(html);
+
+
   });
 };
