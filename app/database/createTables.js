@@ -9,11 +9,10 @@ var con = mysql.createConnection({
 
 //Table for receptionist
 
-
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  var sql = "CREATE TABLE receptionist (employeeid VARCHAR(255), address VARCHAR(255))";
+  var sql = "CREATE TABLE receptionist (employeeid ID(8), name VARCHAR(255), password VARCHAR(255))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table created");
