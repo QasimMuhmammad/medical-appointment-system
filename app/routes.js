@@ -64,6 +64,19 @@ router.get('/allPatients', function(req,res){
 
 });
 
+router.get('/calendar-weekly', function(req, res) {
+  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  res.render('pages/calendar-weekly',  data);
+})
+
+
+router.post('/login_attempt', [
+
+],
+
+function(req,res) {
+  res.render('pages/allPatients');
+})
 
 //  POST REQUESTS
 router.post('/book_appointments', [
@@ -92,6 +105,7 @@ router.post('/book_appointments', [
   check('Sex')
 
 ],
+
   function(req,res) {
   const errors = validationResult(req)
 
@@ -100,15 +114,9 @@ router.post('/book_appointments', [
     res.render('pages/book-appointment', {
       data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
       errors: errors.mapped()
-    })
+    });
   }
-
-
   //If validation is successful, data has the real data.
   const data = matchedData(req)
   console.log('Sanitized: ', data)
-
-router.get('/calendar-weekly', function(req, res) {
-  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  res.render('pages/calendar-weekly',  data);
 });

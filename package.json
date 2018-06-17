@@ -25,12 +25,9 @@
     "express-ejs-layouts": "^2.4.0",
     "express-validator": "^5.2.0",
     "jquery": "^3.3.1",
-<<<<<<< HEAD
     "mysql": "^2.15.0",
     "nodemon": "^1.17.5",
-=======
     "mustache": "^2.3.0",
->>>>>>> origin/calendar
     "popper": "^1.0.1"
   }
 }
