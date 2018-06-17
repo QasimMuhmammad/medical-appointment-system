@@ -1,16 +1,29 @@
 {
   "events": [{
-    "id": "event-1",
-    "name": "Hiking",
-    "day": "Monday",
-    "startTime": "9:00",
-    "endTime": "11:00"
-  },
-  {
-    "id": "event-2",
-    "name": "Lunch",
-    "day": "Monday",
-    "startTime": "11:00",
-    "endTime": "12:00"
-  }]
+      "id": "event-1",
+      "name": "Hiking",
+      "day": "Monday",
+      "startTime": {
+        "hour": 8,
+        "minute": 30
+      },
+      "endTime": {
+        "hour": 11,
+        "minute": 0
+      }
+    },
+    {
+      "id": "event-2",
+      "name": "Lunch",
+      "day": "Tuesday",
+      "startTime": {
+        "hour": 11,
+        "minute": 0
+      },
+      "endTime": {
+        "hour": 12,
+        "minute": 0
+      }
+    }
+  ]
 }

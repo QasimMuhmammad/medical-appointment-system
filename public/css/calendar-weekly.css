@@ -30,6 +30,9 @@ td {
 .add-time {
   font-size: 32pt;
   visibility: hidden;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @keyframes fadeInOpacity {
@@ -37,11 +40,13 @@ td {
     opacity: 0;
     cursor: auto;
   }
-  75% {
+  50% {
     opacity: 0;
+    background-color: lightgreen;
   }
   100% {
     opacity: 1;
+    background-color: transparent;
   }
 }
 
@@ -49,18 +54,18 @@ td {
   visibility: visible;
 }
 
+
 .plus {
   z-index: 1;
 }
 
 .plus:hover {
   cursor: pointer;
-  background-color: lightgreen;
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
 }
 /* background empty table box */
 .calendar-bg {
