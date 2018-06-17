@@ -16,6 +16,11 @@ const router = express.Router();
 // export our router
 module.exports = router;
 
+
+/** bodyParser.urlencoded(options)
+ * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
+ * and exposes the resulting object (containing the keys and values) on req.body
+ */
 const middleware= [
   validator(),
   bodyParser.urlencoded({
@@ -24,13 +29,7 @@ const middleware= [
 ]
 
 router.use(middleware)
-/** bodyParser.urlencoded(options)
- * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
- * and exposes the resulting object (containing the keys and values) on req.body
- */
-router.use(bodyParser.urlencoded({
-    extended: true
-}));
+
 
 /**bodyParser.json(options)
  * Parses the text as JSON and exposes the resulting object on req.body.
@@ -60,6 +59,13 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
+router.get('/allPatients', function(req,res){
+  res.render('pages/allPatients')
+
+});
+
+
+//  POST REQUESTS
 router.post('/book_appointments', [
   check('FirstName')
       .isLength({min: 1})
