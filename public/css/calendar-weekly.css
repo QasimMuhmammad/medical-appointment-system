@@ -15,6 +15,10 @@ th {
   height: 40px !important;
 }
 
+td {
+  padding: none !important;
+}
+
 .container {
   position: relative;
 }
@@ -45,6 +49,10 @@ th {
   visibility: visible;
 }
 
+.plus {
+  z-index: 1;
+}
+
 .plus:hover {
   cursor: pointer;
   background-color: lightgreen;
@@ -54,15 +62,25 @@ th {
   animation-timing-function: ease-in;
   animation-duration: 0.5s;
 }
-
+/* background empty table box */
 .calendar-bg {
+  padding: none !important;
+  width: inherit;
+  height: inherit;
   z-index: 10;
 }
-
+/* foreground table parent */
 .calendar-fg {
-  z-index: 5;
+  z-index: 15;
 }
 
-.calendar-new-event {
-  z-index: 15
+.calendar-event {
+  z-index: 20;
+  position: absolute;
+  min-height: 100px;
+}
+
+.calendar-tile {
+  padding: 0 !important;
+  position: relative !important;
 }

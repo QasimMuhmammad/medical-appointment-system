@@ -6,21 +6,21 @@
 
     <%- contentFor('header-message'); %>
 
-        <h6 class="align-text-middle" style="margin: 0px;" id="todays-date"></h6>
+      <h6 class="align-text-middle" style="margin: 0px;" id="todays-date"></h6>
 
       <%- contentFor('body'); %>
 
         <table class="table table-bordered calendar-layer calendar-bg">
           <thead>
-            <th scope="col" style="width: 5%" class="text-right">
+            <th scope="col" style="width: 10%" class="text-right">
               Time
             </th>
 
             <% for (day of days) { %>
-              <th scope="col" style="width: 10%" class="text-center">
+              <th scope="col" style="width: 15%" class="text-center">
                 <%= day %>
               </th>
-              <% } %>
+            <% } %>
 
           </thead>
           <tbody>
@@ -28,41 +28,19 @@
             <% for (var i = startTime.hour; i < endTime.hour; i++) { %>
               <tr>
                 <td class="text-right">
-                  <%=i%12%>:00 </td>
+                  <%=i%12%>:00
+                </td>
                 <% for (var j = 0; j < days.length; j++) { %>
-                  <td class="text-center plus">
-                    <i class="far fa-plus-square add-time"></i>
+                  <td id="<%=days[j]+'-'+i %>" class="text-center h-100 calendar-tile">
+                    <div class="plus calendar-bg">
+                      <i class="far fa-plus-square add-time"></i>
+                    </div>
                   </td>
-                  <% } %>
+                <% } %>
               </tr>
-              <% } %>
+            <% } %>
 
           </tbody>
 
         </table>
-        <table class="table calendar-layer calendar-fg">
-          <thead>
-            <th scope="col" style="width: 5%">
-            </th>
-            <% for (day of days) { %>
-              <th scope="col" style="width: 10%">
-              </th>
-              <% } %>
-
-          </thead>
-          <tbody>
-
-            <% for (var i = startTime.hour; i < endTime.hour; i++) { %>
-              <tr>
-                <td class="text-right">
-
-                  <% for (var j = 0; j < days.length; j++) { %>
-                    <td id="<%=days[j]+'-'+i %>" class="text-center plus calendar-new-event">
-                    </td>
-                    <% } %>
-              </tr>
-              <% } %>
-
-          </tbody>
-        </table>
-        </div>
+      </div>
