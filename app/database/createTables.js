@@ -15,6 +15,6 @@ con.connect(function(err) {
   var sql = "CREATE TABLE receptionist (employeeid ID(8), name VARCHAR(255), password VARCHAR(255))";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table created");
+    console.log("Table for receptionist created");
   });
 });
