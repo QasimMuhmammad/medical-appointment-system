@@ -4,15 +4,14 @@ $("#todays-date").append(function() {
 
 $.ajax({
   url: "/test-data/test-events.json",
-  success: renderEvents,
+  success: renderEvents
 });
 
 
 function renderEvents(data) {
-
-
   data.events.forEach(function(evt) {
-    var hours = evt.endTime.hour - evt.startTime.hour;
+    var hours = evt.endTime.hour - evt.startTime.hour +
+      (evt.endTime.minute - evt.startTime.minute) / 60.0;
     var minFrac = evt.startTime.minute / 60.0 * 100;
     console.log(minFrac);
     var eventAttr = {

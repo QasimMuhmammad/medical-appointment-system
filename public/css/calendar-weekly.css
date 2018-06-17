@@ -67,6 +67,7 @@ td {
   animation-timing-function: ease-in;
   animation-duration: 1s;
 }
+
 /* background empty table box */
 .calendar-bg {
   padding: none !important;
@@ -74,6 +75,7 @@ td {
   height: inherit;
   z-index: 10;
 }
+
 /* foreground table parent */
 .calendar-fg {
   z-index: 15;
