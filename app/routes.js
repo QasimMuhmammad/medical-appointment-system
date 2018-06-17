@@ -5,6 +5,9 @@ const path = require('path');
 
 const bodyParser = require("body-parser");
 
+const user = require('./user.js')
+
+
 // Next three for form validation
 const validator = require("express-validator");
 const {check, validationResult} = require('express-validator/check')
@@ -16,6 +19,14 @@ const router = express.Router();
 // export our router
 module.exports = router;
 
+//For a session
+const session = require('express-session')
+router.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}))
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -70,13 +81,8 @@ router.get('/calendar-weekly', function(req, res) {
 })
 
 
-router.post('/login_attempt', [
-
-],
-
-function(req,res) {
-  res.render('pages/allPatients');
-})
+// Attempts to log in a user
+router.post('/login_attempt', user.login)
 
 //  POST REQUESTS
 router.post('/book_appointments', [
