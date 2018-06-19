@@ -86,7 +86,6 @@ router.get('/calendar-weekly', function(req, res) {
   res.render('pages/calendar-weekly',  data);
 })
 
-
 // Attempts to log in a user
 router.post('/login_attempt', user.login)
 

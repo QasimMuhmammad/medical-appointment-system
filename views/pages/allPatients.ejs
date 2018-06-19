@@ -4,4 +4,29 @@
 
 <%- contentFor('body') %>
 
-<p> The following showcases the information for all patients</p>
+<div>
+  <table id="table" >
+          <thead>
+              <tr>
+                  <th>Health Care Number</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Last Name</th>
+                  <th>Sex</th>
+                  <th>Email</th>
+              </tr>
+          </thead>
+           <tbody>
+           <% results.forEach(function (patient) { %>
+              <tr>
+                  <td><%= patient.healthcarenum %></td>
+                  <td><%= patient.fname %></td>
+                  <td><%= patient.mname %></td>
+                  <td><%= patient.lname %></td>
+                  <td><%= patient.sex %></td>
+                  <td><%= patient.email %></td>
+              </tr>
+           <% }) %>
+           </tbody>
+      </table>
+</div>

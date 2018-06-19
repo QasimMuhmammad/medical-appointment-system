@@ -49,5 +49,11 @@ exports.login = function(req, res){
 
 exports.showPatient = function(req,res)
 {
-    res.render('pages/allPatients')
+  var sql = "SELECT * FROM patient";
+  connection.query(sql, function(err,results){
+
+    res.render('pages/allPatients',{results: results})
+    console.log(results)
+  });
+
 }
