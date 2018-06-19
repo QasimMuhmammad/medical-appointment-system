@@ -63,5 +63,5 @@ typings/
 **/.DS_Store
 
 Release.key
-
+**/credidentials.json
 credidentials.json
