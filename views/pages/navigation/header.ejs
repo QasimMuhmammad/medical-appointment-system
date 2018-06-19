@@ -8,9 +8,10 @@
       <div class="nav-item">
         <%- defineContent('header-message'); %>
         </div>
-
-        <%- defineContent('header'); %>
-
-        </div>
-      </nav>
-    </header>
+        <% if (user) { %>
+          <%- include('loggedin_header.ejs'); %>
+          <% } else { %>
+            <%- include('header-guest.ejs'); %><% } %>
+          </div>
+        </nav>
+      </header>

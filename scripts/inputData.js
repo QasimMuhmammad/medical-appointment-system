@@ -1,9 +1,10 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
+const login = require('../credidentials.json');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "qazxsw123",
+  user: login.username,
+  password: login.password,
   database: "MedicalCenter"
 });
 
@@ -13,7 +14,8 @@ con.connect(function(err) {
   console.log("Connected!");
   var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
 
-  inputPatient()
+  inputPatient();
+  inputReceptionist();
 });
 
 
