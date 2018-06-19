@@ -10,6 +10,10 @@
       <h6 class="align-text-middle" style="margin: 0px;" id="todays-date"></h6>
 
       <%- contentFor('body'); %>
+<body>
+  Health Care Number: <%= information.healthcarenum %>
+  Doctor: <%= information.chosenDoc %>
+</body>
 
         <table class="table table-bordered calendar-layer calendar-bg">
           <thead>
@@ -17,25 +21,27 @@
               Time
             </th>
 
-            <% for (day of days) { %>
+            <% for (var j = 0; j < data.days.length; j++) { %>
               <th scope="col" style="width: 10%" class="text-center">
-                <%= day %>
+                <%= data.days[j] %>
               </th>
             <% } %>
 
           </thead>
           <tbody>
 
-            <% for (var i = startTime.hour; i < endTime.hour; i++) { %>
+            <% for (var i = data.startTime.hour, f = data.startTime.minute; i < data.endTime.hour; i++) { %>
               <tr>
                 <td class="text-right">
-                  <%=i%12%>:00
+                  <%= i%>:00
                 </td>
-                <% for (var j = 0; j < days.length; j++) { %>
-                  <td id="<%=days[j]+'-'+i %>" class="text-center h-100 calendar-tile">
+                <% for (var k = 0; k < 7; k++) { %>
+                  <td id="<%=i %>" class="text-center h-100 calendar-tile">
+
                     <div class="plus calendar-bg">
                       <i class="far fa-plus-square add-time"></i>
                     </div>
+
                   </td>
                 <% } %>
               </tr>
