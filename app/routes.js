@@ -2,32 +2,37 @@
 const express = require('express');
 const path = require('path');
 
-
 const bodyParser = require("body-parser");
 
-const user = require('./user.js')
 
+const validate = require('./validateUser.js');
 
 // Next three for form validation
 const validator = require("express-validator");
-const {check, validationResult} = require('express-validator/check')
+const {check, validationResult} = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
+
+//For a session
+const session = require('express-session');
 
 // create our router object
 const router = express.Router();
 
-
-// export our router
-module.exports = router;
-
-//For a session
-const session = require('express-session')
 router.use(session({
+  cookieName: 'session',
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 60000 }
-}))
+}));
+
+function requireLogin(req, res, next) {
+  if (!req.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+};
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -40,54 +45,58 @@ const middleware= [
   })
 ]
 
-router.use(middleware)
+router.use(middleware);
 
 /**bodyParser.json(options)
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 router.use(bodyParser.json());
 
+// use login validator
+router.use(validate.login);
+
 router.get('/', function(req, res) {
-  res.render('pages/home');
+  res.render('pages/home', { user: res.locals.userId });
 });
 
 router.get('/login', function(req, res) {
   var message = '';
-  res.render('pages/login',{message:message});
+  res.render('pages/login',{message:message, user: res.locals.userId });
 });
 
 router.get('/about', function(req, res) {
-  res.render('pages/about');
+  res.render('pages/about', { user: res.locals.userId });
 });
 
-router.get('/dashboard', function(req, res) {
-  res.render('pages/dashboard',);
+router.get('/dashboard', requireLogin, function(req, res) {
+  res.render('pages/dashboard', { user: res.locals.userId });
 });
 
 router.get('/book-appointment', function(req, res) {
-  res.render('pages/book-appointment');
+  res.render('pages/book-appointment', { user: res.locals.userId });
 });
 
 router.get('/appointments', function(req, res){
-  res.render('pages/appointments');
+  res.render('pages/appointments', { user: res.locals.userId });
 });
 
 router.get('/book-appointments', function(req, res) {
   res.render('pages/book-appointment', {
     data: {},
-    errors: {}
+    errors: {},
+    user: res.locals.userId
   });
 });
 
-router.get('/allPatients', user.showPatient);
+router.get('/allPatients', validate.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
-  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  res.render('pages/calendar-weekly',  data);
+  let info = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  res.render('pages/calendar-weekly', { data: info, user: res.locals.userId } );
 })
 
 // Attempts to log in a user
-router.post('/login_attempt', user.login)
+//router.post('/login_attempt', validate.login);
 
 
 //  POST REQUESTS
@@ -133,3 +142,6 @@ router.post('/book_appointments', [
   console.log('Sanitized: ', data)
   res.redirect('/calendar-weekly')
 });
+
+// export our router
+module.exports = router;

@@ -4,20 +4,22 @@
   <%- contentFor('body') %>
     <div class="container">
       <div class="card">
-        <% if (message.length > 0) { %><div class="alert alert-danger col-sm-12"><%= message %></div><% } %>
-        <form class="form-signin w-50" action="login_attempt" method="post" novalidate>
+        <% if (message.length > 0) { %>
+          <div class="alert alert-danger col-sm-12"><%= message %></div>
+        <% } %>
+        <form class="form-signin w-50" action="login_attempt" method="post" novalidate="novalidate">
           <h1 class="h3 mb-3 font-weight-bold">Login</h1>
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="Username" id="username" class="form-control" placeholder="Username" name="username" required autofocus>
+          <input type="Username" id="username" class="form-control" placeholder="Username" name="username" required="required" autofocus="autofocus">
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" id="password" class="form-control" placeholder="Password" name="password" required="required">
 
           <div class="container-fluid no-padding">
             <div class="row">
               <div class="col col-lg-6 text-nowrap">
                 <a class="small-text align-middle" href="#">
-                Forgot Password?
-              </a>
+                  Forgot Password?
+                </a>
               </div>
               <div class="col col-lg-auto"></div>
               <div class="col col-lg-4 float-right ml-auto">
