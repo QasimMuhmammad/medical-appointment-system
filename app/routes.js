@@ -89,8 +89,8 @@ router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
 
   user.getHoursForDoctor(function(err,results){
-
-      res.render('pages/calendar-weekly', {data: data,hours: results});
+      console.log(req.session);
+      res.render('pages/calendar-weekly', {information: req.session , data: data, hours: results});
 
   })
 

@@ -72,7 +72,7 @@ function prescription(err) {
 }
 
 function appointment(err) {
-  var sql = "CREATE TABLE appointment (bookingid Int(8) NOT NULL, description VARCHAR(255) NOT NULL, duration Int(8) NOT NULL,room_num Int(8) NOT NULL,date DATE,time Int(8), quantity Int(8) NOT NULL, receptionistid int(8), healthcarenum Int(8))";
+  var sql = "CREATE TABLE appointment (bookingid Int(8) NOT NULL, description VARCHAR(255) NOT NULL, duration Int(8) NOT NULL, date DATE,hour Int(8), quantity Int(8) NOT NULL, receptionistid int(8), healthcarenum Int(8), doctorfName VARCHAR(255))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for appointment created");
