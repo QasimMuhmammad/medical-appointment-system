@@ -57,3 +57,28 @@ exports.showPatient = function(req,res)
   });
 
 }
+
+exports.getDoctors = function(callback)
+{
+  var sql = "SELECT * FROM doctor";
+  connection.query(sql, function(err,results){
+
+    if(err) return callback(err);
+    else{
+      callback(null,results);
+    }
+  });
+
+}
+
+exports.getHoursForDoctor = function(callback)
+{
+  var sql = "SELECT * FROM appointment";
+  connection.query(sql, function(err,results){
+
+    if(err) return callback(err);
+    else{
+      callback(null,results);
+    }
+  });
+}

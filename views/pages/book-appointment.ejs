@@ -84,6 +84,20 @@
     </div>
 </div>
 
+<!-- Doctor !-->
+<div class="form-group row">
+    <div class="form-group col-sm-3" style="margin-left:15px;">
+    <label for="selecion1"> <b>Doctor</b></label>
+    <select class="form-control" id="Doctor" name="Doctor" >
+      <% doctor.forEach(function (results) { %>
+         <tr>
+             <option><%= results.fname %></option>
+         </tr>
+      <% }) %>
+    </select>
+  </div>
+</div>
+
 
     <!-- Submit Button !--->
   <div class="form-group">

@@ -73,17 +73,27 @@ router.get('/appointments', function(req, res){
 });
 
 router.get('/book-appointments', function(req, res) {
-  res.render('pages/book-appointment', {
-    data: {},
-    errors: {}
-  });
+  user.getDoctors(function(err,results){
+    console.log(results);
+    res.render('pages/book-appointment', {
+        data: {},
+        errors: {},
+        doctor: results
+      })
+  })
 });
 
 router.get('/allPatients', user.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  res.render('pages/calendar-weekly',  data);
+
+  user.getHoursForDoctor(function(err,results){
+
+      res.render('pages/calendar-weekly', {data: data,hours: results});
+
+  })
+
 })
 
 // Attempts to log in a user
@@ -114,8 +124,8 @@ router.post('/book_appointments', [
       .isInt()
       .isLength({min:10,max:10})
       .withMessage("Invalid Phone Number Entered"),
-  check('Sex')
-
+  check('Sex'),
+  check('Doctor')
 ],
 
   function(req,res) {
@@ -125,11 +135,21 @@ router.post('/book_appointments', [
   {
     res.render('pages/book-appointment', {
       data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
-      errors: errors.mapped()
+      errors: errors.mapped(),
+      doctor: doctor
     });
   }
   //If validation is successful, data has the real data.
   const data = matchedData(req)
   console.log('Sanitized: ', data)
+
+  // lol leave me alone
+  req.session.chosenDoc= req.body.Doctor;
+  req.session.healthcarenum = req.body.HealthCareNum
+  req.session.fname = req.body.FirstName
+  req.session.lname = req.body.LastName
+  req.session.email = req.body.EmailAddress
+  req.session.phonenum = req.body.PhoneNumber
+  req.session.sex = req.body.Sex
   res.redirect('/calendar-weekly')
 });
