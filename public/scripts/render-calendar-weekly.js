@@ -24,7 +24,7 @@ function renderEvents(data) {
     var template = `<div id={{eventId}}
       class="card calendar-event w-100"
       style="height: {{eventHeight}}; top: {{eventTop}}">
-      <div class="card-body bg-warning">
+      <div class="card-body">
         <div class="card-title">
           {{eventTitle}}
         </div>

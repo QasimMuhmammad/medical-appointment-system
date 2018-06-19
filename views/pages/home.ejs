@@ -1,79 +1,80 @@
 <%- contentFor('css') %>
   <link rel="stylesheet" href="/css/home.css">
 
-  <%- contentFor('hero') %>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="container">
-          <h2>Medical Appointment Center</h2>
-          <p>Book an appointment today!</p>
-          <a href="/book-appointments" class="btn btn-lg btn-light text-dark">
+  <%- contentFor('header') %>
+    <%- include('navigation/header-guest.ejs'); -%>
+
+      <%- contentFor('hero') %>
+        <section class="hero">
+          <div class="hero-content">
+            <div class="container">
+              <h2>Medical Appointment Center</h2>
+              <p>Book an appointment today!</p>
+              <a href="/book-appointments" class="btn btn-lg btn-light text-dark">
           <strong >
 Get Started
 </strong>
           </a>
-          <div class="jumbotron" style="background: transparent;">
-            <div class="card-deck text-white text-left">
-              <div class="card">
-                <div class="hours-card h-100">
-                  <div class="card-body">
-                    <h5>Hours of Operation</h5>
-                    <table class="table table-hover" style="font-size: 12px">
-                      <tbody>
-                        <tr>
-                          <td>Monday-Friday</td>
-                          <td>8:00-17:30</td>
-                        </tr>
-                        <tr>
-                          <td>Saturday</td>
-                          <td>9:00-17:30</td>
-                        </tr>
-                        <tr>
-                          <td>Sunday</td>
-                          <td>9:00-15:00</td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <div class="jumbotron" style="background: transparent;">
+                <div class="card-deck text-white text-left">
+                  <div class="card">
+                    <div class="hours-card h-100">
+                      <div class="card-body">
+                        <h5>Hours of Operation</h5>
+                        <table class="table table-hover" style="font-size: 12px">
+                          <tbody>
+                            <tr>
+                              <td>Monday-Friday</td>
+                              <td>8:00-17:30</td>
+                            </tr>
+                            <tr>
+                              <td>Saturday</td>
+                              <td>9:00-17:30</td>
+                            </tr>
+                            <tr>
+                              <td>Sunday</td>
+                              <td>9:00-15:00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-
-              <div class="card">
-                <div class="appoint-card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Appointments</h5>
-                    <hr class="bg-white">
-                    <p class="card-text" style="font-size: 12px">Some text inside the second card</p>
+                  <div class="card">
+                    <div class="appoint-card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Appointments</h5>
+                        <hr class="bg-white">
+                        <p class="card-text" style="font-size: 12px">Some text inside the second card</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="location-card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Location</h5>
-                    <hr class="bg-white">
-                    <p class="card-text" style="font-size: 12px">Some text inside the third card</p>
+                  <div class="card">
+                    <div class="location-card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Location</h5>
+                        <hr class="bg-white">
+                        <p class="card-text" style="font-size: 12px">Some text inside the third card</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="contact-card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Contact Us</h5>
-                    <hr class="bg-white">
-                    <p class="card-text" style="font-size: 12px">Some text inside the fourth card</p>
+                  <div class="card">
+                    <div class="contact-card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Contact Us</h5>
+                        <hr class="bg-white">
+                        <p class="card-text" style="font-size: 12px">Some text inside the fourth card</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <%- contentFor('body') %>
-      <!-- <div class="card-deck text-white text-left">
+        <%- contentFor('body') %>
+          <!-- <div class="card-deck text-white text-left">
         <div class="card">
           <div class="hours-card">
             <div class="card-body">

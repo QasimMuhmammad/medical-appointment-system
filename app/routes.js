@@ -1,51 +1,72 @@
-// require express
-const express = require('express');
 const path = require('path');
-
-
+const express = require('express');
 const bodyParser = require("body-parser");
 
-const user = require('./user.js')
+const util = require('util');
 
+//For a session
+const session = require('express-session');
 
 // Next three for form validation
 const validator = require("express-validator");
-const {check, validationResult} = require('express-validator/check')
-const { matchedData, sanitize } = require('express-validator/filter');
+
+const {
+  check,
+  validationResult
+} = require('express-validator/check');
+const {
+  matchedData,
+  sanitize
+} = require('express-validator/filter');
+
+const validate = require('./validateUser.js');
 
 // create our router object
 const router = express.Router();
 
 
-// export our router
-module.exports = router;
+/**bodyParser.json(options)
+ * Parses the text as JSON and exposes the resulting object on req.body.
+ */
+router.use(bodyParser.json());
 
-//For a session
-const session = require('express-session')
+
 router.use(session({
+  cookieName: 'session',
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}))
+  cookie: {
+    maxAge: 60000
+  }
+}));
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
  * and exposes the resulting object (containing the keys and values) on req.body
  */
-const middleware= [
+const middleware = [
   validator(),
   bodyParser.urlencoded({
-      extended: true
+    extended: true
   })
 ]
 
-router.use(middleware)
+router.use(middleware);
 
-/**bodyParser.json(options)
- * Parses the text as JSON and exposes the resulting object on req.body.
- */
-router.use(bodyParser.json());
+function requireLogin(req, res, next) {
+  console.log("REQ USER: " + util.inspect(req.session, false, null));
+  if (!req.session.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+};
+
+
+router.use(validate.checkSession);
+
+// use login validator
 
 router.get('/', function(req, res) {
   res.render('pages/home');
@@ -53,27 +74,25 @@ router.get('/', function(req, res) {
 
 router.get('/login', function(req, res) {
   var message = '';
-  res.render('pages/login',{message:message});
+  res.render('pages/login', {
+    message: message
+  });
 });
 
 router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
-router.get('/dashboard', function(req, res) {
-  res.render('pages/dashboard',);
+router.get('/dashboard', requireLogin, function(req, res) {
+  res.render('pages/dashboard');
 });
 
-router.get('/book-appointment', function(req, res) {
-  res.render('pages/book-appointment');
-});
-
-router.get('/appointments', function(req, res){
+router.get('/appointments', function(req, res) {
   res.render('pages/appointments');
 });
 
 router.get('/book-appointments', function(req, res) {
-  user.getDoctors(function(err,results){
+  validate.getDoctors(function(err,results){
     console.log(results);
     res.render('pages/book-appointment', {
         data: {},
@@ -83,12 +102,12 @@ router.get('/book-appointments', function(req, res) {
   })
 });
 
-router.get('/allPatients', user.showPatient);
+router.get('/allPatients', validate.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
 
-  user.getHoursForDoctor(function(err,results){
+  validate.getHoursForDoctor(function(err,results){
       console.log(req.session);
       res.render('pages/calendar-weekly', {information: req.session , data: data, hours: results});
 
@@ -96,9 +115,13 @@ router.get('/calendar-weekly', function(req, res) {
 
 })
 
-// Attempts to log in a user
-router.post('/login_attempt', user.login)
+router.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
 
+// Attempts to log in a user
+router.post('/login_attempt', validate.login);
 
 //  POST REQUESTS
 router.post('/book_appointments', [
@@ -153,3 +176,5 @@ router.post('/book_appointments', [
   req.session.sex = req.body.Sex
   res.redirect('/calendar-weekly')
 });
+
+module.exports = router;
