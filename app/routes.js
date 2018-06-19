@@ -16,6 +16,7 @@ const { matchedData, sanitize } = require('express-validator/filter');
 // create our router object
 const router = express.Router();
 
+
 // export our router
 module.exports = router;
 
@@ -41,7 +42,6 @@ const middleware= [
 
 router.use(middleware)
 
-
 /**bodyParser.json(options)
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
@@ -52,7 +52,8 @@ router.get('/', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.render('pages/login');
+  var message = '';
+  res.render('pages/login',{message:message});
 });
 
 router.get('/about', function(req, res) {
@@ -60,7 +61,7 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/dashboard', function(req, res) {
-  res.render('pages/dashboard');
+  res.render('pages/dashboard',);
 });
 
 router.get('/book-appointment', function(req, res) {
@@ -78,10 +79,7 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
-router.get('/allPatients', function(req,res){
-  res.render('pages/allPatients')
-
-});
+router.get('/allPatients', user.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
@@ -91,6 +89,7 @@ router.get('/calendar-weekly', function(req, res) {
 
 // Attempts to log in a user
 router.post('/login_attempt', user.login)
+
 
 //  POST REQUESTS
 router.post('/book_appointments', [
@@ -133,4 +132,5 @@ router.post('/book_appointments', [
   //If validation is successful, data has the real data.
   const data = matchedData(req)
   console.log('Sanitized: ', data)
+  res.redirect('/calendar-weekly')
 });

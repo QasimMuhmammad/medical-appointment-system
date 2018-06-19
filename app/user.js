@@ -7,35 +7,47 @@ const connection = mysql.createConnection({
               database : 'MedicalCenter'
             });
 
+// Next three for form validation
+const validator = require("express-validator");
+const {check, validationResult} = require('express-validator/check')
+const { matchedData, sanitize } = require('express-validator/filter');
+
+
 
 exports.login = function(req, res){
    var message = '';
-   var sess = req.session;
-
+   const sess = req.session;
+   console.log("IM HERE");
    if(req.method == "POST"){
-      var post  = req.body;
-      var name= post.username;
-      var pass= post.password;
+      const post  = req.body;
+      const name= post.username;
+      const pass= post.password;
       console.log('Username is ' + name + 'Password is ' + pass);
 
-      var sql="SELECT employeeid, password FROM `receptionist` WHERE `employeeid`='"+name+"' and password = '"+pass+"'";
+      const sql="SELECT employeeid, password FROM `receptionist` WHERE `employeeid`='"+name+"' and password = '"+pass+"'";
       connection.query(sql, function(err, results){
          if(results.length){
            // Need to put contents somewhere
-              //req.session.userId = results[0].id;
-              //req.session.user = results[0];
-            //console.log(results[0].id);
-            let data = require(__dirname + '/calendar-weekly-data.json');
-            res.render('pages/calendar-weekly', data);
+              req.session.userId = results[0].employeeid;
+              req.session.userName = results[0].name;
+            console.log(results[0].name);
+            res.redirect('/dashboard')
          }
          else{
             message = 'Wrong Credentials.';
-            res.render('pages/login');
+            res.render('pages/login',{message: message});
             console.log('Wrong Credentials');
          }
 
       });
    } else {
-      res.render('pages/login');
+      message = 'Wrong Credentials';
+      res.render('pages/login', {message:message});
    }
 };
+
+
+exports.showPatient = function(req,res)
+{
+    res.render('pages/allPatients')
+}

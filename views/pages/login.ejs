@@ -1,16 +1,16 @@
 <%- contentFor('css') %>
   <link rel="stylesheet" href="/css/signin.css">
 
-
   <%- contentFor('body') %>
     <div class="container">
       <div class="card">
-        <form class="form-signin w-50">
+        <% if (message.length > 0) { %><div class="alert alert-danger col-sm-12"><%= message %></div><% } %>
+        <form class="form-signin w-50" action="login_attempt" method="post" novalidate>
           <h1 class="h3 mb-3 font-weight-bold">Login</h1>
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="Username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+          <input type="Username" id="username" class="form-control" placeholder="Username" name="username" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
 
           <div class="container-fluid no-padding">
             <div class="row">
