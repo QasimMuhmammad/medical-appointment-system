@@ -117,16 +117,21 @@ function findUser(req, next) {
 
       next(null, user);
     }
+    else {
+      next(err, null);
+    }
   });
 };
 
 exports.showPatient = function(req, res) {
   var sql = "SELECT * FROM patient";
   connection.query(sql, function(err, results) {
+    if (results) {
 
-    res.render('pages/allPatients', {
-      results: results
-    })
-    console.log(results)
+      res.render('pages/allPatients', {
+        results: results
+      })
+      console.log(results)
+    }
   });
 };
