@@ -1,15 +1,6 @@
 // For database
-const mysql = require('mysql');
-const login = require('../credidentials.json');
+const connection = require('./database/connection.js');
 const util = require('util');
-
-
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: login.username,
-  password: login.password,
-  database: "MedicalCenter"
-});
 
 // Next three for form validation
 const validator = require("express-validator");
@@ -91,7 +82,6 @@ exports.login = function(req, res) {
   next();
   */
 };
-
 
 function findUser(req, next) {
   var message = '';

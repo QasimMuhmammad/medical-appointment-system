@@ -62,9 +62,7 @@ function requireLogin(req, res, next) {
   }
 };
 
-
 router.use(validate.checkSession);
-
 
 // use login validator
 // router.use(validate.login);
