@@ -27,12 +27,23 @@ function inputReceptionist(){
     console.log("1 record inserted");
   });
 
+
 }
 
 
 function inputPatient() {
 
   var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ('123456787', 'qasim2', 'muhammad','male', 'qasim.muhamad@ucalgary.ca')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 patient record inserted");
+  });
+  var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ('101010101', 'trevor', 'le','male', 'trevor.le1@ucalgary.ca')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 patient record inserted");
+  });
+  var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ('987654321', 'jimmy', 'truong','male', 'jimmy.truong@ucalgary.ca')";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 patient record inserted");
