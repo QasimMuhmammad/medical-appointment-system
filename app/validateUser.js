@@ -68,29 +68,8 @@ exports.login = function(req, res) {
       }
     }
   });
+}
 
-  /*
-  if (req.method == "POST" && loginIsValid(req)) {
-    // Need to put contents somewhere
-    var user = results[0].employeeid;
-    req.user = user;
-    req.session.user = user;
-    res.locals.userName = results[0].name;
-    res.locals.user = user; // store the user session
-
-    delete post.password; // delete password from session
-    console.log(req.user);
-    res.redirect('/dashboard')
-  } else {
-    message = 'Wrong Credentials.';
-    res.render('pages/login', {
-      message: message
-    });
-    console.log('Wrong Credentials111');
-  }
-  next();
-  */
-};
 
 
 function findUser(req, next) {
@@ -127,7 +106,7 @@ exports.showPatient = function(req, res) {
   var sql = "SELECT * FROM patient";
   connection.query(sql, function(err, results) {
     if (results) {
-
+      console.log(results);
       res.render('pages/allPatients', {
         results: results
       })

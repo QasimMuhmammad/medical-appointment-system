@@ -106,9 +106,27 @@ router.get('/allPatients', validate.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  var calendarData = new Array();
 
   validate.getHoursForDoctor(function(err,results){
-      console.log(req.session);
+
+  console.log(results);
+  //console.log(data.time);
+
+  for (var k = 0; k < data.days.length; k++) {
+    var toAdd = data.time.map(a => Object.assign({},a));
+    for (var i = 0; i < data.time.length; i++) {
+
+      for (var j = 0; j < results.length; j++) {
+          if ((data.days[k] === results[j].weekday) && (data.time[i][0] === results[j].hour)) {
+            toAdd[i][1] = false;
+          }
+      }
+    }
+    console.log("K: " + k + require('util').inspect(toAdd, { depth: null }));
+    calendarData.push(toAdd);
+  }
+
       res.render('pages/calendar-weekly', {information: req.session , data: data, hours: results});
 
   })
