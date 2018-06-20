@@ -1,9 +1,9 @@
 .hero {
-  background: #2980B9;
+  background: #1D976C;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(135deg, #2980B9, #6DD5FA, #FFFFFF);
+  background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(135deg, #2980B9, #6DD5FA, #FFFFFF);
+  background: linear-gradient(to right, #93F9B9, #1D976C);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-position: center center;
@@ -37,12 +37,25 @@
   padding: 10px 20px;
 }
 
-.hours-card {
-  background-color: #36A9EC;
+.container-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }
+
+.brand-logo {}
+
+.name {}
+
+.slogan {}
+
+.action-btn {}
 
 .appoint-card {
   background-color: #2194EE;
+}
+
+.hours-card {
+  background-color: #36A9EC;
 }
 
 .location-card {
