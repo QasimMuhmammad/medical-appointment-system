@@ -2,13 +2,20 @@ $("#todays-date").append(function() {
   return "Today is " + moment().format("D MMMM, YYYY");
 });
 
-$.ajax({
-  url: "/test-data/test-events.json",
-  success: renderEvents
-});
+$( document ).ready(function () {
+
+  $.ajax({
+    url: "/test-data/test-events.json",
+    success: renderEvents
+  });
+}
+
+
+);
 
 
 function renderEvents(data) {
+  console.log(data);
   data.events.forEach(function(evt) {
     var hours = evt.endTime.hour - evt.startTime.hour +
       (evt.endTime.minute - evt.startTime.minute) / 60.0;
@@ -36,7 +43,8 @@ function renderEvents(data) {
 
     var html = Mustache.to_html(template, eventAttr);
 
-    $("#" + evt.day + "-" + evt.startTime.hour).html(html);
+    $("#" + evt.day + "-" + evt.startTime.hour + ":00").html(html);
+    console.log("#" + evt.day + "-" + evt.startTime.hour + ":00");
 
 
   });

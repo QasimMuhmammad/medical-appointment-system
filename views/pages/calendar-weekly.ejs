@@ -36,8 +36,9 @@
                   <%= data.time[i][0] %>
                 </td>
                 <% for (var k = 0; k < data.days.length; k++) { %>
-                  <td id="<%= data.time[i][0] %>" class="text-center h-100 calendar-tile">
-                    
+                  <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile">
+
+                      <%=  (calendarData[k][i][1]) %>
                     <div class="plus calendar-bg">
                       <i class="far fa-plus-square add-time"></i>
                     </div>

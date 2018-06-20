@@ -110,9 +110,6 @@ router.get('/calendar-weekly', function(req, res) {
 
   validate.getHoursForDoctor(function(err,results){
 
-  console.log(results);
-  //console.log(data.time);
-
   for (var k = 0; k < data.days.length; k++) {
     var toAdd = data.time.map(a => Object.assign({},a));
     for (var i = 0; i < data.time.length; i++) {
@@ -123,11 +120,9 @@ router.get('/calendar-weekly', function(req, res) {
           }
       }
     }
-    console.log("K: " + k + require('util').inspect(toAdd, { depth: null }));
     calendarData.push(toAdd);
   }
-
-      res.render('pages/calendar-weekly', {information: req.session , data: data, hours: results});
+      res.render('pages/calendar-weekly', {information: req.session , data: data, hours: results, calendarData: calendarData});
 
   })
 
