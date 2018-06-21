@@ -161,10 +161,11 @@ router.get('/logout', function(req, res) {
 router.post('/login', validate.login);
 
 router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
-  const errors = validationResult(req)
+  const errors = validationResult(req);
   console.log("Appoint is " + req.body.AppointmentDate);
   console.log(req.session);
   req.session.AppointmentDate = req.body.AppointmentDate;
+  res.locals.confirmAppointment = req.body;
   res.render('pages/confirmAppointment');
 });
 

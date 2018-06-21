@@ -121,9 +121,9 @@ td {
                                   supported by Chrome and Opera */
 }
 
-.btn-invis:hover {
+.btn-invis {
   background: transparent;
-  border: none;
+  border: none !important;
   width: inherit;
   height: inherit;
   cursor: pointer;
