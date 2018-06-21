@@ -127,7 +127,7 @@ td {
 
 .btn-invis:hover {
   background: transparent;
-  border: none;
+  border: none !important;
   width: inherit;
   height: inherit;
   cursor: pointer;
