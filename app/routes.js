@@ -1,28 +1,34 @@
 const path = require('path');
 const express = require('express');
+
+// Parses HTML data and store in req.body
 const bodyParser = require("body-parser");
 
+// Async Object Inspector
 const util = require('util');
 
-//For a session
+// Sessions
 const session = require('express-session');
 
-// Next three for form validation
+// Form Validation
 const validator = require("express-validator");
 
+// Form Validation
 const {
   check,
   validationResult
 } = require('express-validator/check');
 
+// Form Validation
 const {
   matchedData,
   sanitize
 } = require('express-validator/filter');
 
+// Login Validation
 const validate = require('./validateUser.js');
 
-// create our router object
+// Router
 const router = express.Router();
 
 
@@ -38,7 +44,7 @@ router.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 60000
+    maxAge: 30 * 60 * 1000 // 30 minute cookies
   }
 }));
 
@@ -63,13 +69,14 @@ function requireLogin(req, res, next) {
   }
 };
 
+// Verifies a user session
 router.use(validate.checkSession);
 
-// use login validator
 router.get('/', function(req, res) {
   res.render('pages/home');
 });
 
+// use login validator
 router.get('/login', function(req, res) {
   var message = '';
   res.render('pages/login', {
@@ -90,7 +97,7 @@ router.get('/appointments', function(req, res) {
 });
 
 router.get('/book-appointments', function(req, res) {
-  validate.getDoctors(function(err, results) {
+  validate.getDoctors(function(results) {
     res.render('pages/book-appointment', {
       data: {},
       errors: {},
@@ -99,34 +106,51 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
-router.get('/allPatients', validate.showPatient);
+router.get('/allPatients', function(req, res) {
+  validate.getPatients(function(results) {
+    res.render('pages/allPatients', {
+      results: results
+    });
+  });
+});
 
 router.get('/calendar-weekly', function(req, res) {
-  let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  renderCalendarWeekly(res, 'view');
+});
+
+function renderCalendarWeekly(res, perspective) {
+  let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  getCalendarData(appointmentsConfig, function(calendarData) {
+    res.render('pages/calendar/calendar-weekly', {
+      data: appointmentsConfig,
+      calendarData: calendarData,
+      intent: perspective
+    });
+  });
+}
+
+router.get('/calendar-weekly-manage', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'manage');
+});
+
+function getCalendarData(appointmentsConfig, next) {
   var calendarData = new Array();
 
-  validate.getHoursForDoctor(function(err, results) {
-
-    for (var k = 0; k < data.days.length; k++) {
-      var toAdd = data.time.map(a => Object.assign({}, a));
-      for (var i = 0; i < data.time.length; i++) {
-
+  validate.getHoursForDoctor(function(results) {
+    for (var k = 0; k < appointmentsConfig.days.length; k++) {
+      var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
+      for (var i = 0; i < appointmentsConfig.time.length; i++) {
         for (var j = 0; j < results.length; j++) {
-          if ((data.days[k] === results[j].weekday) && (data.time[i][0] === results[j].hour)) {
+          if ((appointmentsConfig.days[k] === results[j].weekday) && (appointmentsConfig.time[i][0] === results[j].hour)) {
             toAdd[i][1] = false;
           }
         }
       }
       calendarData.push(toAdd);
     }
-    res.render('pages/calendar/calendar-weekly', {
-      information: req.session,
-      data: data,
-      hours: results,
-      calendarData: calendarData
-    });
+    next(calendarData);
   });
-});
+};
 
 router.get('/logout', function(req, res) {
   req.session.destroy();
@@ -183,7 +207,7 @@ router.post('/book_appointments', [
   ],
 
   function(req, res) {
-    const errors = validationResult(req)
+    const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       res.render('pages/book-appointment', {
@@ -204,7 +228,7 @@ router.post('/book_appointments', [
     req.session.email = req.body.EmailAddress
     req.session.phonenum = req.body.PhoneNumber
     req.session.sex = req.body.Sex
-    res.redirect('pages/calendar/calendar-weekly');
+    res.redirect('/calendar-weekly');
   });
 
 // export our router

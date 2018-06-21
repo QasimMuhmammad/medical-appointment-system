@@ -12,10 +12,6 @@
 
       <%- contentFor('body'); %>
 
-        Health Care Number:
-        <%= information.healthcarenum %>
-        Doctor:
-        <%= information.chosenDoc %>
         <div class="card">
           <div class="card-body">
 
@@ -35,9 +31,9 @@
 
               <tbody>
                 <% if (user) { %>
-                  <%- include('calendar-weekly-guest.ejs') %>
+                  <%- include('calendar-weekly-user.ejs'); %>
                   <% } else { %>
-                    <%- include('calendar-weekly-guest.ejs') %><% } %>
+                    <%- include('calendar-weekly-guest.ejs'); %><% } %>
                   </tbody>
 
                 </table>
