@@ -55,7 +55,6 @@
                           hour = hour;
                         } %>
 
-
                         <div class="h3 d-block time pr-2">
                           <%= hour + ":" + minute %>
                           <div class="h5 d-inline align-top text-muted">
@@ -69,18 +68,16 @@
 
                       <% if(calendarData[k][i][1] == true) { %>
                         <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile" bgcolor="#008000">
-                          <div class="plus calendar-bg" style="color:#008000">
+                          <div class="plus calendar-bg available">
                             <form action="finalize_time" method="post">
                               <input type="hidden" id="AppointmentDate" name="AppointmentDate" value="<%=data.days[k] + ' '+ data.time[i][0] %>"/>
                               <button type="submit" style="background: transparent;border:none;width:80px;height:45px;"></button>
                             </form>
                           </div>
                         </td>
-                      <% }
-
-                        else { %>
+                      <% } else { %>
                         <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile" bgcolor="#FF0000">
-                          <div class="plus calendar-bg" style="color:#FF0000">
+                          <div class="plus calendar-bg unavailable" style="color:#FF0000">
                             <i class="far fa-plus-square add-time" style="color:#FF0000"></i>
                           </div>
                         </td>

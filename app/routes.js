@@ -14,6 +14,7 @@ const {
   check,
   validationResult
 } = require('express-validator/check');
+
 const {
   matchedData,
   sanitize
@@ -55,7 +56,6 @@ const middleware = [
 router.use(middleware);
 
 function requireLogin(req, res, next) {
-  console.log("REQ USER: " + util.inspect(req.session, false, null));
   if (!req.session.user) {
     res.redirect('/login');
   } else {
@@ -66,7 +66,6 @@ function requireLogin(req, res, next) {
 router.use(validate.checkSession);
 
 // use login validator
-
 router.get('/', function(req, res) {
   res.render('pages/home');
 });
@@ -92,13 +91,12 @@ router.get('/appointments', function(req, res) {
 
 router.get('/book-appointments', function(req, res) {
   validate.getDoctors(function(err, results) {
-    console.log(results);
     res.render('pages/book-appointment', {
       data: {},
       errors: {},
       doctor: results
-    })
-  })
+    });
+  });
 });
 
 router.get('/allPatients', validate.showPatient);
@@ -127,10 +125,8 @@ router.get('/calendar-weekly', function(req, res) {
       hours: results,
       calendarData: calendarData
     });
-
-  })
-
-})
+  });
+});
 
 router.get('/logout', function(req, res) {
   req.session.destroy();
@@ -138,7 +134,7 @@ router.get('/logout', function(req, res) {
 });
 
 // Attempts to log in a user
-router.post('/login_attempt', validate.login);
+router.post('/login', validate.login);
 
 router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
   const errors = validationResult(req)
@@ -146,8 +142,7 @@ router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
   console.log(req.session);
   req.session.AppointmentDate = req.body.AppointmentDate;
   res.render('pages/confirmAppointment');
-
-})
+});
 
 //  POST REQUESTS
 router.post('/book_appointments', [
