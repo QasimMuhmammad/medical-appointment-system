@@ -13,7 +13,7 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  addAll();
+  //addAll();
   //dropAll();
 });
 
@@ -73,7 +73,7 @@ function prescription(err) {
 }
 
 function appointment(err) {
-  var sql = "CREATE TABLE appointment (bookingid Int(8) NOT NULL, description VARCHAR(255) NOT NULL, duration Int(8) NOT NULL, weekday VARCHAR(255),hour VARCHAR(255), quantity Int(8) NOT NULL, receptionistid int(8), healthcarenum Int(8), doctorfName VARCHAR(255))";
+  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorfName VARCHAR(20) NOT NULL)";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for appointment created");

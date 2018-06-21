@@ -13,9 +13,9 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
-  inputReceptionist()
-  inputPatient()
-  inputDoctor()
+//  inputReceptionist()
+  //inputPatient()
+  //inputDoctor()
   inputAppointment()
 });
 
@@ -61,7 +61,7 @@ function inputDoctor() {
 
 function inputAppointment() {
 
-  var sql = "INSERT INTO appointment (bookingid, description, duration, weekday, hour, quantity, healthcarenum, doctorfName) VALUES ('1', 'test', '30','Monday','12:00','5', '123456789','armaan')";
+  var sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorfName) VALUES ('Tuesday','12:30','111111111','armaan')";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 appointment record inserted");
