@@ -14,7 +14,7 @@ const { matchedData, sanitize } = require('express-validator/filter');
 
 
 
-exports.login = function(req, res){
+login = function(req, res){
    var message = '';
    const sess = req.session;
    console.log("IM HERE");
@@ -47,7 +47,7 @@ exports.login = function(req, res){
 };
 
 
-exports.showPatient = function(req,res)
+showPatient = function(req,res)
 {
   var sql = "SELECT * FROM patient";
   connection.query(sql, function(err,results){
@@ -58,7 +58,7 @@ exports.showPatient = function(req,res)
 
 }
 
-exports.getDoctors = function(callback)
+getDoctors = function(callback)
 {
   var sql = "SELECT * FROM doctor";
   connection.query(sql, function(err,results){
@@ -71,7 +71,7 @@ exports.getDoctors = function(callback)
 
 }
 
-exports.getHoursForDoctor = function(callback)
+getHoursForDoctor = function(callback)
 {
   var sql = "SELECT * FROM appointment";
   connection.query(sql, function(err,results){

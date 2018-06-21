@@ -7,11 +7,11 @@
 }
 
 tr {
-  height: 75px !important;
+  height: 8em !important;
 }
 
 th {
-  height: 40px !important;
+  height: 6em !important;
 }
 
 td {
@@ -57,14 +57,7 @@ td {
   z-index: 1;
 }
 
-.plus:hover {
-  cursor: pointer;
-  opacity: 1;
-  animation-name: fadeInOpacity;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-duration: 1s;
-}
+.plus:hover {}
 
 /* background empty table box */
 
@@ -93,12 +86,29 @@ td {
 }
 
 .calendar-tile {
-  padding: 0 !important;
   position: relative !important;
 }
 
 .available {
-  color: #008000;
+  background-color: #71BE82;
 }
 
-.unavailable {}
+.status-text {
+  position: absolute;
+  bottom: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.unavailable {
+  background-color: #F199A7;
+}
+
+.btn-invis:hover {
+  background: transparent;
+  border: none;
+  width: inherit;
+  height: inherit;
+  cursor: pointer;
+}

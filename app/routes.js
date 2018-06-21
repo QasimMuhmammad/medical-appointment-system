@@ -119,7 +119,7 @@ router.get('/calendar-weekly', function(req, res) {
       }
       calendarData.push(toAdd);
     }
-    res.render('pages/calendar-weekly', {
+    res.render('pages/calendar/calendar-weekly', {
       information: req.session,
       data: data,
       hours: results,
@@ -204,7 +204,7 @@ router.post('/book_appointments', [
     req.session.email = req.body.EmailAddress
     req.session.phonenum = req.body.PhoneNumber
     req.session.sex = req.body.Sex
-    res.redirect('/calendar-weekly')
+    res.redirect('pages/calendar/calendar-weekly');
   });
 
 // export our router
