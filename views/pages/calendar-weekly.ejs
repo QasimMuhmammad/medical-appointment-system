@@ -11,6 +11,7 @@
       <h6 class="align-text-middle" style="margin: 0px;" id="todays-date"></h6>
 
       <%- contentFor('body'); %>
+
         Health Care Number:
         <%= information.healthcarenum %>
         Doctor:
@@ -19,59 +20,80 @@
           <div class="card-body">
 
             <table class="table calendar-layer calendar-bg">
-                <thead>
-                  <th scope="col" style="width: 7%" class="text-right pb-3">
-                    Time
+              <thead>
+                <th scope="col" style="width: 10%" class="text-center align-middle">
+                  Time
+                </th>
+
+                <% for (var j = 0; j < data.days.length; j++) { %>
+                  <th scope="col" style="width: 10%" class="text-center pb-4">
+                    <%= data.days[j] %>
                   </th>
+                <% } %>
 
-                  <% for (var j = 0; j < data.days.length; j++) { %>
-                    <th scope="col" style="width: 10%" class="text-center pb-4">
-                      <%= data.days[j] %>
-                    </th>
-                  <% } %>
-
-                </thead>
+              </thead>
 
               <tbody>
-
-                <% for (var i = data.startTime.hour, f = data.startTime.minute; i < data.endTime.hour; i++) { %>
-                  <tr class="">
+                <% for (var i = 0; i < data.time.length; i++) { %>
+                  <tr>
 
                     <td class="text-center align-middle px-auto">
-                      <% var time, period;
-                        if (i > 12) {
-                          time = (i % 12);
+                      <% var timeslot = data.time[i][0].split(':');
+                      var hour = timeslot[0];
+                      var minute = timeslot[1];
+                      var period;
+
+                      if (minute == 0) {
+                        if (hour >= 12) {
                           period = " pm";
                         }  else {
-                          time = i;
                           period = " am";
+                        }
+                        if (hour > 12) {
+                          hour = (hour % 12);
+                        }  else {
+                          hour = hour;
                         } %>
+
+
                         <div class="h3 d-block time pr-2">
-                          <%= time %>
-                          <div class="h5 d-inline align-middle text-muted">
+                          <%= hour + ":" + minute %>
+                          <div class="h5 d-inline align-top text-muted">
                             <%= period %>
                           </div>
                         </div>
+                      <% } %>
 
+                    </td>
+                    <% for (var k = 0; k < data.days.length; k++) { %>
 
-                      </td>
-                      <% for (var k = 0; k < 7; k++) { %>
-                        <td id="<%=i %>" class="text-center h-100 calendar-tile">
-
-                          <div class="plus calendar-bg">
-                            <i class="far fa-plus-square add-time"></i>
+                      <% if(calendarData[k][i][1] == true) { %>
+                        <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile" bgcolor="#008000">
+                          <div class="plus calendar-bg" style="color:#008000">
+                            <form action="finalize_time" method="post">
+                              <input type="hidden" id="AppointmentDate" name="AppointmentDate" value="<%=data.days[k] + ' '+ data.time[i][0] %>"/>
+                              <button type="submit" style="background: transparent;border:none;width:80px;height:45px;"></button>
+                            </form>
                           </div>
+                        </td>
+                      <% }
 
+                        else { %>
+                        <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile" bgcolor="#FF0000">
+                          <div class="plus calendar-bg" style="color:#FF0000">
+                            <i class="far fa-plus-square add-time" style="color:#FF0000"></i>
+                          </div>
                         </td>
                       <% } %>
-                    </tr>
-                  <% } %>
+                    <% } %>
+                  </tr>
+                <% } %>
 
-                </tbody>
+              </tbody>
 
-              </table>
-            </div>
-
+            </table>
           </div>
 
         </div>
+
+      </div>

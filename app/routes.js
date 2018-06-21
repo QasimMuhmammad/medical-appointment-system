@@ -105,13 +105,27 @@ router.get('/allPatients', validate.showPatient);
 
 router.get('/calendar-weekly', function(req, res) {
   let data = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  var calendarData = new Array();
 
   validate.getHoursForDoctor(function(err, results) {
-    console.log(req.session);
+
+    for (var k = 0; k < data.days.length; k++) {
+      var toAdd = data.time.map(a => Object.assign({}, a));
+      for (var i = 0; i < data.time.length; i++) {
+
+        for (var j = 0; j < results.length; j++) {
+          if ((data.days[k] === results[j].weekday) && (data.time[i][0] === results[j].hour)) {
+            toAdd[i][1] = false;
+          }
+        }
+      }
+      calendarData.push(toAdd);
+    }
     res.render('pages/calendar-weekly', {
       information: req.session,
       data: data,
-      hours: results
+      hours: results,
+      calendarData: calendarData
     });
 
   })
@@ -125,6 +139,15 @@ router.get('/logout', function(req, res) {
 
 // Attempts to log in a user
 router.post('/login_attempt', validate.login);
+
+router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
+  const errors = validationResult(req)
+  console.log("Appoint is " + req.body.AppointmentDate);
+  console.log(req.session);
+  req.session.AppointmentDate = req.body.AppointmentDate;
+  res.render('pages/confirmAppointment');
+
+})
 
 //  POST REQUESTS
 router.post('/book_appointments', [
