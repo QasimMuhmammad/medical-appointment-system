@@ -126,3 +126,11 @@ exports.getHoursForDoctor = function(callback) {
     }
   });
 }
+
+
+exports.newAppointmentByPatient= function() {
+
+
+
+
+}
