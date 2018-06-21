@@ -3,7 +3,6 @@
 }
 
 .calendar-layer {
-  position: absolute !important;
   width: inherit;
 }
 
@@ -74,6 +73,12 @@ td {
   width: inherit;
   height: inherit;
   z-index: 10;
+}
+
+.time {
+  position: relative;
+  background-color: white;
+  margin-top: -50%;
 }
 
 /* foreground table parent */

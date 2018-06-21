@@ -1,15 +1,6 @@
 // For database
-const mysql = require('mysql');
-const login = require('../credidentials.json');
+const connection = require('./database/connection.js');
 const util = require('util');
-
-
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: login.username,
-  password: login.password,
-  database: "MedicalCenter"
-});
 
 // Next three for form validation
 const validator = require("express-validator");
@@ -71,7 +62,6 @@ exports.login = function(req, res) {
 }
 
 
-
 function findUser(req, next) {
   var message = '';
   console.log("IM HERE");
@@ -95,8 +85,7 @@ function findUser(req, next) {
       console.log("VALIDATE USER IS HERE: ");
 
       next(null, user);
-    }
-    else {
+    } else {
       next(err, null);
     }
   });
@@ -115,27 +104,25 @@ exports.showPatient = function(req, res) {
   });
 };
 
-exports.getDoctors = function(callback)
-{
+exports.getDoctors = function(callback) {
   var sql = "SELECT * FROM doctor";
-  connection.query(sql, function(err,results){
+  connection.query(sql, function(err, results) {
 
-    if(err) return callback(err);
-    else{
-      callback(null,results);
+    if (err) return callback(err);
+    else {
+      callback(null, results);
     }
   });
 
 }
 
-exports.getHoursForDoctor = function(callback)
-{
+exports.getHoursForDoctor = function(callback) {
   var sql = "SELECT * FROM appointment";
-  connection.query(sql, function(err,results){
+  connection.query(sql, function(err, results) {
 
-    if(err) return callback(err);
-    else{
-      callback(null,results);
+    if (err) return callback(err);
+    else {
+      callback(null, results);
     }
   });
 }

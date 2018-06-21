@@ -2,6 +2,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" charset="utf-8"></script>
   <script src="/scripts/render-calendar-weekly.js" charset="utf-8"></script>
+
   <%- contentFor('css'); %>
     <link rel="stylesheet" href="/css/calendar-weekly.css">
 
@@ -10,44 +11,67 @@
       <h6 class="align-text-middle" style="margin: 0px;" id="todays-date"></h6>
 
       <%- contentFor('body'); %>
-<body>
-  Health Care Number: <%= information.healthcarenum %>
-  Doctor: <%= information.chosenDoc %>
-</body>
+        Health Care Number:
+        <%= information.healthcarenum %>
+        Doctor:
+        <%= information.chosenDoc %>
+        <div class="card">
+          <div class="card-body">
 
-        <table class="table table-bordered calendar-layer calendar-bg">
-          <thead>
-            <th scope="col" style="width: 5%" class="text-right">
-              Time
-            </th>
+            <table class="table calendar-layer calendar-bg">
+                <thead>
+                  <th scope="col" style="width: 7%" class="text-right pb-3">
+                    Time
+                  </th>
 
-            <% for (var j = 0; j < data.days.length; j++) { %>
-              <th scope="col" style="width: 10%" class="text-center">
-                <%= data.days[j] %>
-              </th>
-            <% } %>
+                  <% for (var j = 0; j < data.days.length; j++) { %>
+                    <th scope="col" style="width: 10%" class="text-center pb-4">
+                      <%= data.days[j] %>
+                    </th>
+                  <% } %>
 
-          </thead>
-          <tbody>
+                </thead>
 
-            <% for (var i = 0; i < data.time.length; i++) { %>
-              <tr>
-                <td class="text-right">
-                  <%= data.time[i][0] %>
-                </td>
-                <% for (var k = 0; k < data.days.length; k++) { %>
-                  <td id="<%= data.time[i][0] %>" class="text-center h-100 calendar-tile">
-                    
-                    <div class="plus calendar-bg">
-                      <i class="far fa-plus-square add-time"></i>
-                    </div>
+              <tbody>
 
-                  </td>
-                <% } %>
-              </tr>
-            <% } %>
+                <% for (var i = data.startTime.hour, f = data.startTime.minute; i < data.endTime.hour; i++) { %>
+                  <tr class="">
 
-          </tbody>
+                    <td class="text-center align-middle px-auto">
+                      <% var time, period;
+                        if (i > 12) {
+                          time = (i % 12);
+                          period = " pm";
+                        }  else {
+                          time = i;
+                          period = " am";
+                        } %>
+                        <div class="h3 d-block time pr-2">
+                          <%= time %>
+                          <div class="h5 d-inline align-middle text-muted">
+                            <%= period %>
+                          </div>
+                        </div>
 
-        </table>
-      </div>
+
+                      </td>
+                      <% for (var k = 0; k < 7; k++) { %>
+                        <td id="<%=i %>" class="text-center h-100 calendar-tile">
+
+                          <div class="plus calendar-bg">
+                            <i class="far fa-plus-square add-time"></i>
+                          </div>
+
+                        </td>
+                      <% } %>
+                    </tr>
+                  <% } %>
+
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+        </div>

@@ -63,7 +63,6 @@ function requireLogin(req, res, next) {
   }
 };
 
-
 router.use(validate.checkSession);
 
 // use login validator
@@ -92,13 +91,13 @@ router.get('/appointments', function(req, res) {
 });
 
 router.get('/book-appointments', function(req, res) {
-  validate.getDoctors(function(err,results){
+  validate.getDoctors(function(err, results) {
     console.log(results);
     res.render('pages/book-appointment', {
-        data: {},
-        errors: {},
-        doctor: results
-      })
+      data: {},
+      errors: {},
+      doctor: results
+    })
   })
 });
 
@@ -143,56 +142,66 @@ router.post('/login_attempt', validate.login);
 
 //  POST REQUESTS
 router.post('/book_appointments', [
-  check('FirstName')
-      .isLength({min: 1})
-      .withMessage('Your first name is required')
-      .trim(),
-  check('LastName')
-      .isLength({min: 1})
-      .withMessage('Your last name is required')
-      .trim(),
-  check('HealthCareNum')
-      .isLength({min: 9, max:9})
-      .isInt()
-      .withMessage('Your healthcare is required and must be 9 numbers')
-      .trim(),
-  check('EmailAddress')
-      .isEmail()
-      .withMessage('Must be an email')
-      .trim()
-      .normalizeEmail(),
-  check('PhoneNumber')
-      .isInt()
-      .isLength({min:10,max:10})
-      .withMessage("Invalid Phone Number Entered"),
-  check('Sex'),
-  check('Doctor')
-],
+    check('FirstName')
+    .isLength({
+      min: 1
+    })
+    .withMessage('Your first name is required')
+    .trim(),
+    check('LastName')
+    .isLength({
+      min: 1
+    })
+    .withMessage('Your last name is required')
+    .trim(),
+    check('HealthCareNum')
+    .isLength({
+      min: 9,
+      max: 9
+    })
+    .isInt()
+    .withMessage('Your healthcare is required and must be 9 numbers')
+    .trim(),
+    check('EmailAddress')
+    .isEmail()
+    .withMessage('Must be an email')
+    .trim()
+    .normalizeEmail(),
+    check('PhoneNumber')
+    .isInt()
+    .isLength({
+      min: 10,
+      max: 10
+    })
+    .withMessage("Invalid Phone Number Entered"),
+    check('Sex'),
+    check('Doctor')
+  ],
 
-  function(req,res) {
-  const errors = validationResult(req)
+  function(req, res) {
+    const errors = validationResult(req)
 
-  if(!errors.isEmpty())
-  {
-    res.render('pages/book-appointment', {
-      data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
-      errors: errors.mapped(),
-      doctor: doctor
-    });
-  }
-  //If validation is successful, data has the real data.
-  const data = matchedData(req)
-  console.log('Sanitized: ', data)
+    if (!errors.isEmpty()) {
+      res.render('pages/book-appointment', {
+        data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
+        errors: errors.mapped(),
+        doctor: doctor
+      });
+    }
+    //If validation is successful, data has the real data.
+    const data = matchedData(req)
+    console.log('Sanitized: ', data)
 
-  // lol leave me alone
-  req.session.chosenDoc= req.body.Doctor;
-  req.session.healthcarenum = req.body.HealthCareNum
-  req.session.fname = req.body.FirstName
-  req.session.lname = req.body.LastName
-  req.session.email = req.body.EmailAddress
-  req.session.phonenum = req.body.PhoneNumber
-  req.session.sex = req.body.Sex
-  res.redirect('/calendar-weekly')
-});
+    // lol leave me alone
+    req.session.chosenDoc = req.body.Doctor;
+    req.session.healthcarenum = req.body.HealthCareNum
+    req.session.fname = req.body.FirstName
+    req.session.lname = req.body.LastName
+    req.session.email = req.body.EmailAddress
+    req.session.phonenum = req.body.PhoneNumber
+    req.session.sex = req.body.Sex
+    res.redirect('/calendar-weekly')
+  });
 
+// export our router
 module.exports = router;

@@ -60,7 +60,9 @@ typings/
 # next.js build output
 .next
 
+.DS_Store
 **/.DS_Store
+
 
 Release.key
 **/credidentials.json
