@@ -1,18 +1,5 @@
-// For database
+// Database Connection
 const connection = require('./database/connection.js');
-const util = require('util');
-
-// Next three for form validation
-const validator = require("express-validator");
-const {
-  check,
-  validationResult
-} = require('express-validator/check');
-const {
-  matchedData,
-  sanitize
-} = require('express-validator/filter');
-
 
 exports.checkSession = function(req, res, next) {
   res.locals.user = req.session.user;
@@ -32,7 +19,6 @@ exports.checkSession = function(req, res, next) {
 };
 
 exports.login = function(req, res) {
-  console.log("BODY: " + req);
   findUser({
     username: req.body.username
   }, function(err, user) {
@@ -48,9 +34,6 @@ exports.login = function(req, res) {
         req.session.user = user;
         res.locals.user = user;
         res.redirect('/dashboard');
-        console.log("SUCCESSFUL LOGIN:");
-
-        console.log("GOOD SESSION: " + util.inspect(req.session, false, null));
       } else {
         message = 'Wrong Credentials.';
         res.render('pages/login', {
@@ -64,8 +47,6 @@ exports.login = function(req, res) {
 
 function findUser(req, next) {
   var message = '';
-  console.log("IM HERE");
-  console.log(util.inspect(req, false, null));
   const name = req.username;
   const sql = "SELECT employeeid, password FROM `receptionist` WHERE `employeeid`='" + name + "'";
   console.log(sql);
@@ -73,16 +54,12 @@ function findUser(req, next) {
     if (err) {
       console.log(err);
     }
-    console.log("RESULTS: " + util.inspect(results, false, null));
-
 
     if (results.length) {
       var user = {
         username: results[0].employeeid,
         password: results[0].password
       };
-
-      console.log("VALIDATE USER IS HERE: ");
 
       next(null, user);
     } else {
@@ -91,46 +68,40 @@ function findUser(req, next) {
   });
 };
 
-exports.showPatient = function(req, res) {
-  var sql = "SELECT * FROM patient";
+function query(sql, callback) {
   connection.query(sql, function(err, results) {
-    if (results) {
-      console.log(results);
-      res.render('pages/allPatients', {
-        results: results
-      })
-      console.log(results)
+    if (err) {
+      console.log("QUERY ERROR: " + require('util')
+        .inspect(err, {
+          depth: null
+        }));
     }
+
+    if (results.length == 0) {
+      console.log("ERROR: No results were found for query");
+      console.log(sql);
+      console.log("Try rebuilding your database?");
+    }
+    console.log(sql + " RESULT: " +
+      require('util')
+      .inspect(results, {
+        depth: null
+      }));
+    callback(results);
   });
+};
+
+exports.getPatients = function(callback) {
+  var sql = "SELECT * FROM patient";
+  query(sql, callback);
 };
 
 exports.getDoctors = function(callback) {
   var sql = "SELECT * FROM doctor";
-  connection.query(sql, function(err, results) {
-
-    if (err) return callback(err);
-    else {
-      callback(null, results);
-    }
-  });
-
-}
+  query(sql, callback);
+};
 
 exports.getHoursForDoctor = function(callback) {
   var sql = "SELECT * FROM appointment";
-  connection.query(sql, function(err, results) {
-
-    if (err) return callback(err);
-    else {
-      callback(null, results);
-    }
-  });
-}
-
-
-exports.newAppointmentByPatient= function() {
-
-
-
-
-}
+  query(sql, callback);
+};
