@@ -136,6 +136,15 @@ router.get('/logout', function(req, res) {
 // Attempts to log in a user
 router.post('/login_attempt', validate.login);
 
+router.post('/finalize_time',[ check('AppointmentDate') ] ,function(req,res) {
+  const errors = validationResult(req)
+  console.log("Appoint is " + req.body.AppointmentDate);
+  console.log(req.session);
+  req.session.AppointmentDate= req.body.AppointmentDate;
+  res.render('pages/confirmAppointment');
+
+})
+
 //  POST REQUESTS
 router.post('/book_appointments', [
   check('FirstName')
