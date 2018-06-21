@@ -1,0 +1,49 @@
+.container-grid {
+  display: grid;
+  float: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.control-card {
+  min-height: 24em;
+  min-width: 16em;
+  border-radius: 5px;
+}
+
+.card-icon {
+
+  font-size: 10em;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  height: 100% !important;
+}
+.card-name {
+  position: absolute;
+  bottom: 0%;
+  font-weight: bolder;
+  font-size: 1.75em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.card-appoint {
+  background: #fffbd5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(225deg, #fffbd5, #b20a2c);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(225deg, #fffbd5, #b20a2c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.card-patient {
+  background: #00b09b;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(225deg, #96c93d, #00b09b);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(225deg, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.card-manage {
+  background: #03001e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(225deg, #fdeff9, #ec38bc, #7303c0, #03001e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(225deg, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

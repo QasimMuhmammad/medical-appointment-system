@@ -1,23 +1,39 @@
+<%- contentFor('css') %>
+  <link rel="stylesheet" href="/css/dashboard.css">
 
+  <%- contentFor('body') %>
+    <div class="container-grid">
+      <a href="/calendar-weekly" class="card control-card mx-auto card-appoint">
+        <div class="card-body">
+          <div class="card-icon text-center align-middle h-100">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="card-name float-left pb-1">
+            Appointments <i class="fas fa-angle-right"></i>
+          </div>
+        </div>
+      </a>
 
-<div class="row justify-content-md-center">
-  <div class="col col-lg-4">
-    <div class="card bg-info">
-      <div class="card-header text-white">View Appointments</div>
-      <div class="card-body">
-        <div class="card-text text-white">This is the button that
-           receptionists press to view appointments.
-           It will bring a receptionist to our calendar
-           which will display appointments for up to one
-           week in advanced.</div>
-      </div>
+      <a href="/allPatients" class="card control-card mx-auto card-patient">
+        <div class="card-body">
+          <div class="card-icon text-center align-middle h-100">
+            <i class="fas fa-address-card"></i>
+          </div>
+          <div class="card-name float-left pb-1">
+            Patients <i class="fas fa-angle-right"></i>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="card control-card mx-auto card-manage">
+        <div class="card-body">
+          <div class="card-icon text-center align-middle h-100">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <div class="card-name float-left pb-1">
+            Manage <i class="fas fa-angle-right"></i>
+          </div>
+        </div>
+      </a>
 
     </div>
-  </div>
-
-  <div class="col col-lg-4">
-    <div class="card bg-primary">
-      <div class="card-header">Create Appointments</div>
-    </div>
-  </div>
-</div>
