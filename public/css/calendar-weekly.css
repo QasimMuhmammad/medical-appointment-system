@@ -49,15 +49,10 @@ td {
   }
 }
 
-.plus:hover .add-time {
-  visibility: visible;
+.popup {
+  display: none;
 }
 
-.plus {
-  z-index: 1;
-}
-
-.plus:hover {}
 
 /* background empty table box */
 

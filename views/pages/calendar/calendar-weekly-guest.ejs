@@ -31,13 +31,13 @@
     <% for (var k = 0; k < data.days.length; k++) { %>
 
       <% if(calendarData[k][i][1] == true) { %>
-        <td id="<%=data.days[k] + '-'+ data.time[i][0] %>"
-        class="text-center h-100 calendar-tile">
-          <div class="plus calendar-bg available card">
+        <td class="text-center h-100 calendar-tile">
+          <div id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="calendar-bg available card">
+            <div  class="popup card h-100 w-100">Popup</div>
             <form action="finalize_time" class="h-100" method="post">
-              <input type="hidden" id="AppointmentDate" name="AppointmentDate"
-              value="<%=data.days[k] + ' ' + data.time[i][0] %>"/>
-              <div id="<%=data.days[k] + ' ' + data.time[i][0] %>"class="btn-invis h-100 w-100">
+              <input type="hidden" id="AppointmentDate" name="AppointmentDate" value="<%=data.days[k] + ' ' + data.time[i][0]%>"/>
+              <div class="btn-invis h-100 w-100" id="<%=data.days[k] + ''+ i%>">
+
                 <div class="status-text px-2 noselect">Available</div>
               </div>
             </form>
