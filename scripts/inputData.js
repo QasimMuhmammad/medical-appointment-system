@@ -13,10 +13,10 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
-//  inputReceptionist()
-  //inputPatient()
-  //inputDoctor()
-  inputAppointment()
+  inputReceptionist()
+  inputPatient()
+  inputDoctor()
+//  inputAppointment()
 });
 
 
