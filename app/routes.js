@@ -158,9 +158,7 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/finalize_appointment', function(req,res){
-
-
-
+    validate.updateAppointment(req.session);
 })
 
 // Attempts to log in a user

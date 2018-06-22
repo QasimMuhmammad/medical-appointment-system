@@ -1,5 +1,7 @@
 // Database Connection
 const connection = require('./database/connection.js');
+const sendEmail = require('./sendEmail.js')
+
 
 exports.checkSession = function(req, res, next) {
   res.locals.user = req.session.user;
@@ -82,14 +84,20 @@ function query(sql, callback) {
       console.log(sql);
       console.log("Try rebuilding your database?");
     }
-    console.log(sql + " RESULT: " +
-      require('util')
-      .inspect(results, {
-        depth: null
-      }));
     callback(results);
   });
 };
+
+function update(sql){
+
+  connection.query(sql, function(err, results) {
+    if (err) {
+      console.log("QUERY ERROR: " + require('util')
+        .inspect(err, {
+          depth: null
+        }));
+    }})
+  };
 
 exports.getPatients = function(callback) {
   var sql = "SELECT * FROM patient";
@@ -104,4 +112,30 @@ exports.getDoctors = function(callback) {
 exports.getHoursForDoctor = function(callback) {
   var sql = "SELECT * FROM appointment";
   query(sql, callback);
+};
+
+exports.updateAppointment = function(data){
+  console.log(data);
+  var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ( '" + parseInt(data.healthcarenum)
+  + "', '" + data.fname + "', '" + data.lname + "', '" + data.sex + "', '" + data.email + "')";
+
+  update(sql);
+
+  sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorfName) VALUES ( '"
+   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc + "') ";
+
+ connection.query(sql, function(err, results) {
+   if(err)
+   {
+     console.log("Error inserting a new appointment");
+   }
+   console.log("The insertID is " + results.insertId);
+
+   var emailInfo = {
+     email: data.email,
+     id: results.insertId
+   }
+   sendEmail.sendingEmail(emailInfo);
+ })
+
 };
