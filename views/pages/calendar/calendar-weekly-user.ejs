@@ -30,19 +30,13 @@
 
     <% for (var k = 0; k < data.days.length; k++) { %>
 
-      <% if(calendarData[k][i][1] == true) { %>
+      <% if(calendarData[k][i][1] == "available") { %>
         <td class="text-center h-100 calendar-tile">
           <div class="h-100 calendar-bg available card">
             <div class="h-100 w-100 noselect" id="<%=data.days[k] + ''+ i%>">
               <div class="btn status-text p-0 btn-grid w-100 h-100 text-left">
                 <a class="px-2 btn-action btn-book" data-action="book-receptionist" data-id="<%=data.days[k] + '-'+ data.time[i][0] %>">
                   <i class="fas fa-book pr-1"></i>Book
-                </a>
-                <a class="px-2 btn-action btn-check-in" data-action="check-in" data-id="<%=data.days[k] + '-'+ data.time[i][0] %>">
-                  <i class="fas fa-clipboard-check pr-1"></i>Check In
-                </a>
-                <a class="px-2 btn-action btn-book" data-action="cancel" data-id="<%=data.days[k] + '-'+ data.time[i][0] %>">
-                  <i class="fas fa-times pr-1"></i>Cancel
                 </a>
               </div>
               <div class="status-pos status-text px-2 text-available">
@@ -51,10 +45,22 @@
             </div>
           </div>
         </td>
-        <% } else { %>
-          <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile">
-            <div class="plus calendar-bg unavailable card">
-              <div class="status-text status-pos px-2 noselect"><i class="fas fa-times pr-1"></i>Booked</div>
+        <% } else if(calendarData[k][i][1] == "booked"){ %>
+          <td class="text-center h-100 calendar-tile">
+            <div class="h-100 calendar-bg unavailable card">
+              <div class="h-100 w-100 noselect" id="<%=data.days[k] + ''+ i%>">
+                <div class="btn status-text p-0 btn-grid w-100 h-100 text-left">
+                  <a class="px-2 btn-action btn-check-in" data-action="check-in" data-id="<%=data.days[k] + '-'+ data.time[i][0] %>">
+                    <i class="fas fa-clipboard-check pr-1"></i>Check In
+                  </a>
+                  <a class="px-2 btn-action btn-book" data-action="cancel" data-id="<%=data.days[k] + '-'+ data.time[i][0] %>">
+                    <i class="fas fa-times pr-1"></i>Cancel
+                  </a>
+                </div>
+                <div class="status-pos status-text px-2 text-available">
+                  <i class="fas fa-check pr-1"></i>Booked
+                </div>
+              </div>
             </div>
           </td>
           <% } %>

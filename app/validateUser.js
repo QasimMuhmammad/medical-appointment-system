@@ -123,7 +123,7 @@ exports.updateAppointment = function(data){
   update(sql);
 
   sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorid) VALUES ( '"
-   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + "') ";
+   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + ", booked') ";
 
  connection.query(sql, function(err, results) {
    if(err)

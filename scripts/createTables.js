@@ -24,7 +24,7 @@ function addAll(){
   //written_prescription();
   //prescription()
   //patient();
-  appointment();
+  //appointment();
 }
 
 
@@ -75,7 +75,7 @@ function drug(err) {
 }
 
 function appointment(err) {
-  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorid int(8) NOT NULL"+
+  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorid int(8) NOT NULL, state VARCHAR(20)"+
   ", FOREIGN KEY(receptionistid) REFERENCES receptionist(employeeid), FOREIGN KEY(healthcarenum) REFERENCES patient(healthcarenum), FOREIGN KEY (doctorid) REFERENCES doctor(doctorid))";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -92,7 +92,7 @@ function patient(err){
 }
 
 function dropAll(err){
-  var sql = "DROP TABLE patient, appointment, prescription, doctor, receptionist";
+  var sql = "DROP TABLE patient, doctor, receptionist, appointment";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Dropped all tables");

@@ -106,6 +106,10 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
+router.get('/profile', function(req, res) {
+  res.render('pages/profile');
+});
+
 router.get('/allPatients', function(req, res) {
   validate.getPatients(function(results) {
     res.render('pages/allPatients', {
@@ -115,43 +119,46 @@ router.get('/allPatients', function(req, res) {
 });
 
 router.get('/calendar-weekly', function(req, res) {
-  renderCalendarWeekly(req.session.chosenDoc ,res, 'view');
+  renderCalendarWeekly(req.session.chosenDoc ,res);
 });
 
-function renderCalendarWeekly(doctor,res, perspective) {
+function renderCalendarWeekly(doctor,res) {
     let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
     getCalendarData(doctor, appointmentsConfig, function(calendarData) {
       res.render('pages/calendar/calendar-weekly', {
         data: appointmentsConfig,
-        calendarData: calendarData,
-        intent: perspective
+        calendarData: calendarData
       });
     });
 
 };
 
-router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'create');
+router.get('/calendar-select-doctor', requireLogin, function(req, res) {
+  validate.getDoctors(function (results) {
+    res.render('pages/calendar/calendar-select-doctor.ejs', {
+      doctors: results
+    });
+  });
 });
 
-router.get('/calendar-weekly-user-check-in', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'check-in');
-});
+router.post('/calendar-select-doctor', requireLogin, function(req, res) {
+  console.log(req.body);
+  req.session.chosenDoc = req.body.Doctor.split(" ");
+  renderCalendarWeekly(req.session.chosenDoc, res)
 
-router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'manage-missed');
 });
 
 function getCalendarData(doctor, appointmentsConfig, next) {
   var calendarData = new Array();
   validate.getHoursForDoctor(doctor, function(results) {
-    console.log("the results of query are " + results);
+    console.log("Results has " + require('util').inspect(results, { depth: null }));
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {
         for (var j = 0; j < results.length; j++) {
           if ((appointmentsConfig.days[k] === results[j].weekday) && (appointmentsConfig.time[i][0] === results[j].hour)) {
-            toAdd[i][1] = false;
+            toAdd[i][1] = results[j].state;
+            console.log("The toAdd[i][1] has " +toAdd[i][1]);
           }
         }
       }

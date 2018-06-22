@@ -13,14 +13,14 @@
   },
 
   "time":[
-    ["11:00", true],
-    ["11:30", true],
-    ["12:00", true],
-    ["12:30", true],
-    ["13:00", true],
-    ["13:30", true],
-    ["14:00", true],
-    ["14:30", true],
-    ["15:00", true],
-    ["15:30", true]]
+    ["11:00", "available"],
+    ["11:30", "available"],
+    ["12:00", "available"],
+    ["12:30", "available"],
+    ["13:00", "available"],
+    ["13:30", "available"],
+    ["14:00", "available"],
+    ["14:30", "available"],
+    ["15:00", "available"],
+    ["15:30", "available"]]
 }

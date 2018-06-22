@@ -46,3 +46,10 @@
   background: linear-gradient(225deg, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+
+.card-notes {
+  background: #43C6AC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(45deg, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(45deg, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
