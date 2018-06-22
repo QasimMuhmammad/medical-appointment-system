@@ -1,0 +1,48 @@
+<% for (var i = 0; i < data.time.length; i++) { %>
+  <tr>
+
+    <td class="text-center align-top px-auto py-0">
+      <% var timeslot = data.time[i][0].split(':');
+    var hour = timeslot[0];
+    var minute = timeslot[1];
+    var period;
+
+    if (minute == 0) {
+      if (hour >= 12) {
+        period = " pm";
+      }  else {
+        period = " am";
+      }
+      if (hour > 12) {
+        hour = (hour % 12);
+      }  else {
+        hour = hour;
+      } %>
+
+        <div class="h3 d-block time pr-2">
+          <%= hour + ":" + minute %>
+          <div class="h5 d-inline align-top text-muted">
+            <%= period %>
+          </div>
+        </div>
+      <% } %>
+    </td>
+
+    <% for (var k = 0; k < data.days.length; k++) { %>
+
+      <% if(calendarData[k][i][1] == true) { %>
+        <td id="<%=data.days[k] + '-'+ data.time[i][0] %>"
+        class="text-center h-100 calendar-tile">
+
+        </td>
+      <% } else { %>
+        <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile">
+          <div class="plus calendar-bg unavailable card">
+            <% //<div class="status-text px-2 noselect">Booked</div>
+            %>
+          </div>
+        </td>
+      <% } %>
+    <% } %>
+  </tr>
+<% } %>

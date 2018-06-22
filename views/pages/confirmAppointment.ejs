@@ -1,0 +1,37 @@
+<%- contentFor('css') %>
+<link rel="stylesheet" href="/css/signin.css">
+
+
+<%- contentFor('body') %>
+
+<div class="" >
+
+  <body>
+    The following information is what you have provided for this appointment, please read over it and confirm
+    contents:
+  </body>
+
+  <ul>
+    <b>Personal Information </b>
+    <li> First Name: <%= data.fname %> </li>
+    <li>Last Name: <%= data.lname %> </li>
+    <li>Email: <%= data.email %> </li>
+    <li>Phone number: <%= data.phonenum %> </li>
+    <li>Sex: <%= data.sex %> </li>
+  </ul>
+  <ul>
+    <b>Appointment Information </b>
+    <li>Doctor: <%= data.chosenDoc[0] %> </li>
+    <li>Date: <%= data.AppointmentDate[0] %> </li>
+    <li>Time: <%= data.AppointmentDate[1] %> </li>
+  </ul>
+</div>
+
+<div class="row tall-button-row">
+      <div class="col-sm-4">
+          <a class="btn btn-secondary btn-block" href="finalize_appointment">Confirm</a>
+      </div>
+      <div class="col-sm-4">
+          <a class="btn btn-secondary btn-block" href="logout">Cancel</a>
+      </div>
+</div>

@@ -119,28 +119,37 @@ router.get('/allPatients', function(req, res) {
 });
 
 router.get('/calendar-weekly', function(req, res) {
-  renderCalendarWeekly(res, 'view');
+  renderCalendarWeekly(req.session.chosenDoc ,res, 'view');
 });
 
-function renderCalendarWeekly(res, perspective) {
-  let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  getCalendarData(appointmentsConfig, function(calendarData) {
-    res.render('pages/calendar/calendar-weekly', {
-      data: appointmentsConfig,
-      calendarData: calendarData,
-      intent: perspective
+function renderCalendarWeekly(doctor,res, perspective) {
+    let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
+    getCalendarData(doctor, appointmentsConfig, function(calendarData) {
+      res.render('pages/calendar/calendar-weekly', {
+        data: appointmentsConfig,
+        calendarData: calendarData,
+        intent: perspective
+      });
     });
-  });
-}
 
-router.get('/calendar-weekly-manage', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'manage');
+};
+
+router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'create');
 });
 
-function getCalendarData(appointmentsConfig, next) {
-  var calendarData = new Array();
+router.get('/calendar-weekly-user-check-in', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'check-in');
+});
 
-  validate.getHoursForDoctor(function(results) {
+router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'manage-missed');
+});
+
+function getCalendarData(doctor, appointmentsConfig, next) {
+  var calendarData = new Array();
+  validate.getHoursForDoctor(doctor, function(results) {
+    console.log("the results of query are " + results);
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {
@@ -161,16 +170,45 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+router.get('/finalize_appointment', function(req,res){
+    validate.updateAppointment(req.session);
+})
+
 // Attempts to log in a user
 router.post('/login', validate.login);
 
-router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
-  const errors = validationResult(req)
-  console.log("Appoint is " + req.body.AppointmentDate);
-  console.log(req.session);
-  req.session.AppointmentDate = req.body.AppointmentDate;
-  res.render('pages/confirmAppointment');
+
+router.post('/calendar-weekly-action', function (req, res) {
+  req.session.AppointmentDate = req.body.id.split(" ");
+  console.log("The appointment information is " + req.session.AppointmentDate);
+  if(req.body.action == "book-patient")
+  {
+    console.log("Booking patient");
+    res.redirect('finalize_time')
+  }
+
+  else if(req.body.action == "book-receptionist")
+  {
+    console.log("Booking receptionist");
+    res.redirect("finalize information")
+  }
+
+  else if(req.body.action == "check-in")
+  {
+    console.log("Checking in a appointment");
+  }
+
+  else if(req.body.action == "cancel")
+  {
+    console.log("Cancelling an appointment");
+  }
 });
+
+router.get('/finalize_time', function(req, res) {
+  console.log("Make it here");
+  res.render('pages/confirmAppointment', {data: req.session});
+
+})
 
 //  POST REQUESTS
 router.post('/book_appointments', [
@@ -225,7 +263,7 @@ router.post('/book_appointments', [
     console.log('Sanitized: ', data)
 
     // lol leave me alone
-    req.session.chosenDoc = req.body.Doctor;
+    req.session.chosenDoc = req.body.Doctor.split(" ");
     req.session.healthcarenum = req.body.HealthCareNum
     req.session.fname = req.body.FirstName
     req.session.lname = req.body.LastName
