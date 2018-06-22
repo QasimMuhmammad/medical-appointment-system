@@ -1,51 +1,13 @@
 $("#todays-date").append(function() {
   return "Today is " + moment().format("D MMMM, YYYY");
 });
+$(document).ready(function() {
 
-$( document ).ready(function () {
-
-  $.ajax({
-    url: "/test-data/test-events.json",
-    success: renderEvents
-  });
-}
+      console.log("ready");
+  $(".btn-invis").click(function(event) {
+      console.log(event.target.id);
+    }
 
 
-);
-
-
-function renderEvents(data) {
-  console.log(data);
-  data.events.forEach(function(evt) {
-    var hours = evt.endTime.hour - evt.startTime.hour +
-      (evt.endTime.minute - evt.startTime.minute) / 60.0;
-    var minFrac = evt.startTime.minute / 60.0 * 100;
-    console.log(minFrac);
-    var eventAttr = {
-      eventId: "event-" + evt.id,
-      eventTitle: evt.name,
-      eventHeight: (hours * 100).toString() + "%",
-      eventTop: minFrac.toString() + "%"
-    };
-
-    var template = `<div id={{eventId}}
-      class="card calendar-event w-100"
-      style="height: {{eventHeight}}; top: {{eventTop}}">
-      <div class="card-body">
-        <div class="card-title">
-          {{eventTitle}}
-        </div>
-        <div class="card-text">
-          STUFF
-        </div>
-      </div>
-    </div>`;
-
-    var html = Mustache.to_html(template, eventAttr);
-
-    $("#" + evt.day + "-" + evt.startTime.hour + ":00").html(html);
-    console.log("#" + evt.day + "-" + evt.startTime.hour + ":00");
-
-
-  });
-};
+  );
+});

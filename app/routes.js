@@ -127,10 +127,18 @@ function renderCalendarWeekly(res, perspective) {
       intent: perspective
     });
   });
-}
+};
 
-router.get('/calendar-weekly-manage', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'manage');
+router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'create');
+});
+
+router.get('/calendar-weekly-user-check-in', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'check-in');
+});
+
+router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'manage-missed');
 });
 
 function getCalendarData(appointmentsConfig, next) {

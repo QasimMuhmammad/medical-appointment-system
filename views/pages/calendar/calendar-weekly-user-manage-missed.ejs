@@ -37,8 +37,8 @@
             <form action="finalize_time" class="h-100" method="post">
               <input type="hidden" id="AppointmentDate" name="AppointmentDate"
               value="<%=data.days[k] + ' ' + data.time[i][0] %>"/>
-              <div id="<%=data.days[k] + ' ' + data.time[i][0] %>"class="btn-invis h-100 w-100">
-                <div class="status-text px-2 noselect">Available</div>
+              <div type="submit" class="btn-invis h-100">
+                <div class="status-text px-2 noselect">Empty</div>
               </div>
             </form>
           </div>
@@ -46,7 +46,7 @@
       <% } else { %>
         <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile">
           <div class="plus calendar-bg unavailable card">
-            <div class="status-text px-2 noselect">Unavailable</div>
+            <div class="status-text px-2 noselect">Booked</div>
           </div>
         </td>
       <% } %>
