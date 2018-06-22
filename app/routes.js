@@ -106,6 +106,10 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
+router.get('/profile', function(req, res) {
+  res.render('pages/profile');
+});
+
 router.get('/allPatients', function(req, res) {
   validate.getPatients(function(results) {
     res.render('pages/allPatients', {
