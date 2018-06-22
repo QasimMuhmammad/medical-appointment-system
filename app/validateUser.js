@@ -109,7 +109,7 @@ exports.getDoctors = function(callback) {
   query(sql, callback);
 };
 
-exports.getHoursForDoctor = function(callback) {
+exports.getHoursForDoctor = function(doctor, callback) {
   var sql = "SELECT * FROM appointment";
   query(sql, callback);
 };

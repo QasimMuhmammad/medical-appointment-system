@@ -125,7 +125,7 @@ router.post('/calendar-weekly', function(req, res) {
 
 function renderCalendarWeekly(res, doctor) {
   let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  getCalendarData(appointmentsConfig, function(calendarData) {
+  getCalendarData(appointmentsConfig, doctor, function(calendarData) {
     res.render('pages/calendar/calendar-weekly', {
       data: appointmentsConfig,
       calendarData: calendarData
@@ -146,10 +146,10 @@ router.post('/calendar-select-doctor', requireLogin, function(req, res) {
 
 });
 
-function getCalendarData(appointmentsConfig, next) {
+function getCalendarData(appointmentsConfig, doctor, next) {
   var calendarData = new Array();
 
-  validate.getHoursForDoctor(function(results) {
+  validate.getHoursForDoctor(doctor, function(results) {
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {
