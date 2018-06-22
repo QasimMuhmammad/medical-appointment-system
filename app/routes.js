@@ -127,10 +127,18 @@ function renderCalendarWeekly(res, perspective) {
       intent: perspective
     });
   });
-}
+};
 
-router.get('/calendar-weekly-manage', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'manage');
+router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'create');
+});
+
+router.get('/calendar-weekly-user-check-in', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'check-in');
+});
+
+router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, res) {
+  renderCalendarWeekly(res, 'manage-missed');
 });
 
 function getCalendarData(appointmentsConfig, next) {
@@ -163,6 +171,11 @@ router.get('/finalize_appointment', function(req,res){
 
 // Attempts to log in a user
 router.post('/login', validate.login);
+
+router.post('/calendar-weekly-user-manage', requireLogin function (req, res) {
+
+  // sample req.body: { id: 'Sunday-11:00', action: 'check-in' }
+});
 
 router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
   const errors = validationResult(req)

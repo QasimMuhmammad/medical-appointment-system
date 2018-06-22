@@ -11,7 +11,7 @@ tr {
 }
 
 th {
-  height: 6em !important;
+  height: 1em !important;
 }
 
 td {
@@ -34,30 +34,13 @@ td {
   transform: translateY(-50%);
 }
 
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-    cursor: auto;
-  }
-  50% {
-    opacity: 0;
-    background-color: lightgreen;
-  }
-  100% {
-    opacity: 1;
-    background-color: transparent;
-  }
+.popup {
+  display: none;
 }
 
-.plus:hover .add-time {
-  visibility: visible;
+.calendar-tile:hover .popup {
+  display: inline;
 }
-
-.plus {
-  z-index: 1;
-}
-
-.plus:hover {}
 
 /* background empty table box */
 
@@ -93,10 +76,13 @@ td {
   background-color: #71BE82;
 }
 
-.status-text {
+.status-pos {
   position: absolute;
   bottom: 0;
-  font-size: 1.5em;
+}
+
+.status-text {
+  font-size: 1.3em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -121,14 +107,20 @@ td {
                                   supported by Chrome and Opera */
 }
 
-.btn-invis {
-  min-height: 4em;
+.btn-grid {
+  display: none;
+  position: absolute;
 }
 
-.btn-invis:hover {
-  background: transparent;
-  border: none !important;
-  width: inherit;
-  height: inherit;
-  cursor: pointer;
+.calendar-tile:hover .btn-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.calendar-tile:hover .btn-action:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.calendar-tile:hover .text-available {
+  display: none;
 }
