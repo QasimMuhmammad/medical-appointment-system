@@ -172,7 +172,7 @@ router.get('/finalize_appointment', function(req,res){
 // Attempts to log in a user
 router.post('/login', validate.login);
 
-router.post('/calendar-weekly-user-manage', requireLogin function (req, res) {
+router.post('/calendar-weekly-action', function (req, res) {
 
   // sample req.body: { id: 'Sunday-11:00', action: 'check-in' }
 });

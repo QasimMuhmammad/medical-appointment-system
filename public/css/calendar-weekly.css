@@ -7,16 +7,18 @@
 }
 
 tr {
-  height: 8em !important;
 }
 
 th {
-  height: 1em !important;
+  min-height: 10em !important;
 }
 
 td {
+
+  height: 6em !important;
   padding: none !important;
 }
+
 
 .container {
   position: relative;
@@ -42,6 +44,10 @@ td {
   display: inline;
 }
 
+.calendar-tile {
+  min-height: 10em;
+}
+
 /* background empty table box */
 
 .calendar-bg {
@@ -62,6 +68,11 @@ td {
   z-index: 15;
 }
 
+
+.calendar-bg {
+  height: 6em;
+}
+
 .calendar-event {
   z-index: 20;
   position: absolute;
@@ -70,6 +81,7 @@ td {
 
 .calendar-tile {
   position: relative !important;
+  height: 10em;
 }
 
 .available {
@@ -110,6 +122,10 @@ td {
 .btn-grid {
   display: none;
   position: absolute;
+}
+
+.calendar-tile {
+  height: 10em;
 }
 
 .calendar-tile:hover .btn-grid {

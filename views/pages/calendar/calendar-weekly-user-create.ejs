@@ -33,20 +33,13 @@
       <% if(calendarData[k][i][1] == true) { %>
         <td id="<%=data.days[k] + '-'+ data.time[i][0] %>"
         class="text-center h-100 calendar-tile">
-          <div class="plus calendar-bg available card">
-            <form action="finalize_time" class="h-100" method="post">
-              <input type="hidden" id="AppointmentDate" name="AppointmentDate"
-              value="<%=data.days[k] + ' ' + data.time[i][0] %>"/>
-              <div type="submit" class="btn-invis h-100">
-                <div class="status-text px-2 noselect">Empty</div>
-              </div>
-            </form>
-          </div>
+
         </td>
       <% } else { %>
         <td id="<%=data.days[k] + '-'+ data.time[i][0] %>" class="text-center h-100 calendar-tile">
           <div class="plus calendar-bg unavailable card">
-            <div class="status-text px-2 noselect">Booked</div>
+            <% //<div class="status-text px-2 noselect">Booked</div>
+            %>
           </div>
         </td>
       <% } %>

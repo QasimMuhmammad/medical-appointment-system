@@ -6,7 +6,7 @@ $(document).ready(function() {
     var data = $(this).data();
     $.ajax({
       type: "POST",
-      url: "/calendar-weekly-user-manage",
+      url: "/calendar-weekly-action",
       data: data,
       success: location.reload(true)
     });
