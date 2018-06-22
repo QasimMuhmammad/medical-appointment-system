@@ -30,7 +30,7 @@ function addAll(){
 
 function receptionist(err)
 {
-  var sql = "CREATE TABLE receptionist (employeeid Int(8) NOT NULL, name VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL)";
+  var sql = "CREATE TABLE receptionist (employeeid Int(8) NOT NULL, name VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(employeeid))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for receptionist created");
@@ -39,7 +39,7 @@ function receptionist(err)
 
 
 function doctor(err) {
-  var sql = "CREATE TABLE doctor (doctorid Int(8) NOT NULL, fname VARCHAR(255) NOT NULL, mname VARCHAR(255) NOT NULL, lname VARCHAR(255), specialization VARCHAR(255))";
+  var sql = "CREATE TABLE doctor (doctorid Int(8) NOT NULL, fname VARCHAR(20) NOT NULL, lname VARCHAR(20), specialization VARCHAR(255), PRIMARY KEY(doctorid))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for doctor created");
@@ -55,8 +55,9 @@ function doctor_phone_number(err) {
 }
 
 
-function written_prescription(err){
-  var sql = "CREATE TABLE written_prescription (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, healthcarenum Int(8) NOT NULL)";
+function prescription(err){
+  var sql = "CREATE TABLE drug (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, healthcarenum Int(8) NOT NULL,year VARCHAR(4) NOT NULL, month VARCHAR(15) NOT NULL, day VARCHAR(5) NOT NULL, PRIMARY KEY(prescriptionid), FOREIGN KEY(healthcarenum) REFRENCES PATIENT (healthcarenum)" +
+    ",FOREIGN KEY(doctorid) REFRENCES doctor (doctorid)) ";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for written_prescription created");
@@ -64,8 +65,8 @@ function written_prescription(err){
 }
 
 
-function prescription(err) {
-  var sql = "CREATE TABLE prescription (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, drugid Int(8) NOT NULL, usagedate DATE, quantity Int(8), is_refillable int(8))";
+function drug(err) {
+  var sql = "CREATE TABLE prescription (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, drugid Int(8) NOT NULL, quantity Int(8), is_refillable int(1), PRIMARY KEY())";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for prescription created");

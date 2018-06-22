@@ -172,27 +172,35 @@ router.get('/finalize_appointment', function(req,res){
 // Attempts to log in a user
 router.post('/login', validate.login);
 
-<<<<<<< HEAD
-router.post('/calendar-weekly-action', function (req, res) {
-=======
-router.post('/calendar-weekly-user-manage', function (req, res) {
->>>>>>> e8d57f70ec5c7137a00e771c90aeb614cc485e36
 
-  // sample req.body: { id: 'Sunday-11:00', action: 'check-in' }
-  console.log(req.body.action);
-  console.log(req.body.id);
+router.post('/calendar-weekly-action', function (req, res) {
+  req.session.AppointmentDate = req.body.id.split(" ");
+  console.log("The appointment information is " + req.session.AppointmentDate);
   if(req.body.action == "book-patient")
   {
-    req.session.AppointmentDate = req.body.id.split(" ");
-    res.redirect('/finalize_time')
-
+    console.log("Booking patient");
+    res.redirect('finalize_time')
   }
 
+  else if(req.body.action == "book-receptionist")
+  {
+    console.log("Booking receptionist");
+    res.redirect("finalize information")
+  }
 
+  else if(req.body.action == "check-in")
+  {
+    console.log("Checking in a appointment");
+  }
+
+  else if(req.body.action == "cancel")
+  {
+    console.log("Cancelling an appointment");
+  }
 });
 
-router.get('/finalize_time', [check('AppointmentDate')], function(req, res) {
-  const errors = validationResult(req)
+router.get('/finalize_time', function(req, res) {
+  console.log("Make it here");
   res.render('pages/confirmAppointment', {data: req.session});
 
 })
