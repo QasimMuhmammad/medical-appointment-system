@@ -118,31 +118,32 @@ router.get('/allPatients', function(req, res) {
   });
 });
 
-router.get('/calendar-weekly', function(req, res) {
-  renderCalendarWeekly(res, 'view');
+router.post('/calendar-weekly', function(req, res) {
+
+  renderCalendarWeekly(res, req.body.doctor);
 });
 
-function renderCalendarWeekly(res, perspective) {
+function renderCalendarWeekly(res, doctor) {
   let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
   getCalendarData(appointmentsConfig, function(calendarData) {
     res.render('pages/calendar/calendar-weekly', {
       data: appointmentsConfig,
-      calendarData: calendarData,
-      intent: perspective
+      calendarData: calendarData
     });
   });
 };
 
-router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'create');
+router.get('/calendar-select-doctor', requireLogin, function(req, res) {
+  validate.getDoctors(function (results) {
+    res.render('pages/calendar/calendar-select-doctor.ejs', {
+      doctors: results
+    });
+  });
 });
 
-router.get('/calendar-weekly-user-check-in', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'check-in');
-});
+router.post('/calendar-select-doctor', requireLogin, function(req, res) {
+  console.log(req.body);
 
-router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, res) {
-  renderCalendarWeekly(res, 'manage-missed');
 });
 
 function getCalendarData(appointmentsConfig, next) {

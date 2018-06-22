@@ -1,0 +1,28 @@
+<%- contentFor('body') %>
+  <div class="container">
+    <div class="card mx-auto">
+      <div class="card-body">
+        <h2 class="text-center">
+          Select a doctor
+        </h2>
+
+        <div class="d-flex justify-content-center">
+          <form class="form-inline" action="/calendar-select-doctor" method="post">
+            <select class="form-control" id="Doctor" name="Doctor">
+      <% doctors.forEach(function (doc) { %>
+         <tr>
+             <option><%= doc.fname %></option>
+         </tr>
+      <% }) %>
+    </select>
+            <button type="submit" class="btn btn-primary show-loading-text" data-loading-text="Booking..."> Select Doctor </button>
+          </form>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+  </div>
