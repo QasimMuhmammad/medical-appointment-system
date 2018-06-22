@@ -139,7 +139,7 @@ exports.updateAppointment = function(data){
      email: data.email,
      id: results.insertId
    }
-   sendEmail.sendingEmail(emailInfo);
+  // sendEmail.sendingEmail(emailInfo);
  })
 
 };
@@ -147,5 +147,13 @@ exports.updateAppointment = function(data){
 exports.checkinAppointment= function(appointmentInfo){
       var sql = "UPDATE appointment SET state='checkedin' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
        + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
+       console.log(sql);
+      update(sql)
+}
+
+exports.cancelAppointment= function(appointmentInfo){
+      var sql = "UPDATE appointment SET state='cancelled' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
+       + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
+       console.log(sql);
       update(sql)
 }

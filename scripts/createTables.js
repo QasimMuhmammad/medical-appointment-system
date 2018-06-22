@@ -18,13 +18,13 @@ con.connect(function(err) {
 });
 
 function addAll(){
-  //doctor();
-  //receptionist();
+  doctor();
+  receptionist();
   //doctor_phone_number();
   //written_prescription();
   //prescription()
-  //patient();
-  //appointment();
+  patient();
+  appointment();
 }
 
 

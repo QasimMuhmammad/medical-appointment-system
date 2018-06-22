@@ -98,6 +98,7 @@ router.get('/appointments', function(req, res) {
 
 router.get('/book-appointments', function(req, res) {
   validate.getDoctors(function(results) {
+    req.session.allDocs = results;
     res.render('pages/book-appointment', {
       data: {},
       errors: {},
@@ -175,6 +176,13 @@ router.get('/logout', function(req, res) {
 
 router.get('/finalize_appointment', function(req,res){
     validate.updateAppointment(req.session);
+    res.redirect('/logout');
+})
+
+router.get('/book_receptionist',function(req,res){
+
+  console.log(require('util').inspect(req.session, { depth: null }));
+  res.render('pages/book_receptionist',{data: req.session, errors:{}})
 })
 
 // Attempts to log in a user
@@ -183,8 +191,8 @@ router.post('/login', validate.login);
 
 router.post('/calendar-weekly-action', function (req, res) {
 
-  req.session.AppointmentDate = req.body.id.split(" ");
-  console.log("The appointment information is " + req.session.AppointmentDate);
+  req.session.AppointmentDate = req.body.id.split("-");
+
   if(req.body.action == "book-patient")
   {
     console.log("Booking patient");
@@ -193,23 +201,23 @@ router.post('/calendar-weekly-action', function (req, res) {
 
   else if(req.body.action == "book-receptionist")
   {
-    console.log("Booking receptionist");
     res.redirect('/book_receptionist')
   }
 
   else if(req.body.action == "check-in")
   {
-    console.log("Checking in a appointment, the doctor is " + req.session.chosenDoc);
     validate.checkinAppointment(req.session);
     renderCalendarWeekly(req.session.chosenDoc,res);
 
   }
-  /*
+
   else(req.body.action == "cancel")
   {
     console.log("Cancelling an appointment");
+    validate.cancelAppointment(req.session);
+    renderCalendarWeekly(req.session.chosenDoc,res);
   }
-  */
+
 });
 
 router.get('/finalize_time', function(req, res) {
@@ -263,9 +271,11 @@ router.post('/book_appointments', [
       res.render('pages/book-appointment', {
         data: req.body, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
         errors: errors.mapped(),
-        doctor: doctor
+        doctor: req.session.allDocs
       });
     }
+    else {
+
     //If validation is successful, data has the real data.
     const data = matchedData(req)
     console.log('Sanitized: ', data)
@@ -279,7 +289,73 @@ router.post('/book_appointments', [
     req.session.phonenum = req.body.PhoneNumber
     req.session.sex = req.body.Sex
     res.redirect('/calendar-weekly');
+  }
   });
+
+
+// FOR RECEPTIONIST ERROR CHEKCKING
+router.post('/book_receptionist', [
+      check('FirstName')
+      .isLength({
+        min: 1
+      })
+      .withMessage('Your first name is required')
+      .trim(),
+      check('LastName')
+      .isLength({
+        min: 1
+      })
+      .withMessage('Your last name is required')
+      .trim(),
+      check('HealthCareNum')
+      .isLength({
+        min: 9,
+        max: 9
+      })
+      .isInt()
+      .withMessage('Your healthcare is required and must be 9 numbers')
+      .trim(),
+      check('EmailAddress')
+      .isEmail()
+      .withMessage('Must be an email')
+      .trim()
+      .normalizeEmail(),
+      check('PhoneNumber')
+      .isInt()
+      .isLength({
+        min: 10,
+        max: 10
+      })
+      .withMessage("Invalid Phone Number Entered"),
+      check('Sex'),
+    ],
+
+    function(req, res) {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        res.render('pages/book_receptionist', {
+          data: req.session, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
+          errors: errors.mapped()
+        });
+      }
+
+      else
+      {
+      //If validation is successful, data has the real data.
+      const data = matchedData(req)
+      console.log('Sanitized: ', data)
+
+      // lol leave me alone
+      req.session.healthcarenum = req.body.HealthCareNum
+      req.session.fname = req.body.FirstName
+      req.session.lname = req.body.LastName
+      req.session.email = req.body.EmailAddress
+      req.session.phonenum = req.body.PhoneNumber
+      req.session.sex = req.body.Sex
+      validate.updateAppointment(req.session);
+    }
+    });
 
 // export our router
 module.exports = router;
