@@ -206,22 +206,20 @@ router.post('/calendar-weekly-action', function (req, res) {
 
   else if(req.body.action == "check-in")
   {
-    validate.checkinAppointment(req.session);
+    validate.changeAppointmentState("checkedin",req.session);
     renderCalendarWeekly(req.session.chosenDoc,res);
 
   }
 
   else(req.body.action == "cancel")
   {
-    console.log("Cancelling an appointment");
-    validate.cancelAppointment(req.session);
+    validate.changeAppointmentState("cancelled",req.session);
     renderCalendarWeekly(req.session.chosenDoc,res);
   }
 
 });
 
 router.get('/finalize_time', function(req, res) {
-  console.log("Make it here");
   res.render('pages/confirmAppointment', {data: req.session});
 
 })
@@ -278,7 +276,6 @@ router.post('/book_appointments', [
 
     //If validation is successful, data has the real data.
     const data = matchedData(req)
-    console.log('Sanitized: ', data)
 
     // lol leave me alone
     req.session.chosenDoc = req.body.Doctor.split(" ");
@@ -343,8 +340,7 @@ router.post('/book_receptionist', [
       else
       {
       //If validation is successful, data has the real data.
-      const data = matchedData(req)
-      console.log('Sanitized: ', data)
+      const data = matchedData(req);
 
       // lol leave me alone
       req.session.healthcarenum = req.body.HealthCareNum

@@ -116,7 +116,6 @@ exports.getHoursForDoctor = function(doctorInfo, callback) {
 };
 
 exports.updateAppointment = function(data){
-  console.log(data);
   var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ( '" + parseInt(data.healthcarenum)
   + "', '" + data.fname + "', '" + data.lname + "', '" + data.sex + "', '" + data.email + "')";
 
@@ -133,27 +132,18 @@ exports.updateAppointment = function(data){
          depth: null
        }));
    }
-   console.log("The insertID is " + results.insertId);
 
    var emailInfo = {
      email: data.email,
      id: results.insertId
    }
-  // sendEmail.sendingEmail(emailInfo);
+   //sendEmail.sendingEmail(emailInfo);
  })
 
 };
 
-exports.checkinAppointment= function(appointmentInfo){
-      var sql = "UPDATE appointment SET state='checkedin' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
+exports.changeAppointmentState= function(newstate,appointmentInfo){
+      var sql = "UPDATE appointment SET state='"+ newstate +"' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
        + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
-       console.log(sql);
-      update(sql)
-}
-
-exports.cancelAppointment= function(appointmentInfo){
-      var sql = "UPDATE appointment SET state='cancelled' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
-       + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
-       console.log(sql);
       update(sql)
 }
