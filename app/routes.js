@@ -172,14 +172,27 @@ router.get('/finalize_appointment', function(req,res){
 // Attempts to log in a user
 router.post('/login', validate.login);
 
+<<<<<<< HEAD
 router.post('/calendar-weekly-action', function (req, res) {
+=======
+router.post('/calendar-weekly-user-manage', function (req, res) {
+>>>>>>> e8d57f70ec5c7137a00e771c90aeb614cc485e36
 
   // sample req.body: { id: 'Sunday-11:00', action: 'check-in' }
+  console.log(req.body.action);
+  console.log(req.body.id);
+  if(req.body.action == "book-patient")
+  {
+    req.session.AppointmentDate = req.body.id.split(" ");
+    res.redirect('/finalize_time')
+
+  }
+
+
 });
 
-router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
+router.get('/finalize_time', [check('AppointmentDate')], function(req, res) {
   const errors = validationResult(req)
-  req.session.AppointmentDate = req.body.AppointmentDate.split(" ");
   res.render('pages/confirmAppointment', {data: req.session});
 
 })
