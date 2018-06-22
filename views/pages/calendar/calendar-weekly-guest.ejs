@@ -30,7 +30,7 @@
 
     <% for (var k = 0; k < data.days.length; k++) { %>
 
-      <% if(calendarData[k][i][1] == true) { %>
+      <% if(calendarData[k][i][1] == "available") { %>
         <td class="text-center h-100 calendar-tile">
           <div class="h-100 calendar-bg available card">
             <div class="h-100 w-100 noselect" id="<%=data.days[k] + ''+ i%>">
@@ -54,4 +54,4 @@
           <% } %>
             <% } %>
   </tr>
-  <% } %>
+  <% }%>

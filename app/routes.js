@@ -204,11 +204,12 @@ router.post('/calendar-weekly-action', function (req, res) {
     renderCalendarWeekly(req.session.chosenDoc,res);
 
   }
-
+  /*
   else(req.body.action == "cancel")
   {
     console.log("Cancelling an appointment");
   }
+  */
 });
 
 router.get('/finalize_time', function(req, res) {

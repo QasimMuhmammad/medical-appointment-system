@@ -122,13 +122,16 @@ exports.updateAppointment = function(data){
 
   update(sql);
 
-  sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorid) VALUES ( '"
-   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + ", booked') ";
+  sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorid, state) VALUES ( '"
+   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + "', 'booked') ";
 
  connection.query(sql, function(err, results) {
    if(err)
    {
-     console.log("Error inserting a new appointment");
+     console.log("QUERY ERROR: " + require('util')
+       .inspect(err, {
+         depth: null
+       }));
    }
    console.log("The insertID is " + results.insertId);
 
@@ -142,7 +145,7 @@ exports.updateAppointment = function(data){
 };
 
 exports.checkinAppointment= function(appointmentInfo){
-      var sql = "UPDATE appointment SET state=checkedin WHERE doctorid= '" + appointmentInfo.chosenDoc[1] + "' AND "
-      "weekday='" + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";
+      var sql = "UPDATE appointment SET state='checkedin' WHERE doctorid='" + appointmentInfo.chosenDoc[1] +"' AND weekday='"
+       + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
       update(sql)
 }
