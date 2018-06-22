@@ -115,18 +115,19 @@ router.get('/allPatients', function(req, res) {
 });
 
 router.get('/calendar-weekly', function(req, res) {
-  renderCalendarWeekly(res, 'view');
+  renderCalendarWeekly(req.session.chosenDoc ,res, 'view');
 });
 
-function renderCalendarWeekly(res, perspective) {
-  let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
-  getCalendarData(appointmentsConfig, function(calendarData) {
-    res.render('pages/calendar/calendar-weekly', {
-      data: appointmentsConfig,
-      calendarData: calendarData,
-      intent: perspective
+function renderCalendarWeekly(doctor,res, perspective) {
+    let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
+    getCalendarData(doctor, appointmentsConfig, function(calendarData) {
+      res.render('pages/calendar/calendar-weekly', {
+        data: appointmentsConfig,
+        calendarData: calendarData,
+        intent: perspective
+      });
     });
-  });
+
 };
 
 router.get('/calendar-weekly-user-create', requireLogin, function(req, res) {
@@ -141,10 +142,10 @@ router.get('/calendar-weekly-user-manage-missed', requireLogin, function(req, re
   renderCalendarWeekly(res, 'manage-missed');
 });
 
-function getCalendarData(appointmentsConfig, next) {
+function getCalendarData(doctor, appointmentsConfig, next) {
   var calendarData = new Array();
-
-  validate.getHoursForDoctor(function(results) {
+  validate.getHoursForDoctor(doctor, function(results) {
+    console.log("the results of query are " + results);
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {

@@ -13,8 +13,8 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
-  inputReceptionist()
-  inputPatient()
+  //inputReceptionist()
+  //inputPatient()
   inputDoctor()
 //  inputAppointment()
 });
@@ -52,7 +52,7 @@ function inputPatient() {
 
 function inputDoctor() {
 
-  var sql = "INSERT INTO doctor (doctorid, fname, mname, lname, specialization) VALUES ('1', 'armaan', 'm','seekhon', 'physician')";
+  var sql = "INSERT INTO doctor (doctorid, fname, mname, lname, specialization) VALUES ('2', 'harman', 'm','hehar', 'physician')";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 doctor record inserted");

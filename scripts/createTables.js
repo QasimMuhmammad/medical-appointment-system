@@ -56,7 +56,7 @@ function doctor_phone_number(err) {
 
 
 function prescription(err){
-  var sql = "CREATE TABLE drug (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, healthcarenum Int(8) NOT NULL,year VARCHAR(4) NOT NULL, month VARCHAR(15) NOT NULL, day VARCHAR(5) NOT NULL, PRIMARY KEY(prescriptionid), FOREIGN KEY(healthcarenum) REFRENCES PATIENT (healthcarenum)" +
+  var sql = "CREATE TABLE prescription (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, healthcarenum Int(8) NOT NULL,year VARCHAR(4) NOT NULL, month VARCHAR(15) NOT NULL, day VARCHAR(5) NOT NULL, PRIMARY KEY(prescriptionid), FOREIGN KEY(healthcarenum) REFRENCES PATIENT (healthcarenum)" +
     ",FOREIGN KEY(doctorid) REFRENCES doctor (doctorid)) ";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -66,7 +66,8 @@ function prescription(err){
 
 
 function drug(err) {
-  var sql = "CREATE TABLE prescription (doctorid Int(8) NOT NULL, prescriptionid Int(8) NOT NULL, drugid Int(8) NOT NULL, quantity Int(8), is_refillable int(1), PRIMARY KEY())";
+  var sql = "CREATE TABLE drug (doctorid Int(8) NOT NULL, drugid Int(8) NOT NULL, quantity Int(8), is_refillable int(1), PRIMARY KEY (drugid)," +
+            "FOREIGN KEY(doctorid) REFERENCES doctor (doctorid))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for prescription created");
@@ -74,7 +75,8 @@ function drug(err) {
 }
 
 function appointment(err) {
-  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorfName VARCHAR(20) NOT NULL)";
+  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorfName VARCHAR(20) NOT NULL"+
+  ", FOREIGN KEY(receptionistid) REFERENCES receptionist(receptionistid), FOREIGN KEY(healthcarenum) REFERENCES patient(healthcarenum), FOREIGN KEY (doctorfName) REFERENCES doctor)";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for appointment created");
@@ -82,7 +84,7 @@ function appointment(err) {
 }
 
 function patient(err){
-  var sql = "CREATE TABLE patient (healthcarenum Int(8) NOT NULl, fname VARCHAR(255) NOT NULL, mname VARCHAR(255), lname VARCHAR(255) NOT NULL,sex VARCHAR(255) NOT NULL,email VARCHAR(255) NOT NULL)";
+  var sql = "CREATE TABLE patient (healthcarenum Int(8) NOT NULl, fname VARCHAR(255) NOT NULL, mname VARCHAR(255), lname VARCHAR(255) NOT NULL,sex VARCHAR(255) NOT NULL,email VARCHAR(255) NOT NULL, PRIMARY KEY (healthcarenum))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for patient created");

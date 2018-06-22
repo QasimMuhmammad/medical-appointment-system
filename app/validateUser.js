@@ -109,9 +109,10 @@ exports.getDoctors = function(callback) {
   query(sql, callback);
 };
 
-exports.getHoursForDoctor = function(callback) {
-  var sql = "SELECT * FROM appointment";
+exports.getHoursForDoctor = function(doctorInfo, callback) {
+  var sql = "SELECT * FROM appointment WHERE doctorfname= '" + doctorInfo + "'";
   query(sql, callback);
+
 };
 
 exports.updateAppointment = function(data){
@@ -122,7 +123,7 @@ exports.updateAppointment = function(data){
   update(sql);
 
   sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorfName) VALUES ( '"
-   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc + "') ";
+   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[0] + "') ";
 
  connection.query(sql, function(err, results) {
    if(err)
