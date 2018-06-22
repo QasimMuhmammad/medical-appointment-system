@@ -168,6 +168,11 @@ router.get('/logout', function(req, res) {
 // Attempts to log in a user
 router.post('/login', validate.login);
 
+router.post('/calendar-weekly-user-manage', requireLogin function (req, res) {
+
+  // sample req.body: { id: 'Sunday-11:00', action: 'check-in' }
+});
+
 router.post('/finalize_time', [check('AppointmentDate')], function(req, res) {
   const errors = validationResult(req);
   console.log("Appoint is " + req.body.AppointmentDate);
