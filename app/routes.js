@@ -259,7 +259,7 @@ router.post('/book_appointments', [
     console.log('Sanitized: ', data)
 
     // lol leave me alone
-    req.session.chosenDoc = req.body.Doctor;
+    req.session.chosenDoc = req.body.Doctor.split(" ");
     req.session.healthcarenum = req.body.HealthCareNum
     req.session.fname = req.body.FirstName
     req.session.lname = req.body.LastName

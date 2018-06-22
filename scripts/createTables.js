@@ -18,13 +18,13 @@ con.connect(function(err) {
 });
 
 function addAll(){
-  doctor();
-  receptionist();
-  doctor_phone_number();
-  written_prescription();
-  prescription()
+  //doctor();
+  //receptionist();
+  //doctor_phone_number();
+  //written_prescription();
+  //prescription()
+  //patient();
   appointment();
-  patient();
 }
 
 
@@ -75,8 +75,8 @@ function drug(err) {
 }
 
 function appointment(err) {
-  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorfName VARCHAR(20) NOT NULL"+
-  ", FOREIGN KEY(receptionistid) REFERENCES receptionist(receptionistid), FOREIGN KEY(healthcarenum) REFERENCES patient(healthcarenum), FOREIGN KEY (doctorfName) REFERENCES doctor)";
+  var sql = "CREATE TABLE appointment (bookingid Int AUTO_INCREMENT PRIMARY KEY, description VARCHAR(100), weekday VARCHAR(255) NOT NULL, hour VARCHAR(255) NOT NULL, receptionistid int(8), healthcarenum Int(9) NOT NULL, doctorid int(8) NOT NULL"+
+  ", FOREIGN KEY(receptionistid) REFERENCES receptionist(employeeid), FOREIGN KEY(healthcarenum) REFERENCES patient(healthcarenum), FOREIGN KEY (doctorid) REFERENCES doctor(doctorid))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table for appointment created");
@@ -92,7 +92,7 @@ function patient(err){
 }
 
 function dropAll(err){
-  var sql = "DROP TABLE patient, appointment, prescription, written_prescription, doctor_phone_number, doctor, receptionist";
+  var sql = "DROP TABLE patient, appointment, prescription, doctor, receptionist";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Dropped all tables");

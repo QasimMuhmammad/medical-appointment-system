@@ -110,7 +110,7 @@ exports.getDoctors = function(callback) {
 };
 
 exports.getHoursForDoctor = function(doctorInfo, callback) {
-  var sql = "SELECT * FROM appointment WHERE doctorfname= '" + doctorInfo + "'";
+  var sql = "SELECT * FROM appointment WHERE doctorid= '" + doctorInfo[1] + "'";
   query(sql, callback);
 
 };
@@ -122,8 +122,8 @@ exports.updateAppointment = function(data){
 
   update(sql);
 
-  sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorfName) VALUES ( '"
-   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[0] + "') ";
+  sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorid) VALUES ( '"
+   + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + "') ";
 
  connection.query(sql, function(err, results) {
    if(err)
