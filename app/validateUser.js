@@ -140,3 +140,9 @@ exports.updateAppointment = function(data){
  })
 
 };
+
+exports.checkinAppointment= function(appointmentInfo){
+      var sql = "UPDATE appointment SET state=checkedin WHERE doctorid= '" + appointmentInfo.chosenDoc[1] + "' AND "
+      "weekday='" + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";
+      update(sql)
+}

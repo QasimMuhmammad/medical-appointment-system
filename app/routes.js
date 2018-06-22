@@ -182,6 +182,7 @@ router.post('/login', validate.login);
 
 
 router.post('/calendar-weekly-action', function (req, res) {
+
   req.session.AppointmentDate = req.body.id.split(" ");
   console.log("The appointment information is " + req.session.AppointmentDate);
   if(req.body.action == "book-patient")
@@ -193,15 +194,18 @@ router.post('/calendar-weekly-action', function (req, res) {
   else if(req.body.action == "book-receptionist")
   {
     console.log("Booking receptionist");
-    res.redirect("finalize information")
+    res.redirect('/book_receptionist')
   }
 
   else if(req.body.action == "check-in")
   {
-    console.log("Checking in a appointment");
+    console.log("Checking in a appointment, the doctor is " + req.session.chosenDoc);
+    validate.checkinAppointment(req.session);
+    renderCalendarWeekly(req.session.chosenDoc,res);
+
   }
 
-  else if(req.body.action == "cancel")
+  else(req.body.action == "cancel")
   {
     console.log("Cancelling an appointment");
   }
