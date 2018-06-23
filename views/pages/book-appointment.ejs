@@ -91,7 +91,7 @@
     <select class="form-control" id="Doctor" name="Doctor" >
       <% doctor.forEach(function (results) { %>
          <tr>
-             <option><%= results.fname + " " + results.doctorid%></option>
+             <option><%= results.fname + " " + results.doctorid + " " + results.specialization %></option>
          </tr>
       <% }) %>
     </select>

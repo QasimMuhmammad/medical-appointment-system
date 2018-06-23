@@ -99,7 +99,6 @@ router.get('/profile', requireLogin, function(req, res) {
       console.log(require('util').inspect(result, { depth: null }));
       console.log(require('util').inspect(notes, { depth: null }));
       res.render('pages/profile', {patient: result, notes:notes});
-
     });
 
   });
