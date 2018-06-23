@@ -92,6 +92,17 @@ router.get('/dashboard', requireLogin, function(req, res) {
   res.render('pages/dashboard');
 });
 
+router.get('/cancel-patient', function(req,res){
+  res.render('pages/cancelling', {errors:{}})
+
+})
+
+router.post('/cancel-patient', function(req,res){
+  validate.cancelAppointment(req.body.appointmentID)
+    res.render('pages/home');
+
+})
+
 router.get('/profile', requireLogin, function(req, res) {
   console.log("PROFILE PID: " + req.session.pid);
   validate.getPatientProfile(req.session.pid, function (result) {

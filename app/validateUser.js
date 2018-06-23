@@ -166,7 +166,7 @@ exports.changeAppointmentState= function(newstate,appointmentInfo){
       update(sql)
 }
 
-exports.cancelAppointment = function( appointmentID,callback){
-  var sql = "DELETE FROM appointment WHERE appointmentid='" + appointmentID + "'";
+exports.cancelAppointment = function( appointmentID){
+  var sql = "DELETE FROM appointment WHERE bookingid='" + appointmentID + "'";
   update(sql);
 }
