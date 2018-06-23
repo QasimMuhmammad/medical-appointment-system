@@ -115,7 +115,8 @@ exports.getHoursForDoctor = function(doctorInfo, callback) {
 };
 
 exports.getDrug = function(drugInfo, callback){
-    var sql = "SELECT * FROM drug WHERE prescriptionid='" + druginfo.prescriptionId +"'";
+    var sql = "SELECT * FROM drug WHERE prescriptionid='" + drugInfo.prescriptionid +"'";
+    console.log(sql);
     query(sql,callback);
 }
 

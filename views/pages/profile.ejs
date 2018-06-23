@@ -15,7 +15,10 @@
       <div id="modal" class="modal">
         <div id="modal-content" class="modal-content">
 
-          <span id="modal-close" class="close">&times;</span> stuff
+          <span id="modal-close" class="close">&times;</span>
+          <div id="modal-table">
+            
+          </div>
         </div>
       </div>
       <div class="d-flex justify-content-center mx-auto">
@@ -120,83 +123,35 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <!-- Accordion card -->
-                        <div class="card">
 
-                          <!-- Card header -->
-                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading1">
-                            <a data-toggle="collapse" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                              <h5 class="mb-0 white-text text-uppercase font-thin">
-                                        First appointment notes <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                    </h5>
-                            </a>
-                          </div>
+                    <% for (var i = 0; i < notes.length; i++) { %>
+                      <tr>
+                        <td>
+                          <!-- Accordion card -->
+                          <div class="card">
 
-                          <!-- Card body -->
-                          <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1">
-                            <div class="card-body mb-1 rgba-grey-light white-text">
-                              <p>THIS IS:
-                                <%= console.log("THIS IS "); %>
-                              </p>
+                            <!-- Card header -->
+                            <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading<%=i+1%>">
+                              <a data-toggle="collapse" href="#collapse<%=i+1%>" aria-expanded="true" aria-controls="collapse<%=i+1%>">
+                                <h5 class="mb-0 white-text text-uppercase font-thin">
+                                          <%= notes[i].title %> <i class="fa fa-angle-down rotate-icon float-right"></i>
+                                      </h5>
+                              </a>
+                            </div>
+
+                            <!-- Card body -->
+                            <div id="collapse<%=i+1%>" class="collapse show" role="tabpanel" aria-labelledby="heading<%=i+1%>">
+                              <div class="card-body mb-1 rgba-grey-light white-text">
+                                <%= notes[i].note %>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <!-- Accordion card -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <!-- Accordion card -->
-                        <div class="card">
+                          <!-- Accordion card -->
+                        </td>
 
-                          <!-- Card header -->
-                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading2">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                              <h5 class="mb-0 white-text text-uppercase font-thin">
-                                        Appointment for July 6 <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                    </h5>
-                            </a>
-                          </div>
+                      </tr>
+                      <% } %>
 
-                          <!-- Card body -->
-                          <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx7">
-                            <div class="card-body mb-1 rgba-grey-light white-text">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Accordion card -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <!-- Accordion card -->
-                        <div class="card">
-
-                          <!-- Card header -->
-                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading3">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                              <h5 class="mb-0 white-text text-uppercase font-thin">
-                                        Drug #113 Notes <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                    </h5>
-                            </a>
-                          </div>
-
-                          <!-- Card body -->
-                          <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx7">
-                            <div class="card-body mb-1 rgba-grey-light white-text">
-                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
-                                enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Accordion card -->
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>

@@ -94,16 +94,20 @@ router.get('/dashboard', requireLogin, function(req, res) {
 
 router.get('/profile', requireLogin, function(req, res) {
   console.log("PROFILE PID: " + req.session.pid);
-  validate.getPatientProfile(req.session.pid, function (result) {
-    validate.getPatientNotes(req.session.pid, function(notes){
-      res.render('pages/profile', {patient: result, notes:notes});
+  validate.getPatientProfile(req.session.pid, function(result) {
+    validate.getPatientNotes(req.session.pid, function(notes) {
+      res.render('pages/profile', {
+        patient: result,
+        notes: notes
+      });
     });
 
   });
 });
 
 router.post('/profile', requireLogin, function(req, res) {
-  validate.getDrug(req.body, function(result){
+  console.log(req.body.prescriptionid);
+  validate.getDrug(req.body, function(result) {
     console.log("You want the drugs lol");
     res.send(result);
   })
@@ -137,22 +141,22 @@ router.get('/allPatients', requireLogin, function(req, res) {
 });
 
 router.get('/calendar-weekly', function(req, res) {
-  renderCalendarWeekly(req.session.chosenDoc ,res);
+  renderCalendarWeekly(req.session.chosenDoc, res);
 });
 
-function renderCalendarWeekly(doctor,res) {
-    let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
-    getCalendarData(doctor, appointmentsConfig, function(calendarData) {
-      res.render('pages/calendar/calendar-weekly', {
-        data: appointmentsConfig,
-        calendarData: calendarData
-      });
+function renderCalendarWeekly(doctor, res) {
+  let appointmentsConfig = require(path.join(__dirname, 'calendar-weekly-data.json'));
+  getCalendarData(doctor, appointmentsConfig, function(calendarData) {
+    res.render('pages/calendar/calendar-weekly', {
+      data: appointmentsConfig,
+      calendarData: calendarData
     });
+  });
 
 };
 
 router.get('/calendar-select-doctor', requireLogin, function(req, res) {
-  validate.getDoctors(function (results) {
+  validate.getDoctors(function(results) {
     res.render('pages/calendar/calendar-select-doctor.ejs', {
       doctors: results
     });
@@ -168,14 +172,16 @@ router.post('/calendar-select-doctor', requireLogin, function(req, res) {
 function getCalendarData(doctor, appointmentsConfig, next) {
   var calendarData = new Array();
   validate.getHoursForDoctor(doctor, function(results) {
-    console.log(require('util').inspect(results, { depth: null }));
+    console.log(require('util').inspect(results, {
+      depth: null
+    }));
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {
         for (var j = 0; j < results.length; j++) {
           if ((appointmentsConfig.days[k] === results[j].weekday) && (appointmentsConfig.time[i][0] === results[j].hour)) {
             toAdd[i][1] = results[j].state;
-            console.log("The toAdd[i][1] has " +toAdd[i][1]);
+            console.log("The toAdd[i][1] has " + toAdd[i][1]);
           }
         }
       }
@@ -190,56 +196,53 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-router.get('/finalize_appointment', function(req,res){
-    validate.updateAppointment(req.session);
-    res.redirect('/logout');
+router.get('/finalize_appointment', function(req, res) {
+  validate.updateAppointment(req.session);
+  res.redirect('/logout');
 })
 
-router.get('/book_receptionist',function(req,res){
+router.get('/book_receptionist', function(req, res) {
 
-  res.render('pages/book_receptionist',{data: req.session, errors:{}})
+  res.render('pages/book_receptionist', {
+    data: req.session,
+    errors: {}
+  })
 })
 
 // Attempts to log in a user
 router.post('/login', validate.login);
 
-router.post('/allPatients', requireLogin, function (req, res) {
-  console.log(require('util').inspect(req.body, { depth: null }));
+router.post('/allPatients', requireLogin, function(req, res) {
+  console.log(require('util').inspect(req.body, {
+    depth: null
+  }));
   req.session.pid = req.body.pid;
   res.redirect('profile');
 });
 
-router.post('/calendar-weekly-action', function (req, res) {
+router.post('/calendar-weekly-action', function(req, res) {
 
   req.session.AppointmentDate = req.body.id.split("-");
 
-  if(req.body.action == "book-patient")
-  {
+  if (req.body.action == "book-patient") {
     res.redirect('finalize_time')
-  }
-
-  else if(req.body.action == "book-receptionist")
-  {
+  } else if (req.body.action == "book-receptionist") {
     res.redirect('/book_receptionist')
-  }
+  } else if (req.body.action == "check-in") {
+    validate.changeAppointmentState("checkedin", req.session);
+    renderCalendarWeekly(req.session.chosenDoc, res);
 
-  else if(req.body.action == "check-in")
-  {
-    validate.changeAppointmentState("checkedin",req.session);
-    renderCalendarWeekly(req.session.chosenDoc,res);
-
-  }
-
-  else if(req.body.action == "cancel")
-  {
-    validate.changeAppointmentState("cancelled",req.session);
-    renderCalendarWeekly(req.session.chosenDoc,res);
+  } else if (req.body.action == "cancel") {
+    validate.changeAppointmentState("cancelled", req.session);
+    renderCalendarWeekly(req.session.chosenDoc, res);
   }
 
 });
 
 router.get('/finalize_time', function(req, res) {
-  res.render('pages/confirmAppointment', {data: req.session});
+  res.render('pages/confirmAppointment', {
+    data: req.session
+  });
 })
 
 //  POST REQUESTS
@@ -289,75 +292,71 @@ router.post('/book_appointments', [
         errors: errors.mapped(),
         doctor: req.session.allDocs
       });
+    } else {
+
+      //If validation is successful, data has the real data.
+      const data = matchedData(req)
+
+      // lol leave me alone
+      req.session.chosenDoc = req.body.Doctor.split(" ");
+      req.session.healthcarenum = req.body.HealthCareNum
+      req.session.fname = req.body.FirstName
+      req.session.lname = req.body.LastName
+      req.session.email = req.body.EmailAddress
+      req.session.phonenum = req.body.PhoneNumber
+      req.session.sex = req.body.Sex
+      res.redirect('/calendar-weekly');
     }
-    else {
-
-    //If validation is successful, data has the real data.
-    const data = matchedData(req)
-
-    // lol leave me alone
-    req.session.chosenDoc = req.body.Doctor.split(" ");
-    req.session.healthcarenum = req.body.HealthCareNum
-    req.session.fname = req.body.FirstName
-    req.session.lname = req.body.LastName
-    req.session.email = req.body.EmailAddress
-    req.session.phonenum = req.body.PhoneNumber
-    req.session.sex = req.body.Sex
-    res.redirect('/calendar-weekly');
-  }
   });
 
 
 
 // FOR RECEPTIONIST ERROR CHEKCKING
 router.post('/book_receptionist', [
-      check('FirstName')
-      .isLength({
-        min: 1
-      })
-      .withMessage('Your first name is required')
-      .trim(),
-      check('LastName')
-      .isLength({
-        min: 1
-      })
-      .withMessage('Your last name is required')
-      .trim(),
-      check('HealthCareNum')
-      .isLength({
-        min: 9,
-        max: 9
-      })
-      .isInt()
-      .withMessage('Your healthcare is required and must be 9 numbers')
-      .trim(),
-      check('EmailAddress')
-      .isEmail()
-      .withMessage('Must be an email')
-      .trim()
-      .normalizeEmail(),
-      check('PhoneNumber')
-      .isInt()
-      .isLength({
-        min: 10,
-        max: 10
-      })
-      .withMessage("Invalid Phone Number Entered"),
-      check('Sex'),
-    ],
+    check('FirstName')
+    .isLength({
+      min: 1
+    })
+    .withMessage('Your first name is required')
+    .trim(),
+    check('LastName')
+    .isLength({
+      min: 1
+    })
+    .withMessage('Your last name is required')
+    .trim(),
+    check('HealthCareNum')
+    .isLength({
+      min: 9,
+      max: 9
+    })
+    .isInt()
+    .withMessage('Your healthcare is required and must be 9 numbers')
+    .trim(),
+    check('EmailAddress')
+    .isEmail()
+    .withMessage('Must be an email')
+    .trim()
+    .normalizeEmail(),
+    check('PhoneNumber')
+    .isInt()
+    .isLength({
+      min: 10,
+      max: 10
+    })
+    .withMessage("Invalid Phone Number Entered"),
+    check('Sex'),
+  ],
 
-    function(req, res) {
-      const errors = validationResult(req);
+  function(req, res) {
+    const errors = validationResult(req);
 
-      if (!errors.isEmpty()) {
-        res.render('pages/book_receptionist', {
-          data: req.session, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
-          errors: errors.mapped()
-        });
-      }
-
-      else
-      {
+    if (!errors.isEmpty()) {
+      res.render('pages/book_receptionist', {
+        data: req.session, // {FirstName, LastName, HealthCarNum, EmailAddress, PhoneNumber, sex}
+        errors: errors.mapped()
+      });
+    } else {
       //If validation is successful, data has the real data.
       const data = matchedData(req);
 
@@ -370,7 +369,7 @@ router.post('/book_receptionist', [
       req.session.sex = req.body.Sex
       validate.updateAppointment(req.session);
     }
-    });
+  });
 
 // export our router
 module.exports = router;
