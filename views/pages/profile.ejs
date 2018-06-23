@@ -23,8 +23,8 @@
         <div class="card col-xl-7 py-5">
           <!-- Header -->
           <div class="header">
-            <h4 class="float-left">Trevor Le</h4>
-            <h4 class="float-right">ID: 30028725</h4>
+            <h4 class="float-left"><%- patient.fname %> <%- patient.lname %></h4>
+            <h4 class="float-right">ID: <%= patient.healthcarenum %></h4>
           </div>
 
           <!-- Body -->
@@ -52,15 +52,14 @@
                 <div class="body-header">
                   <div class="personal-side h-100 w-50 float-left">
                     <h5>Personal</h5>
-                    <p>First Name: </p>
-                    <p>Last Name:</p>
-                    <p>Sex: </p>
+                    <p>First Name: <%= patient.fname %></p>
+                    <p>Last Name: <%= patient.lname %></p>
+                    <p>Sex: <%= patient.sex %></p>
                   </div>
                   <div class="contact-side h-100 w-50 float-right">
-                    <h5>Contact</h5>
-                    <p>Email: </p>
-                    <p>Phone Number: </p>
-                    <p>Address: </p>
+                    <h5>Contact </h5>
+                    <p>Email: <%= patient.email %></p>
+                    <p>Phone Number: <%= patient.phonenum %></p>
                   </div>
                 </div>
               </div>

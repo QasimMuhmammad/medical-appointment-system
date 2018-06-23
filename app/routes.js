@@ -88,6 +88,11 @@ router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
+router.get('/profile', requireLogin, function(req, res) {
+  console.log(req.session.profile);
+  res.render('pages/profile', {patient: req.session.profile});
+});
+
 router.get('/dashboard', requireLogin, function(req, res) {
   res.render('pages/dashboard');
 });
@@ -107,11 +112,9 @@ router.get('/book-appointments', function(req, res) {
   });
 });
 
-router.get('/profile', function(req, res) {
-  res.render('pages/profile');
-});
 
-router.get('/allPatients', function(req, res) {
+
+router.get('/allPatients', requireLogin, function(req, res) {
   validate.getPatients(function(results) {
     res.render('pages/allPatients', {
       results: results
@@ -188,10 +191,10 @@ router.post('/login', validate.login);
 
 router.post('/allPatients', requireLogin, function (req, res) {
   validate.getPatientProfile(req.body.pid, function (patient) {
-    res.render('/profile', patient);
+    req.session.profile = patient;
+    res.redirect('/profile');
   });
 });
-
 
 router.post('/calendar-weekly-action', function (req, res) {
 
