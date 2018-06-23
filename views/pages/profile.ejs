@@ -88,29 +88,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1000</td>
-                      <td>2101</td>
-                      <td>20/06/18</td>
 
-
-                      <th>
-                        <div class="btn btn-primary btn-view-prescription">
-                          Modify
-                        </div>
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>1001</td>
-                      <td>2101</td>
-                      <td>22/06/18</td>
-
-                      <th>
-                        <div class="btn btn-primary btn-view-prescription">
-                          Modify
-                        </div>
-                      </th>
-                    </tr>
+                    <% for (var i = 0; i < patient.length; i++) { %>
+                      <tr>
+                        <td>
+                          <%= patient[i].prescriptionid; %>
+                        </td>
+                        <td>
+                          <%= patient[i].doctorid; %>
+                        </td>
+                        <td>
+                          <%= patient[i].year + "/" + patient[i].month + "/" + patient[i].day; %>
+                        </td>
+                        <th>
+                          <div class="btn btn-primary btn-view-prescription" data-prescriptionid="<%= patient[i].prescriptionid; %>">
+                            Modify
+                          </div>
+                        </th>
+                      </tr>
+                      <% } %>
                   </tbody>
                 </table>
               </div>
@@ -141,7 +137,9 @@
                           <!-- Card body -->
                           <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1">
                             <div class="card-body mb-1 rgba-grey-light white-text">
-                              <p>THIS IS: <%= console.log("THIS IS "); %></p>
+                              <p>THIS IS:
+                                <%= console.log("THIS IS "); %>
+                              </p>
                             </div>
                           </div>
                         </div>

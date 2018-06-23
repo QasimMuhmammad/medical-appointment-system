@@ -2,22 +2,50 @@ $(document).ready(function() {
   // popup modal
   var modal = $('#modal');
 
-
-  $('.btn-profile').click(function(event) {
-    var data = event.getPatients;
+  $('.btn-view-prescription').click(function (event) {
+    var data = $(this).data();
 
     $.ajax({
       type: "POST",
       url: "/profile",
       data: data,
-      success: success,
-      dataType: dataType
-    });
-  });
+      success: function renderDrugs(drugs) {
+        var table = `<table class="myTable">
+          <thead>
+            <tr>
+              <th>Prescription ID</th>
+              <th>Doctor ID</th>
+              <th>Date</th>
+              <th>Modify</th>
+            </tr>
+          </thead>
+          <tbody>
 
-  $('.btn-view-prescription').click(function (event) {
-    modal.css("display", "block");
-    console.log("MODAL BUTTON PRESSED");
+            <% for (var i = 0; i < patient.length; i++) { %>
+              <tr>
+                <td>
+                  <%= patient[i].prescriptionid; %>
+                </td>
+                <td>
+                  <%= patient[i].doctorid; %>
+                </td>
+                <td>
+                  <%= patient[i].year + "/" + patient[i].month + "/" + patient[i].day; %>
+                </td>
+                <th>
+                  <div class="btn btn-primary btn-view-prescription" data-prescriptionid="<%= patient[i].prescriptionid; %>">
+                    Modify
+                  </div>
+                </th>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>`;
+        
+        modal.css("display", "block");
+      }
+    });
+
   });
 
   $('#modal-close').click(function (event) {
