@@ -88,13 +88,16 @@ router.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
-router.get('/profile', requireLogin, function(req, res) {
-  console.log(require('util').inspect(req.session.profile, { depth: null }));
-  res.render('pages/profile', {patient: req.session.profile});
-});
-
 router.get('/dashboard', requireLogin, function(req, res) {
   res.render('pages/dashboard');
+});
+
+router.get('/profile', requireLogin, function(req, res) {
+  console.log("PROFILE PID: " + req.session.pid);
+  validate.getPatientProfile(req.session.pid, function (result) {
+    res.render('pages/profile', {patient: result});
+
+  });
 });
 
 router.get('/appointments', function(req, res) {
@@ -190,9 +193,9 @@ router.get('/book_receptionist',function(req,res){
 router.post('/login', validate.login);
 
 router.post('/allPatients', requireLogin, function (req, res) {
-  validate.getPatientProfile(req.body.pid, function (patient) {
-    res.render('pages/profile', {patient: patient})
-  });
+  console.log(require('util').inspect(req.body, { depth: null }));
+  req.session.pid = req.body.pid;
+  res.redirect('profile');
 });
 
 router.post('/calendar-weekly-action', function (req, res) {
@@ -226,7 +229,6 @@ router.post('/calendar-weekly-action', function (req, res) {
 
 router.get('/finalize_time', function(req, res) {
   res.render('pages/confirmAppointment', {data: req.session});
-
 })
 
 //  POST REQUESTS
