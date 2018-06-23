@@ -28,7 +28,6 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   populateAll();
-  process.exit();
 });
 
 function populateAll() {
@@ -40,7 +39,6 @@ function populateAll() {
   populate(prescription, prescriptionTable);
   populate(drug, drugTable);
 }
-var sql = "INSERT INTO patient (healthcarenum, fname, lname, sex, email) VALUES ('123456787', 'qasim2', 'muhammad','male', 'qasim.muhamad@ucalgary.ca')";
 
 function populate(jsonData, tableData) {
   var data = jsonData.data;
@@ -64,11 +62,9 @@ function populate(jsonData, tableData) {
       colValues += "'" + data[i][colStringArr[j]] + "', ";
     }
     colValues += "'" + data[i][colStringArr[attr.length - 1]] + "')";
-
-
+    
     var sql = "INSERT INTO " + tableName + " (";
     sql += colStrings + ") VALUES (" + colValues;
-
     con.query(sql, function(err, result) {
       if (err) {
         console.log(err);

@@ -118,7 +118,7 @@ exports.getHoursForDoctor = function(doctorInfo, callback) {
 // Patient profile includes
 // patient info, patient prescriptions, and patient notes
 exports.getPatientProfile = function(patientId, callback) {
-  var sql = "SELECT * FROM patient WHERE patientid= '" + patientId + "'";
+  var sql = "SELECT * FROM patient WHERE healthcarenum= '" + patientId + "'";
   query(sql, callback);
 };
 
