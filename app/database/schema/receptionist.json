@@ -1,0 +1,12 @@
+{
+  "name": "receptionist",
+  "attributes": [
+    "employeeid Int(8) NOT NULL",
+    "fname VARCHAR(255) NOT NULL",
+    "lname VARCHAR(255) NOT NULL",
+    "password VARCHAR(255) NOT NULL"
+  ],
+  "properties": [
+    "PRIMARY KEY(employeeid)"
+  ]
+}

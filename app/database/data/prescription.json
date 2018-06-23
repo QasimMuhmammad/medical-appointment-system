@@ -1,0 +1,20 @@
+{
+  "prescriptions": [
+    {
+      "doctorid" :"2",
+      "prescriptionid" :"1",
+      "healthcarenum" :"25902593",
+      "year" :"2018",
+      "month" :"June",
+      "day" :"25"
+    },
+    {
+      "doctorid" :"5",
+      "prescriptionid" :"2",
+      "healthcarenum" :"80116293",
+      "year" :"2018",
+      "month" :"June",
+      "day" :"22"
+    }
+  ]
+}

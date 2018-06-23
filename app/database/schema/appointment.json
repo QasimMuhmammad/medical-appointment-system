@@ -1,0 +1,19 @@
+{
+  "name": "appointment",
+  "attributes": [
+    "bookingid int(8) AUTO_INCREMENT",
+    "description VARCHAR(100)",
+    "weekday VARCHAR(255) NOT NULL",
+    "hour VARCHAR(255) NOT NULL",
+    "employeeid int(8)",
+    "healthcarenum int(9) NOT NULL",
+    "doctorid int(8) NOT NULL",
+    "state VARCHAR(20) NOT NULL"
+  ],
+  "properties": [
+    "PRIMARY KEY (bookingid)",
+    "FOREIGN KEY (doctorid) REFERENCES doctor (doctorid)",
+    "FOREIGN KEY (healthcarenum) REFERENCES patient (healthcarenum)",
+    "FOREIGN KEY (employeeid) REFERENCES receptionist (employeeid)"
+  ]
+}

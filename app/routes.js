@@ -177,6 +177,13 @@ router.get('/finalize_appointment', function(req,res){
 // Attempts to log in a user
 router.post('/login', validate.login);
 
+router.post('/allPatients', requireLogin, function (req, res) {
+  console.log(require('util').inspect(req.body, { depth: null }));
+  validate.getPatientProfile(req.body.pid, function (patient) {
+    res.render('/profile', patient);
+  });
+});
+
 
 router.post('/calendar-weekly-action', function (req, res) {
   req.session.AppointmentDate = req.body.id.split(" ");

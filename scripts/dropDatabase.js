@@ -7,12 +7,12 @@ var con = mysql.createConnection({
   password: login.password
 });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  con.query("CREATE DATABASE MedicalCenter", function (err, result) {
+function dropDb(err) {
+  var sql = "DROP DATABASE MedicalCenter";
+  con.query(sql, function(err, result) {
     if (err) throw err;
-    console.log("Database created");
+    console.log("Dropped database");
     process.exit();
   });
-});
+}
+dropDb();

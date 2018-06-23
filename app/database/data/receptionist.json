@@ -1,0 +1,22 @@
+{
+  "receptionists": [
+    {
+      "employeeid" : "1",
+      "fname": "Carolyn",
+      "lname": "Reed",
+      "password" : "1"
+    },
+    {
+      "employeeid" : "2",
+      "fname": "Gary",
+      "lname": "Luu",
+      "password" : "2"
+    },
+    {
+      "employeeid" : "3",
+      "fname": "Dorthy",
+      "lname": "Sloane",
+      "password" : "3"
+    }
+  ]
+}

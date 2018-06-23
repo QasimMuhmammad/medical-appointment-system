@@ -1,0 +1,28 @@
+{
+  "patients": [
+    {
+      "healthcarenum" :"25902593",
+      "fname" :"Jimmy",
+      "lname" :"Truong",
+      "sex" :"M",
+      "email" :"jimmy.truong@ucalgary.ca",
+      "phonenum" :"(305) 219 6920",
+    },
+    {
+      "healthcarenum" :"80116293",
+      "fname" :"Trevor",
+      "lname" :"Le",
+      "sex" :"M",
+      "email" :"trevor.le1@ucalgary.ca",
+      "phonenum" :"(312) 798 4481",
+    },
+    {
+      "healthcarenum" :"406876241",
+      "fname" :"Qasim",
+      "lname" :"Muhammad",
+      "sex" :"M",
+      "email" :"qasim.muhammad@ucalgary.ca",
+      "phonenum" :"(631) 805 0069",
+    }
+  ]
+}

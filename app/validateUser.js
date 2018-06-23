@@ -115,6 +115,17 @@ exports.getHoursForDoctor = function(doctorInfo, callback) {
 
 };
 
+// Patient profile includes
+// patient info, patient prescriptions, and patient notes
+exports.getPatientProfile = function(patientId, callback) {
+  var sql = "SELECT * FROM patient WHERE patientid= '" + patientId + "'";
+  query(sql, callback);
+};
+
+exports.getPatientDrugs = function(doctorInfo, callback) {
+
+};
+
 exports.updateAppointment = function(data){
   console.log(data);
   var sql = "INSERT INTO patient (healthcarenum, fname,lname, sex, email) VALUES ( '" + parseInt(data.healthcarenum)

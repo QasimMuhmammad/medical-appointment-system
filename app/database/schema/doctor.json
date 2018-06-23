@@ -1,0 +1,13 @@
+{
+  "name": "doctor",
+  "attributes": [
+    "doctorid Int(8) NOT NULL",
+    "fname VARCHAR(20)",
+    "lname VARCHAR(20)",
+    "phonenum VARCHAR(20)",
+    "specialization VARCHAR(255)"
+  ],
+  "properties": [
+    "PRIMARY KEY (doctorid)"
+  ]
+}

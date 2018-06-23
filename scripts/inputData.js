@@ -1,22 +1,25 @@
+
+
 const mysql = require('mysql');
 const login = require('../credidentials.json');
 
 var con = mysql.createConnection({
   host: "localhost",
   user: login.username,
-  password: login.password,
-  database: "MedicalCenter"
+  password: login.password
 });
+
 
 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
+  //var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
   //inputReceptionist()
   //inputPatient()
-  //inputDoctor()
-  inputAppointment()
+  inputDoctor()
+  //inputAppointment()
+  process.exit();
 });
 
 

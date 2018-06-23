@@ -1,0 +1,14 @@
+{
+  "name": "patient",
+  "attributes": [
+    "healthcarenum Int(8) NOT NULL",
+    "fname VARCHAR(255) NOT NULL",
+    "lname VARCHAR(255) NOT NULL",
+    "sex VARCHAR(255) NOT NULL",
+    "email VARCHAR(255) NOT NULL",
+    "phonenum VARCHAR(20)"
+  ],
+  "properties": [
+    "PRIMARY KEY (healthcarenum)"
+  ]
+}
