@@ -4,8 +4,6 @@ $("#todays-date").append(function() {
 $(document).ready(function() {
   $('.btn-action').click(function(event) {
     var data = $(this).data();
-    console.log(data);
-    console.log(JSON.stringify(data));
     var url = '/calendar-weekly-action';
     var target = '/calendar-weekly-action';
     var form = $('<form action="' + url +
@@ -15,7 +13,6 @@ $(document).ready(function() {
       '</form>');
     $(this).append(form);
     form.submit();
-
-    console.log();
+    form.remove();
   });
 });

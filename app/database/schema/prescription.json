@@ -1,0 +1,16 @@
+{
+  "name": "prescription",
+  "attributes": [
+    "doctorid Int(8) NOT NULL",
+    "prescriptionid Int(8) NOT NULL",
+    "healthcarenum Int(8) NOT NULL",
+    "year VARCHAR(4) NOT NULL",
+    "month VARCHAR(15) NOT NULL",
+    "day VARCHAR(5) NOT NULL"
+  ],
+  "properties": [
+    "PRIMARY KEY(prescriptionid)",
+    "FOREIGN KEY(healthcarenum) REFRENCES PATIENT (healthcarenum)",
+    "FOREIGN KEY(doctorid) REFRENCES doctor (doctorid)"
+  ]
+}

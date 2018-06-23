@@ -9,8 +9,16 @@
         $('.myTable').DataTable();
       });
     </script>
+    <script src="/scripts/profile.js" charset="utf-8"></script>
 
     <%- contentFor('body') %>
+    <div id="modal" class="modal">
+      <div id="modal-content" class="modal-content">
+
+        <span id="modal-close" class="close">&times;</span>
+        stuff
+      </div>
+    </div>
       <div class="d-flex justify-content-center mx-auto">
         <div class="card col-xl-7 py-5">
           <!-- Header -->
@@ -65,6 +73,7 @@
                       <th>Prescription ID</th>
                       <th>Doctor ID</th>
                       <th>Date</th>
+                      <th>Modify</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -72,11 +81,24 @@
                       <td>1000</td>
                       <td>2101</td>
                       <td>20/06/18</td>
+
+
+                      <th>
+                        <div class="btn btn-primary btn-view-prescription">
+                          Modify
+                        </div>
+                      </th>
                     </tr>
                     <tr>
                       <td>1001</td>
                       <td>2101</td>
                       <td>22/06/18</td>
+
+                      <th>
+                        <div class="btn btn-primary btn-view-prescription">
+                          Modify
+                        </div>
+                      </th>
                     </tr>
                   </tbody>
                 </table>
