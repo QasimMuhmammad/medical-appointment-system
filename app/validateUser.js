@@ -165,3 +165,8 @@ exports.changeAppointmentState= function(newstate,appointmentInfo){
        + appointmentInfo.AppointmentDate[0] + "' AND hour='" + appointmentInfo.AppointmentDate[1] + "'";;
       update(sql)
 }
+
+exports.cancelAppointment = function( appointmentID,callback){
+  var sql = "DELETE FROM appointment WHERE appointmentid='" + appointmentID + "'";
+  update(sql);
+}
