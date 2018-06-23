@@ -155,7 +155,7 @@ exports.updateAppointment = function(data){
      email: data.email,
      id: results.insertId
    }
-   //sendEmail.sendingEmail(emailInfo);
+   sendEmail.sendingEmail(emailInfo);
  })
 
 };
