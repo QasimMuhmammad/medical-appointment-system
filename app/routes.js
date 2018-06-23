@@ -89,7 +89,7 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/profile', requireLogin, function(req, res) {
-  console.log(req.session.profile);
+  console.log(require('util').inspect(req.session.profile, { depth: null }));
   res.render('pages/profile', {patient: req.session.profile});
 });
 
@@ -191,8 +191,7 @@ router.post('/login', validate.login);
 
 router.post('/allPatients', requireLogin, function (req, res) {
   validate.getPatientProfile(req.body.pid, function (patient) {
-    req.session.profile = patient;
-    res.redirect('/profile');
+    res.render('pages/profile', {patient: patient})
   });
 });
 

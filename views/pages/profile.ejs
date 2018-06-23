@@ -23,7 +23,7 @@
         <div class="card col-xl-7 py-5">
           <!-- Header -->
           <div class="header">
-            <h4 class="float-left"><%- patient.fname %> <%- patient.lname %></h4>
+            <h4 class="float-left"><%= patient.fname %> <%= patient.lname %></h4>
             <h4 class="float-right">ID: <%= patient.healthcarenum %></h4>
           </div>
 
@@ -129,9 +129,7 @@
                           <!-- Card body -->
                           <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1">
                             <div class="card-body mb-1 rgba-grey-light white-text">
-                              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                                vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable.</p>
+                              <p>THIS IS: <%= console.log("THIS IS "); %></p>
                             </div>
                           </div>
                         </div>
