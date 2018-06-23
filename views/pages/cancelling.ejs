@@ -1,0 +1,24 @@
+<%- contentFor('body') %>
+
+<div class= "jumbotron">
+
+  <form class="form-horizontal" action="cancel-patient" method="post" novalidate>
+    <!-- First Name  !--->
+    <div class="form-group">
+      <label class="col-sm-3 control label" for="FirstName"> <b> Appointment ID </b></label>
+      <div class="col-sm-9">
+        <div class="form-inline">
+            <input class="form-control name" data-val="true" id="appointmentID"
+              name="appointmentID" type="text" value=""/>
+        </div>
+      </div>
+    </div>
+    <!-- Submit Button !--->
+  <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <button type="submit" class="btn btn-primary show-loading-text"
+            data-loading-text="Booking..."> <b> Cancelling Appointment </b> </button>
+        </div>
+  </div>
+
+</div>
