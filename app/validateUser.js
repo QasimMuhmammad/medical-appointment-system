@@ -130,7 +130,6 @@ exports.updateAppointment = function(data){
   + "', '" + data.fname + "', '" + data.lname + "', '" + data.sex + "', '" + data.email + "')";
 
   update(sql);
-
   sql = "INSERT INTO appointment (weekday, hour, healthcarenum, doctorid, state) VALUES ( '"
    + data.AppointmentDate[0] + "', '" + data.AppointmentDate[1] + "', '" + parseInt(data.healthcarenum) + "', '" + data.chosenDoc[1] + "', 'booked') ";
 
