@@ -1,5 +1,6 @@
 {
-  "patients": [
+  "tableName" : "patient",
+  "data": [
     {
       "healthcarenum" :"25902593",
       "fname" :"Jimmy",

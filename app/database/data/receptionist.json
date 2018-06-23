@@ -1,5 +1,6 @@
 {
-  "receptionists": [
+  "tableName" : "receptionist",
+  "data": [
     {
       "employeeid" : "1",
       "fname": "Carolyn",

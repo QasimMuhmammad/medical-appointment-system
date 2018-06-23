@@ -1,5 +1,6 @@
 {
-  "prescriptions": [
+  "tableName" : "prescription",
+  "data": [
     {
       "doctorid" :"2",
       "prescriptionid" :"1",

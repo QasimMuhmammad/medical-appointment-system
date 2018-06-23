@@ -1,5 +1,6 @@
 {
-  "appointments": [
+  "tableName" : "appointment",
+  "data": [
     {
       "bookingid": "1",
       "description": "Arthritis",

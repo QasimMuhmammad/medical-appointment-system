@@ -1,5 +1,6 @@
 {
-  "doctors": [
+  "tableName" : "doctor",
+  "data": [
     {
       "doctorid": "1",
       "fname": "Armaan",

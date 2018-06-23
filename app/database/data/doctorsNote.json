@@ -1,5 +1,6 @@
 {
-  "doctorsNotes": [{
+  "tableName" : "doctorsNote",
+  "data": [{
     "healthcarenum": "25902593",
     "doctorid": "2",
     "employeeid": "1",
