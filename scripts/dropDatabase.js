@@ -4,7 +4,8 @@ const login = require('../credidentials.json');
 var con = mysql.createConnection({
   host: "localhost",
   user: login.username,
-  password: login.password
+  password: login.password,
+  database: "MedicalCenter"
 });
 
 function dropDb(err) {

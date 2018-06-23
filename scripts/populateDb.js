@@ -20,7 +20,8 @@ const login = require('../credidentials.json');
 var con = mysql.createConnection({
   host: "localhost",
   user: login.username,
-  password: login.password
+  password: login.password,
+  database: "MedicalCenter"
 });
 
 con.connect(function(err) {
@@ -32,12 +33,12 @@ con.connect(function(err) {
 
 function populateAll() {
   populate(doctor, doctorTable);
-  // populate(receptionist, receptionistTable);
-  // populate(patient);
-  // populate(appointment);
-  // populate(doctorsNote);
-  // populate(prescription);
-  // populate(drug);
+  populate(receptionist, receptionistTable);
+  populate(patient, patientTable);
+  populate(appointment, appointmentTable);
+  populate(doctorsNote, doctorsNoteTable);
+  populate(prescription, prescriptionTable);
+  populate(drug, drugTable);
 }
 var sql = "INSERT INTO patient (healthcarenum, fname, lname, sex, email) VALUES ('123456787', 'qasim2', 'muhammad','male', 'qasim.muhamad@ucalgary.ca')";
 

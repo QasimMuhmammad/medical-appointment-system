@@ -10,8 +10,8 @@
   ],
   "properties": [
     "PRIMARY KEY(noteid)",
-    "FOREIGN KEY(doctorid) REFRENCES doctor (doctorid)",
-    "FOREIGN KEY(healthcarenum) REFRENCES patient (healthcarenum)",
-    "FOREIGN KEY(employeeid) REFRENCES receptionist (employeeid)"
+    "FOREIGN KEY(doctorid) REFERENCES doctor (doctorid)",
+    "FOREIGN KEY(healthcarenum) REFERENCES patient (healthcarenum)",
+    "FOREIGN KEY(employeeid) REFERENCES receptionist (employeeid)"
   ]
 }

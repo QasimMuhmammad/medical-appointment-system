@@ -12,14 +12,14 @@ const login = require('../credidentials.json');
 var con = mysql.createConnection({
   host: "localhost",
   user: login.username,
-  password: login.password
+  password: login.password,
+  database: "MedicalCenter"
 });
 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   addAll();
-  process.exit();
 });
 
 function addAll() {
@@ -51,7 +51,10 @@ function generateTable(tableJson) {
   sql += props[props.length - 1] + ")";
 
   con.query(sql, function(err, result) {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      throw err;
+    }
     console.log("Table for "+name+" created");
   });
 }

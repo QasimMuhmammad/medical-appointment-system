@@ -8,6 +8,6 @@
   ],
   "properties": [
     "PRIMARY KEY (drugid, prescriptionid)",
-    "FOREIGN KEY (prescriptionid) REFERENCES prescription(prescriptionid)"
+    "FOREIGN KEY (prescriptionid) REFERENCES prescription (prescriptionid)"
   ]
 }

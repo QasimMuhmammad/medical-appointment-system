@@ -10,7 +10,7 @@
   ],
   "properties": [
     "PRIMARY KEY(prescriptionid)",
-    "FOREIGN KEY(healthcarenum) REFRENCES PATIENT (healthcarenum)",
-    "FOREIGN KEY(doctorid) REFRENCES doctor (doctorid)"
+    "FOREIGN KEY(healthcarenum) REFERENCES PATIENT (healthcarenum)",
+    "FOREIGN KEY(doctorid) REFERENCES doctor (doctorid)"
   ]
 }
