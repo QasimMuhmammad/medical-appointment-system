@@ -104,6 +104,15 @@ router.get('/profile', requireLogin, function(req, res) {
   });
 });
 
+router.post('/profile', requireLogin, function(req, res) {
+  validate.getDrug(req.body, function(result){
+    console.log("You want the drugs lol");
+    res.send(result);
+  })
+
+})
+
+
 router.get('/appointments', function(req, res) {
   res.render('pages/appointments');
 });
@@ -299,6 +308,7 @@ router.post('/book_appointments', [
     res.redirect('/calendar-weekly');
   }
   });
+
 
 
 // FOR RECEPTIONIST ERROR CHEKCKING
