@@ -13,5 +13,6 @@ con.connect(function(err) {
   con.query("CREATE DATABASE MedicalCenter", function (err, result) {
     if (err) throw err;
     console.log("Database created");
+    process.exit();
   });
 });

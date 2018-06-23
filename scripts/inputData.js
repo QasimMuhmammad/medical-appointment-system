@@ -9,14 +9,16 @@ var con = mysql.createConnection({
 });
 
 
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
-  inputReceptionist()
-  inputPatient()
+  //var sql = "INSERT INTO receptionist (employeeid, name, password) VALUES ('1', 'qasim', '1')";
+  //inputReceptionist()
+  //inputPatient()
   inputDoctor()
-  inputAppointment()
+  //inputAppointment()
+  process.exit();
 });
 
 

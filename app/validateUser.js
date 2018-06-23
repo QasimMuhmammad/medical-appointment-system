@@ -51,7 +51,6 @@ function findUser(req, next) {
   var message = '';
   const name = req.username;
   const sql = "SELECT employeeid, password FROM `receptionist` WHERE `employeeid`='" + name + "'";
-  console.log(sql);
   return connection.query(sql, function(err, results) {
     if (err) {
       console.log(err);
@@ -112,6 +111,17 @@ exports.getDoctors = function(callback) {
 exports.getHoursForDoctor = function(doctorInfo, callback) {
   var sql = "SELECT * FROM appointment WHERE doctorid= '" + doctorInfo[1] + "'";
   query(sql, callback);
+
+};
+
+// Patient profile includes
+// patient info, patient prescriptions, and patient notes
+exports.getPatientProfile = function(patientId, callback) {
+  var sql = "SELECT * FROM patient WHERE patientid= '" + patientId + "'";
+  query(sql, callback);
+};
+
+exports.getPatientDrugs = function(doctorInfo, callback) {
 
 };
 

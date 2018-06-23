@@ -1,0 +1,75 @@
+{
+  "tableName" : "doctor",
+  "data": [
+    {
+      "doctorid": "1",
+      "fname": "Armaan",
+      "lname": "Djoour",
+      "phonenum": "(587) 322 4821",
+      "specialization": "Pediatrics"
+    },
+    {
+      "doctorid": "2",
+      "fname": "Andy",
+      "lname": "Tran",
+      "phonenum": "(587) 213 7532",
+      "specialization": "Heart Surgeon"
+    },
+    {
+      "doctorid": "3",
+      "fname": "Darin",
+      "lname": "Nguyen",
+      "phonenum": "(403) 403 4033",
+      "specialization": "Biomedical Specialist"
+    },
+    {
+      "doctorid": "4",
+      "fname": "John",
+      "lname": "Vee",
+      "phonenum": "(587) 122 4321",
+      "specialization": "Clinician"
+    },
+    {
+      "doctorid": "5",
+      "fname": "Zofia",
+      "lname": "Nold",
+      "phonenum": "(416) 863 5574",
+      "specialization": "Pediatrics"
+    },
+    {
+      "doctorid": "6",
+      "fname": "Spongebob",
+      "lname": "Squarepants",
+      "phonenum": "(363) 601 2346",
+      "specialization": "Pediatrics"
+    },
+    {
+      "doctorid": "7",
+      "fname": "Kathleen",
+      "lname": "Bean",
+      "phonenum": "(618) 768 1922",
+      "specialization": "Nurse"
+    },
+    {
+      "doctorid": "8",
+      "fname": "Marcia",
+      "lname": "Murphy",
+      "phonenum": "(956) 688 7619",
+      "specialization": "Field Medic"
+    },
+    {
+      "doctorid": "9",
+      "fname": "Anthony",
+      "lname": "Abney",
+      "phonenum": "(715) 869 7321",
+      "specialization": "Surgeon General"
+    },
+    {
+      "doctorid": "10",
+      "fname": "Daisy",
+      "lname": "Mendez",
+      "phonenum": "(952) 210 7465",
+      "specialization": "Radiologist"
+    }
+  ]
+}

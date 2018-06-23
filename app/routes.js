@@ -143,7 +143,6 @@ router.get('/calendar-select-doctor', requireLogin, function(req, res) {
 });
 
 router.post('/calendar-select-doctor', requireLogin, function(req, res) {
-  console.log(req.body);
   req.session.chosenDoc = req.body.Doctor.split(" ");
   renderCalendarWeekly(req.session.chosenDoc, res)
 
@@ -152,7 +151,7 @@ router.post('/calendar-select-doctor', requireLogin, function(req, res) {
 function getCalendarData(doctor, appointmentsConfig, next) {
   var calendarData = new Array();
   validate.getHoursForDoctor(doctor, function(results) {
-    console.log("Results has " + require('util').inspect(results, { depth: null }));
+    console.log(require('util').inspect(results, { depth: null }));
     for (var k = 0; k < appointmentsConfig.days.length; k++) {
       var toAdd = appointmentsConfig.time.map(a => Object.assign({}, a));
       for (var i = 0; i < appointmentsConfig.time.length; i++) {
@@ -181,12 +180,17 @@ router.get('/finalize_appointment', function(req,res){
 
 router.get('/book_receptionist',function(req,res){
 
-  console.log(require('util').inspect(req.session, { depth: null }));
   res.render('pages/book_receptionist',{data: req.session, errors:{}})
 })
 
 // Attempts to log in a user
 router.post('/login', validate.login);
+
+router.post('/allPatients', requireLogin, function (req, res) {
+  validate.getPatientProfile(req.body.pid, function (patient) {
+    res.render('/profile', patient);
+  });
+});
 
 
 router.post('/calendar-weekly-action', function (req, res) {
@@ -195,7 +199,6 @@ router.post('/calendar-weekly-action', function (req, res) {
 
   if(req.body.action == "book-patient")
   {
-    console.log("Booking patient");
     res.redirect('finalize_time')
   }
 
@@ -211,7 +214,7 @@ router.post('/calendar-weekly-action', function (req, res) {
 
   }
 
-  else(req.body.action == "cancel")
+  else if(req.body.action == "cancel")
   {
     validate.changeAppointmentState("cancelled",req.session);
     renderCalendarWeekly(req.session.chosenDoc,res);

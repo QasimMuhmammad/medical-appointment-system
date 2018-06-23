@@ -1,0 +1,9 @@
+{
+  "tableName" : "drug",
+  "data": [{
+    "prescriptionid": "2",
+    "drugid": "6688",
+    "quantity": "30",
+    "is_refillable": "0"
+  }]
+}

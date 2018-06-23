@@ -1,0 +1,13 @@
+{
+  "name": "drug",
+  "attributes": [
+    "prescriptionid int(8) NOT NULL",
+    "drugid int(8) NOT NULL",
+    "quantity int(8)",
+    "is_refillable int(1)"
+  ],
+  "properties": [
+    "PRIMARY KEY (drugid, prescriptionid)",
+    "FOREIGN KEY (prescriptionid) REFERENCES prescription (prescriptionid)"
+  ]
+}

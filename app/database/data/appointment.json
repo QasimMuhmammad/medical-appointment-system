@@ -1,0 +1,35 @@
+{
+  "tableName" : "appointment",
+  "data": [
+    {
+      "bookingid": "1",
+      "description": "Arthritis",
+      "weekday": "Tuesday",
+      "hour": "11:30",
+      "employeeid": "1",
+      "healthcarenum": "25902593",
+      "doctorid": "2",
+      "state" : "booked"
+    },
+    {
+      "bookingid": "2",
+      "description": "Condition of Excessive Salt",
+      "weekday": "Thursday",
+      "hour": "1:30",
+      "employeeid": "2",
+      "healthcarenum": "80116293",
+      "doctorid": "3",
+      "state" : "checkedin"
+    },
+    {
+      "bookingid": "3",
+      "description": "Back Pain",
+      "weekday": "Tuesday",
+      "hour": "11:30",
+      "employeeid": "1",
+      "healthcarenum": "406876241",
+      "doctorid": "1",
+      "state" : "booked"
+    }
+  ]
+}

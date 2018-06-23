@@ -1,0 +1,17 @@
+{
+  "name": "doctorsNote",
+  "attributes": [
+    "healthcarenum Int(8)",
+    "doctorid Int(8)",
+    "employeeid Int(8)",
+    "noteid Int(8) NOT NULL",
+    "title VARCHAR(64)",
+    "note VARCHAR(255)"
+  ],
+  "properties": [
+    "PRIMARY KEY(noteid)",
+    "FOREIGN KEY(doctorid) REFERENCES doctor (doctorid)",
+    "FOREIGN KEY(healthcarenum) REFERENCES patient (healthcarenum)",
+    "FOREIGN KEY(employeeid) REFERENCES receptionist (employeeid)"
+  ]
+}

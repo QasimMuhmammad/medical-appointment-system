@@ -1,15 +1,24 @@
 <%- contentFor('css') %>
   <link rel="stylesheet" href="/css/profile.css">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+
   <%- contentFor('scripts') %>
     <script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" charset="utf-8"></script>
     <script>
       $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('.myTable').DataTable();
       });
     </script>
+    <script src="/scripts/profile.js" charset="utf-8"></script>
 
     <%- contentFor('body') %>
+    <div id="modal" class="modal">
+      <div id="modal-content" class="modal-content">
+
+        <span id="modal-close" class="close">&times;</span>
+        stuff
+      </div>
+    </div>
       <div class="d-flex justify-content-center mx-auto">
         <div class="card col-xl-7 py-5">
           <!-- Header -->
@@ -58,97 +67,131 @@
 
               <!-- Prescription Body -->
               <div id="prescription" class="tab-pane">
-                <h5>Prescription</h5>
-                <p>this is the prescription</p>
+                <table class="myTable">
+                  <thead>
+                    <tr>
+                      <th>Prescription ID</th>
+                      <th>Doctor ID</th>
+                      <th>Date</th>
+                      <th>Modify</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1000</td>
+                      <td>2101</td>
+                      <td>20/06/18</td>
+
+
+                      <th>
+                        <div class="btn btn-primary btn-view-prescription">
+                          Modify
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>1001</td>
+                      <td>2101</td>
+                      <td>22/06/18</td>
+
+                      <th>
+                        <div class="btn btn-primary btn-view-prescription">
+                          Modify
+                        </div>
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <!-- Notes Body -->
               <div id="notes" class="tab-pane">
-                <!-- Grid row -->
-                <div class="row gradient-background d-flex justify-content-center">
+                <table class="myTable">
+                  <thead>
+                    <tr>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <!-- Accordion card -->
+                        <div class="card">
 
-                    <!-- Grid column -->
-                    <div class="col-md-10 py-5">
+                          <!-- Card header -->
+                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading1">
+                            <a data-toggle="collapse" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                              <h5 class="mb-0 white-text text-uppercase font-thin">
+                                        First appointment notes <i class="fa fa-angle-down rotate-icon float-right"></i>
+                                    </h5>
+                            </a>
+                          </div>
 
-                        <!--Accordion wrapper-->
-                        <div class="accordion accordion-2" id="accordionEx7" role="tablist" aria-multiselectable="true">
-
-                            <!-- Accordion card -->
-                            <div class="card">
-
-                                <!-- Card header -->
-                                <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading1">
-                                    <a data-toggle="collapse" data-parent="#accordionEx7" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                        <h5 class="mb-0 white-text text-uppercase font-thin">
-                                            Patient #1 <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                        </h5>
-                                    </a>
-                                </div>
-
-                                <!-- Card body -->
-                                <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordionEx7">
-                                    <div class="card-body mb-1 rgba-grey-light white-text">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                        non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
-                                        3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
-                                        accusamus labore sustainable.</p>
-                                    </div>
-                                </div>
+                          <!-- Card body -->
+                          <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1">
+                            <div class="card-body mb-1 rgba-grey-light white-text">
+                              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable.</p>
                             </div>
-                            <!-- Accordion card -->
-
-                            <!-- Accordion card -->
-                            <div class="card">
-
-                                <!-- Card header -->
-                                <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading2">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                        <h5 class="mb-0 white-text text-uppercase font-thin">
-                                            Patient #2 <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                        </h5>
-                                    </a>
-                                </div>
-
-                                <!-- Card body -->
-                                <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx7">
-                                    <div class="card-body mb-1 rgba-grey-light white-text">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Accordion card -->
-
-                            <!-- Accordion card -->
-                            <div class="card">
-
-                                <!-- Card header -->
-                                <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading3">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                        <h5 class="mb-0 white-text text-uppercase font-thin">
-                                            Patient #3 <i class="fa fa-angle-down rotate-icon float-right"></i>
-                                        </h5>
-                                    </a>
-                                </div>
-
-                                <!-- Card body -->
-                                <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx7">
-                                    <div class="card-body mb-1 rgba-grey-light white-text">
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Accordion card -->
+                          </div>
                         </div>
-                        <!--/.Accordion wrapper-->
+                        <!-- Accordion card -->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <!-- Accordion card -->
+                        <div class="card">
 
-                    </div>
-                    <!-- Grid column -->
+                          <!-- Card header -->
+                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading2">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                              <h5 class="mb-0 white-text text-uppercase font-thin">
+                                        Appointment for July 6 <i class="fa fa-angle-down rotate-icon float-right"></i>
+                                    </h5>
+                            </a>
+                          </div>
 
-                </div>
-                <!-- Grid row -->
+                          <!-- Card body -->
+                          <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx7">
+                            <div class="card-body mb-1 rgba-grey-light white-text">
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Accordion card -->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <!-- Accordion card -->
+                        <div class="card">
+
+                          <!-- Card header -->
+                          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading3">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                              <h5 class="mb-0 white-text text-uppercase font-thin">
+                                        Drug #113 Notes <i class="fa fa-angle-down rotate-icon float-right"></i>
+                                    </h5>
+                            </a>
+                          </div>
+
+                          <!-- Card body -->
+                          <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx7">
+                            <div class="card-body mb-1 rgba-grey-light white-text">
+                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                                enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Accordion card -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
