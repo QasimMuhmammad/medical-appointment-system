@@ -154,7 +154,10 @@ exports.updateAppointment = function(data){
 
    var emailInfo = {
      email: data.email,
-     id: results.insertId
+     id: results.insertId,
+     day: data.AppointmentDate[0],
+     time: data.AppointmentDate[1],
+     doctor: data.chosenDoc
    }
    sendEmail.sendingEmail(emailInfo);
  })

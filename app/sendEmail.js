@@ -15,7 +15,9 @@ exports.sendingEmail = function(emailInfo){
       from: 'qasimmedical1998@gmail.com',
       to:   emailInfo.email,
       subject: 'Confirmation of medical appointment',
-      text: 'This email is confirmation of your medical appointment. The '
+      text: 'This email is confirmation of your medical appointment.' +
+       ' The booking ID for your appointment is ' + emailInfo.id + ', the appointment is set for ' +
+       emailInfo.day + ' at ' + emailInfo.time + " with Dr." + emailInfo.doctor + '.'
   }
 
   transporter.sendMail(mailOptions, function(error, info){
