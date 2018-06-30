@@ -1,12 +1,12 @@
 {
   "name": "doctorsNote",
   "attributes": [
-    "healthcarenum Int(8)",
-    "doctorid Int(8)",
-    "employeeid Int(8)",
+    "healthcarenum Int(8) NOT NULL",
+    "doctorid Int(8) NOT NULL",
+    "employeeid Int(8) NOT NULL",
     "noteid Int(8) NOT NULL",
-    "title VARCHAR(64)",
-    "note VARCHAR(255)"
+    "title VARCHAR(64) NOT NULL",
+    "note VARCHAR(255) NOT NULL"
   ],
   "properties": [
     "PRIMARY KEY(noteid)",
