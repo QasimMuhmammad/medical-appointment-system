@@ -103,6 +103,8 @@ exports.getPatients = function(callback) {
   query(sql, callback);
 };
 
+
+
 exports.getDoctors = function(callback) {
   var sql = "SELECT * FROM doctor";
   query(sql, callback);
@@ -120,9 +122,14 @@ exports.getDrug = function(drugInfo, callback){
     query(sql,callback);
 }
 
+exports.getPatientInfo = function(patientId, callback) {
+  var sql = "SELECT * FROM patient WHERE healthcarenum= '" + patientId + "'";
+  query(sql, callback);
+};
+
 // Patient profile includes
 // patient info, patient prescriptions, and patient notes
-exports.getPatientProfile = function(patientId, callback) {
+exports.getPatientPrescriptions = function(patientId, callback) {
   var sql = "SELECT * FROM patient as p, prescription as pr WHERE p.healthcarenum= '" + patientId +
  "' AND pr.healthcarenum= '" + patientId +"'";
   query(sql, callback);

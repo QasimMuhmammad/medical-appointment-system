@@ -3,7 +3,6 @@
   "data": [
     {
       "bookingid": "1",
-      "description": "Arthritis",
       "weekday": "Tuesday",
       "hour": "11:30",
       "employeeid": "1",
@@ -13,7 +12,6 @@
     },
     {
       "bookingid": "2",
-      "description": "Condition of Excessive Salt",
       "weekday": "Thursday",
       "hour": "1:30",
       "employeeid": "2",
@@ -23,7 +21,6 @@
     },
     {
       "bookingid": "3",
-      "description": "Back Pain",
       "weekday": "Tuesday",
       "hour": "11:30",
       "employeeid": "1",

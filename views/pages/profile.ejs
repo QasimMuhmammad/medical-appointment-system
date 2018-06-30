@@ -92,19 +92,19 @@
                   </thead>
                   <tbody>
 
-                    <% for (var i = 0; i < patient.length; i++) { %>
+                    <% for (var i = 0; i < prescriptions.length; i++) { %>
                       <tr>
                         <td>
-                          <%= patient[i].prescriptionid; %>
+                          <%= prescriptions[i].prescriptionid; %>
                         </td>
                         <td>
-                          <%= patient[i].doctorid; %>
+                          <%= prescriptions[i].doctorid; %>
                         </td>
                         <td>
-                          <%= patient[i].year + "/" + patient[i].month + "/" + patient[i].day; %>
+                          <%= prescriptions[i].year + "/" + prescriptions[i].month + "/" + prescriptions[i].day; %>
                         </td>
                         <th>
-                          <div class="btn btn-primary btn-view-prescription" data-prescriptionid="<%= patient[i].prescriptionid; %>">
+                          <div class="btn btn-primary btn-view-prescription" data-prescriptionid="<%= prescriptions[i].prescriptionid; %>">
                             Modify
                           </div>
                         </th>

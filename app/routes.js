@@ -92,29 +92,40 @@ router.get('/dashboard', requireLogin, function(req, res) {
   res.render('pages/dashboard');
 });
 
-router.get('/cancel-patient', function(req,res){
-  res.render('pages/cancelling', {errors:{}})
+router.get('/cancel-patient', function(req, res) {
+  res.render('pages/cancelling', {
+    errors: {}
+  })
 
 })
 
-router.post('/cancel-patient', function(req,res){
+router.post('/cancel-patient', function(req, res) {
   validate.cancelAppointment(req.body.appointmentID)
-    res.render('pages/home');
+  res.render('pages/home');
 
 })
 
 router.get('/profile', requireLogin, function(req, res) {
   console.log("PROFILE PID: " + req.session.pid);
-  validate.getPatientProfile(req.session.pid, function(result) {
-    validate.getPatientNotes(req.session.pid, function(notes) {
-      res.render('pages/profile', {
-        patient: result,
-        notes: notes
+  validate.getPatientInfo(req.session.pid, function(patient) {
+    validate.getPatientPrescriptions(req.session.pid, function(prescriptions) {
+      validate.getPatientNotes(req.session.pid, function(notes) {
+        if (!patient) {
+          patient = new Array();
+        }
+        if (!notes) {
+          notes = new Array();
+        }
+        res.render('pages/profile', {
+          patient: patient,
+          prescriptions: prescriptions,
+          notes: notes
+        });
       });
     });
-
   });
 });
+
 
 router.post('/profile', requireLogin, function(req, res) {
   console.log(req.body.prescriptionid);

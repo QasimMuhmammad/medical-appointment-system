@@ -2,7 +2,6 @@
   "name": "appointment",
   "attributes": [
     "bookingid int(8) AUTO_INCREMENT",
-    "description VARCHAR(100)",
     "weekday VARCHAR(255) NOT NULL",
     "hour VARCHAR(255) NOT NULL",
     "employeeid int(8)",
